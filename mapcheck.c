@@ -6,15 +6,38 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/21 13:07:23 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/21 17:19:04 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
+ * @brief Parse the map by checking if all info elements are present and valid.
+ * Also provides the real map array.
+ * @param data 
+ * @return true 
+ * @return false 
+ */
+bool	ft_parse_info(t_data *data)
+{
+	int	i;
+	
+	i = 0;
+	while (data->map.map_a[i] != NULL)
+	{
+		while (data->map.map_a[i][0] == ' ')
+			data->map.map_a[i]++;
+		if (data->map.map_a[i][0] == 'N')
+
+		i++;
+	}
+	return (true);
+}
+
+/**
  * @brief Calculates the size of the buffer to read the map. 
- * Stores the map in the data structure data->map.map_s.
+ * Stores the map in the data structure data->map.map_s as a single string.
  * @param argv 
  * @param data 
  * @param fd 
@@ -73,7 +96,10 @@ bool	ft_mapcheck(char **argv, t_data *data)
 		ft_error("Malloc error\n");
 	ft_read_map(argv, data, fd);
 	data->map.map_a = ft_split(data->map.map_s, '\n'); //[3] malloc Take care of this!!
-	printf("%s", data->map.map_a[0]);
-	// ft_print_array(data->map.map_a);
+	if (!data->map.map_a)
+		ft_error("Malloc error\n");
+	if (data->map.map_a[0] == NULL || data->map.map_a[1] == NULL || data->map.map_a[2] == NULL) //HARDCODED
+		ft_error("Map error\n");
 	return (true);
+	ft_parse_info(data);
 }
