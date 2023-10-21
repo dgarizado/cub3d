@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/21 19:26:10 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/21 22:46:31 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct	s_map
 {
 	char	*map_s;
 	char	**map_a;
+	char	*map_sclean;
+	char	**map_aclean;
 	int		width;
 	int		height;
 	int		bytes;
@@ -65,5 +67,8 @@ void	ft_print_array(char **array);
 
 //TEXTURE PARSING
 bool	ft_texture_parse(t_data *data, int i);
+
+//MAPCHECK2
+bool	ft_clean_map(t_data *data, int i);
 
 #endif

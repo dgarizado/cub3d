@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/21 19:48:46 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/21 23:38:30 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,7 @@ bool	ft_parse_info(t_data *data)
 	
 	i = 0;
 	printf("Parsing info\n");
-	while (data->map.map_a[i] != NULL)
-	{
-		printf("data->map.map_a[%d] = '%s'\n", i, data->map.map_a[i]);
-		if (data->map.map_a[i][0] == 'N')
-			ft_texture_parse(data, i);
-		i++;
-	}
-	char **test = ft_split(data->map.map_a[0], ' ');
-	int j = 0;
-	while (test[j] != NULL)
-	{
-		printf("test[%d] = '%s'\n", j, test[j]);
-		j++;
-	}
+	ft_clean_map(data, 7);
 	return (true);
 }
 
