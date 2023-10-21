@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/21 23:30:50 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/22 00:16:59 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,27 @@ int ft_ismap(char *line)
 bool	ft_check_chars(t_data *data)
 {
 	int	i;
+	int	watchdog;
+	int j;
 
 	i = 0;
+	j = 0;
+	watchdog = 0;
 	while (data->map.map_aclean[i] != NULL)
 	{
 		if (ft_ismap(data->map.map_aclean[i]) == 0)
 			ft_error("Map is not valid\n");
+		while (data->map.map_aclean[i][j] != '\0')
+		{
+			if (ft_strchr("NWSE", data->map.map_aclean[i][j]) != NULL)
+				watchdog++;
+			j++;
+		}
+		j = 0;
 		i++;
 	}
+	if (watchdog != 1)
+		ft_error("Character Problems!\n");
 	return	(true);
 }
 
@@ -73,7 +86,6 @@ bool	ft_clean_map(t_data *data, int i)
 	int	j;
 	int	firstlen;
 	
-	i = 7;
 	if (i > ft_arraylen(data->map.map_a) - 3 || i < 5)
 		ft_error("Map is not valid");
 	j = 0;
@@ -87,6 +99,5 @@ bool	ft_clean_map(t_data *data, int i)
 	data->map.map_sclean = ft_strdup(data->map.map_s + firstlen); //[4] malloc Take care of this!!
 	data->map.map_aclean = ft_split(data->map.map_sclean, '\n'); //[5] malloc Take care of this!!
 	ft_print_array(data->map.map_aclean);
-	ft_check_chars(data);
 	return (true);
 }
