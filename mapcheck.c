@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/21 17:19:04 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:48:46 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,20 @@ bool	ft_parse_info(t_data *data)
 	int	i;
 	
 	i = 0;
+	printf("Parsing info\n");
 	while (data->map.map_a[i] != NULL)
 	{
-		while (data->map.map_a[i][0] == ' ')
-			data->map.map_a[i]++;
+		printf("data->map.map_a[%d] = '%s'\n", i, data->map.map_a[i]);
 		if (data->map.map_a[i][0] == 'N')
-
+			ft_texture_parse(data, i);
 		i++;
+	}
+	char **test = ft_split(data->map.map_a[0], ' ');
+	int j = 0;
+	while (test[j] != NULL)
+	{
+		printf("test[%d] = '%s'\n", j, test[j]);
+		j++;
 	}
 	return (true);
 }
@@ -100,6 +107,6 @@ bool	ft_mapcheck(char **argv, t_data *data)
 		ft_error("Malloc error\n");
 	if (data->map.map_a[0] == NULL || data->map.map_a[1] == NULL || data->map.map_a[2] == NULL) //HARDCODED
 		ft_error("Map error\n");
-	return (true);
 	ft_parse_info(data);
+	return (true);
 }

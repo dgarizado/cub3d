@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/21 12:58:33 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:26:10 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,8 @@ bool	ft_mapcheck(char **argv, t_data *data);
 //UTILS
 void	ft_error(char *err);
 void	ft_print_array(char **array);
+
+//TEXTURE PARSING
+bool	ft_texture_parse(t_data *data, int i);
 
 #endif
