@@ -6,7 +6,7 @@
 #    By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 18:46:57 by dgarizad          #+#    #+#              #
-#    Updated: 2023/10/20 21:13:13 by dgarizad         ###   ########.fr        #
+#    Updated: 2023/10/21 15:10:17 by dgarizad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,21 +26,22 @@ NAME := cub3d
 LIBMLX := ./lib/MLX42
 LIBFT = ./libft/libft.a
 HEADERS := "-I./inc -I$(LIBMLX)/include"
-HEADER = ./inc/so_long.h
+HEADER = cub3d.h
 CC = gcc -g
 CFLAGS = -Wall -Wextra -Werror
 LIBS	:= -ldl -lglfw -L "/Users/dgarizad/.brew/opt/glfw/lib/" -lm $(LIBMLX)/libmlx42.a
-
+OBJDIR = ./obj
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
 
-
 SRC = $(wildcard *.c)
-OBJS = $(SRC:.c=.o)
-%.o: %.c $(HEADER)
-	@echo "Creating objects..."
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) 
+
+OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
+
+$(OBJDIR)/%.o: %.c $(HEADER)
+	@mkdir -p $(OBJDIR)
+	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 ################################################################################
 #                                  Makefile  objs                              #
@@ -61,7 +62,7 @@ $(LIBFT):
 	@echo "Your beloved ${YELLOW}libft${CLR_RMV}..."
 	@make -C ./libft
 clean:
-	@rm -f *.o
+	@rm -rf $(OBJDIR)
 
 fclean: clean
 	@rm -f $(NAME)
