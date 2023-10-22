@@ -1,9 +1,9 @@
-	NO	./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+N ./maps/cub1.cub
+SO ./maps/cub1.cub 
+WE ./maps/cub1.cub
+EA ./maps/cub1.cub
 
-F 220,100,0
+F 250,100,0 
 C 225,30,0
 
         1111111111111111111111111

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapcheck.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/22 21:09:14 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/22 21:12:25 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ bool	ft_read_map(char **argv, t_data *data, int fd)
 bool	ft_mapcheck(char **argv, t_data *data)
 {
 	int	fd;
+	int line;
 
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4))
 		ft_error(INPUT_EXT);
@@ -100,7 +101,9 @@ bool	ft_mapcheck(char **argv, t_data *data)
 		free(data->map.map_s);
 		ft_abort(data->map.map_a, ft_arrlen(data->map.map_a)); //[2 and 3] Freed here
 		ft_error("Map error\n");
-	}
-	ft_parse_info(data);
+	//ft_parse_info(data);
+	line = ft_parse_elements(data);
+	
+	printf("line parsed victor %d\n", line);
 	return (true);
 }
