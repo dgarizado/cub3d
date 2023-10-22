@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/22 21:05:02 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/22 21:09:14 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ bool	ft_mapcheck(char **argv, t_data *data)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		ft_error(INPUT_OPN);
-	data->map.map_s = ft_calloc(1, BUFFER_SIZE); //[1] malloc Take care of this!!
+	data->map.map_s = ft_calloc(1, BUFFER_SIZE);//[1] malloc Take care of this!!
 	if (!data->map.map_s)
 		ft_error("Malloc error\n");
 	ft_read_map(argv, data, fd);
