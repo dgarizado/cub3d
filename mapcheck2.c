@@ -6,36 +6,11 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/22 16:56:11 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/22 20:56:30 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-//DELETE THIS UNTIL MERGE WITH VICTOR
-int	ft_arraylen(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i] != NULL)
-		i++;
-	return (i);
-}
-
-int ft_ismap(char *line)
-{
-    int flag;
-    flag = 1;
-    while(*line)
-    {
-        if(!ft_strchr("0 1NWSE", *line))
-            flag = 0;
-        line++;
-    }
-    return(flag);
-}
-//DELETE THIS UNTIL MERGE WITH VICTOR
 
 /**
  * @brief Auxiliary function that
@@ -53,6 +28,15 @@ void	get_player_coords(int i, int j, t_data *data, int *watchdog)
 		data->player.x = j;
 		data->player.y = i;
 		(*watchdog)++;
+	}
+}
+
+void	ft_check_wd(t_data *data, int watchdog)
+{
+	if (watchdog != 1)
+	{
+		ft_free_maps(data);
+		ft_error("Check player Character!\n");
 	}
 }
 
@@ -75,8 +59,11 @@ bool	ft_check_chars(t_data *data)
 	watchdog = 0;
 	while (data->map.map_aclean[i] != NULL)
 	{
-		if (ft_ismap(data->map.map_aclean[i]) == 0)
+		if (ft_ismap(data->map.map_aclean[i], "0 1NWSE") == 0)
+		{
+			ft_free_maps(data);
 			ft_error("Map is not valid\n");
+		}
 		while (data->map.map_aclean[i][j] != '\0')
 		{
 			get_player_coords(i, j, data, &watchdog);
@@ -85,8 +72,7 @@ bool	ft_check_chars(t_data *data)
 		j = 0;
 		i++;
 	}
-	if (watchdog != 1)
-		ft_error("Character Problems!\n");
+	ft_check_wd(data, watchdog);
 	return	(true);
 }
 
@@ -104,8 +90,12 @@ bool	ft_clean_map(t_data *data, int i)
 	int	j;
 	int	firstlen;
 	
-	if (i > ft_arraylen(data->map.map_a) - 3 || i < 5)
+	if (i > ft_arrlen(data->map.map_a) - 3 || i < 5)
+	{
+		free(data->map.map_s);
+		ft_abort(data->map.map_a, ft_arrlen(data->map.map_a)); //[2 and 3] Freed here
 		ft_error("Map is not valid");
+	}
 	j = 0;
 	firstlen = 0;
 	while (j < i)

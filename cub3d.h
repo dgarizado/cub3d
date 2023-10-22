@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/22 19:37:15 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/22 20:43:21 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,18 @@ typedef struct s_macro_data
 	t_player	player;
 }	t_data;
 
-typedef struct	s_queue
-{
-	struct s_queue	*next;
-	int				row;
-	int				col;
-	char			**map_a;
-	char			**visited;
-}	t_queue;
-
-
 //MAPCHECK
 bool	ft_mapcheck(char **argv, t_data *data);
 
 //UTILS
 void	ft_error(char *err);
 void	ft_print_array(char **array);
+int		ft_arrlen(char **arr);
+int		ft_ismap(char *line, char *str);
+char	**ft_abort(char **new_array, unsigned int i);
+
+//UTILS2
+void	ft_free_maps(t_data *data);
 
 //TEXTURE PARSING
 bool	ft_texture_parse(t_data *data, int i);
@@ -81,10 +77,13 @@ bool	ft_texture_parse(t_data *data, int i);
 bool	ft_clean_map(t_data *data, int i);
 bool	ft_check_chars(t_data *data);
 
-//BFS
-bool	ft_bfs(t_data *data);
+//MAPANAL
+bool	ft_map_anal(t_data *data);
 
-//BFS2
-int	ft_add2queue(t_queue *queue, int row, int col);
+//MAPANAL2
+void	ft_space_check_aux(t_data *data, int i, int j);
+
+
+
 
 #endif

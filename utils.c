@@ -19,3 +19,40 @@ void	ft_print_array(char **array)
 		i++;
 	}
 }
+
+int	ft_arrlen(char **arr)
+{
+    int i;
+    i = 0;
+    if (!arr)
+        return (0);
+    while (arr[i] != NULL)
+        i++;
+    return (i);
+}
+
+char	**ft_abort(char **new_array, unsigned int i)
+{
+    while (i-- > 0)
+        free(new_array[i]);
+    free(new_array);
+    return (0);
+}
+/**
+ * @brief
+ *
+ * @param line
+ * @return int 0 is map 1 not map
+ */
+int ft_ismap(char *line, char *str)
+{
+    int flag;
+    flag = 1;
+    while (*line)
+    {
+        if (!ft_strchr(str, *line))
+            flag = 0;
+        line++;
+    }
+    return (flag);
+}
