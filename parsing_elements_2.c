@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:40:15 by vcereced          #+#    #+#             */
-/*   Updated: 2023/10/22 19:39:07 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/10/22 20:15:23 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	ft_check_elements(t_data *data, char **elements)
 		buffer = ft_split(data->map.map_a[line_reached], ' ');
 		if (!ft_check_buffer(buffer[0], elements))
 		{
+			msg_error("ELEMENTS DON'T MATCH\n");
 			ft_abort(buffer, ft_arrlen(buffer));
 			return (0);
 		}
@@ -87,6 +88,9 @@ int	ft_check_elements(t_data *data, char **elements)
 		line_reached++;
 	}
 	if (ft_miss_elements(elements))
+	{
+		msg_error("MISSING ELEMENT\n");
 		line_reached = -1;
+	}
 	return (line_reached);
 }

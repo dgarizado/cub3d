@@ -6,11 +6,18 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 19:47:32 by vcereced          #+#    #+#             */
-/*   Updated: 2023/10/22 19:47:33 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/10/22 20:07:13 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	msg_error(char *err)
+{
+	ft_putstr_fd(RED"Error\n"RST, 2);
+	ft_putstr_fd(err, 2);
+	
+}
 
 void	ft_error(char *err)
 {

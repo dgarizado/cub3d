@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:21:29 by vcereced          #+#    #+#             */
-/*   Updated: 2023/10/22 19:46:33 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/10/22 20:11:52 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	ft_check_colors(t_data *data, int line_reached)
 	}
 	if (cont == 2)
 		return (1);
+	msg_error("RGB WRONG\n");
 	return (0);
 }
 
@@ -135,5 +136,6 @@ int	ft_check_paths(t_data *data, int line_reached)
 	}
 	if (cont == 4)
 		return (1);
+	msg_error("PATH WRONG\n");
 	return (0);
 }

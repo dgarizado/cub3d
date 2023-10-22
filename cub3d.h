@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/22 19:44:54 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/10/22 20:08:08 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int		ft_parse_elements(t_data *data);
 
 //UTILS
 void	ft_error(char *err);
+void	msg_error(char *err);
 void	ft_print_array(char **array);
 int		ft_arrlen(char **arr);
 char	**ft_abort(char **new_array, unsigned int i);

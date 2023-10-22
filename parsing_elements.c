@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:53:05 by vcereced          #+#    #+#             */
-/*   Updated: 2023/10/22 19:44:45 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/10/22 20:12:01 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	ft_check_n_elem(t_data *data, int line_reached)
 		buffer = ft_split(data->map.map_a[i], ' ');
 		if (ft_arrlen(buffer) != 2)
 		{
+			msg_error("Nº PARAMETERS WRONG IN LINE\n");
 			ft_abort(buffer, ft_arrlen(buffer));
 			return (0);
 		}
