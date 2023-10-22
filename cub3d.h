@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/21 23:52:24 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/22 19:37:15 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ typedef struct	s_map
 
 typedef struct	s_player
 {
-	double	x;
-	double	y;
+	int		x;
+	int		y;
 	double	dir;
 	double	fov;
 }	t_player;
@@ -56,6 +56,15 @@ typedef struct s_macro_data
 	t_map		map;
 	t_player	player;
 }	t_data;
+
+typedef struct	s_queue
+{
+	struct s_queue	*next;
+	int				row;
+	int				col;
+	char			**map_a;
+	char			**visited;
+}	t_queue;
 
 
 //MAPCHECK
@@ -71,5 +80,11 @@ bool	ft_texture_parse(t_data *data, int i);
 //MAPCHECK2
 bool	ft_clean_map(t_data *data, int i);
 bool	ft_check_chars(t_data *data);
+
+//BFS
+bool	ft_bfs(t_data *data);
+
+//BFS2
+int	ft_add2queue(t_queue *queue, int row, int col);
 
 #endif
