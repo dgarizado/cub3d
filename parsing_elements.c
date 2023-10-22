@@ -1,0 +1,111 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_elements.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/21 19:53:05 by vcereced          #+#    #+#             */
+/*   Updated: 2023/10/22 19:44:45 by vcereced         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+/**
+ * @brief check if * was freed. NO free(arr).
+ */
+void	ft_special_abort(char **arr, int i)
+{
+	while (i-- > 0)
+	{
+		if (arr[i] != NULL)
+			free(arr[i]);
+	}
+}
+
+/**
+ * @brief check till line reached of the arr(map) just have  2 params per line.
+ * @return int 0 KO. 1 OK
+ */
+int	ft_check_n_elem(t_data *data, int line_reached)
+{
+	char	**buffer;
+	int		i;
+
+	i = 0;
+	while (i < line_reached)
+	{
+		buffer = ft_split(data->map.map_a[i], ' ');
+		if (ft_arrlen(buffer) != 2)
+		{
+			ft_abort(buffer, ft_arrlen(buffer));
+			return (0);
+		}
+		ft_abort(buffer, ft_arrlen(buffer));
+		i++;
+	}
+	return (1);
+}
+
+/**
+ * @brief Converts all tab in single space.
+ * @param data struct(data)->map.map_a(array of the map)
+ * @return char** pointer to array converted. 
+ */
+char	**ft_swap_tabs_sp(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (data->map.map_a[i])
+	{
+		j = 0;
+		while (data->map.map_a[i][j])
+		{
+			if (data->map.map_a[i][j] == 9)
+				data->map.map_a[i][j] = 32;
+			j++;
+		}
+		i++;
+	}
+	return (data->map.map_a);
+}
+
+void	ft_set_elements(char **elements)
+{
+	elements[0] = ft_strdup("NO");
+	elements[1] = ft_strdup("SO");
+	elements[2] = ft_strdup("WE");
+	elements[3] = ft_strdup("EA");
+	elements[4] = ft_strdup("F");
+	elements[5] = ft_strdup("C");
+	elements[6] = NULL;
+}
+
+/**
+ * @brief  -set a array[7] with 6 diferents elements needed for the game.
+ * 		   -swap all tabs to single space for easer parsing.
+ * 		   -checks if there are all elements from array[7], no repeated, 
+ * 			now we know n_lines = LINE_REACHED should check later.
+ *		   -checks if all lines from 0 to LINE_REACHED just have 2 params.
+ * 		   -checks if NO, SO, WE, EA paths till LINE_REACHED are ok.
+ * 		   -checks if F, C colors till LINE_REACHED are ok.
+ * @return int 0 = KO. 1 = OK (6 elements no repeat, 2 token per line, 
+ * paths/color ok) 
+ */
+int	ft_parse_elements(t_data *data)
+{
+	char	*elements[7];
+	int		line_reached;
+
+	ft_set_elements(elements);
+	data->map.map_a = ft_swap_tabs_sp(data);
+	line_reached = ft_check_elements(data, elements);
+	if (line_reached <= 0 || !ft_check_n_elem(data, line_reached) || \
+	!ft_check_paths(data, line_reached) || !ft_check_colors(data, line_reached))
+		line_reached = 0;
+	ft_special_abort(elements, ft_arrlen(elements));
+	return (line_reached);
+}

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+         #
+#    By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 18:46:57 by dgarizad          #+#    #+#              #
-#    Updated: 2023/10/21 15:10:17 by dgarizad         ###   ########.fr        #
+#    Updated: 2023/10/21 20:38:32 by vcereced         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ HEADERS := "-I./inc -I$(LIBMLX)/include"
 HEADER = cub3d.h
 CC = gcc -g
 CFLAGS = -Wall -Wextra -Werror
-LIBS	:= -ldl -lglfw -L "/Users/dgarizad/.brew/opt/glfw/lib/" -lm $(LIBMLX)/libmlx42.a
+LIBS	:= -ldl -lglfw -L "/Users/vcereced/.brew/opt/glfw/lib/" -lm $(LIBMLX)/libmlx42.a
 OBJDIR = ./obj
 ################################################################################
 #                                 PROGRAM'S SRCS                               #

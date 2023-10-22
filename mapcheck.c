@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapcheck.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/21 19:48:46 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/21 23:36:32 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ bool	ft_read_map(char **argv, t_data *data, int fd)
 bool	ft_mapcheck(char **argv, t_data *data)
 {
 	int	fd;
+	int line;
 
 	data->map.width = 0;
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4))
@@ -107,6 +108,9 @@ bool	ft_mapcheck(char **argv, t_data *data)
 		ft_error("Malloc error\n");
 	if (data->map.map_a[0] == NULL || data->map.map_a[1] == NULL || data->map.map_a[2] == NULL) //HARDCODED
 		ft_error("Map error\n");
-	ft_parse_info(data);
+	//ft_parse_info(data);
+	line = ft_parse_elements(data);
+	
+	printf("line parsed victor %d\n", line);
 	return (true);
 }

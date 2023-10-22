@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/21 19:26:10 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/22 19:44:54 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,21 @@ typedef struct s_macro_data
 
 //MAPCHECK
 bool	ft_mapcheck(char **argv, t_data *data);
+int		ft_check_colors(t_data *data, int line_reached);
+int		ft_check_paths(t_data *data, int line_reached);
+int		ft_check_elements(t_data *data, char **elements);
+int		ft_parse_elements(t_data *data);
 
 //UTILS
 void	ft_error(char *err);
 void	ft_print_array(char **array);
+int		ft_arrlen(char **arr);
+char	**ft_abort(char **new_array, unsigned int i);
+int		ft_ismap(char *line, char *str);
 
 //TEXTURE PARSING
 bool	ft_texture_parse(t_data *data, int i);
+
+
 
 #endif
