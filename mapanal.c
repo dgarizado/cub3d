@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 23:57:37 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/22 21:03:04 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:00:21 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_space_check(t_data *data)
 			i == ft_arrlen(data->map.map_aclean) - 1))
 			{
 				ft_free_maps(data);
-				ft_error("Map not enclosed by walls\n");
+				ft_error("Bad map config\n");
 			}
 			ft_space_check_aux(data, i, j);
 			j++;

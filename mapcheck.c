@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/23 18:32:46 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/23 20:18:15 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,9 @@ bool	ft_parse_info(t_data *data)
 	int	line;
 
 	line = ft_parse_elements(data);
-	printf("line parsed= %d\n", line);
-	//HERE COMES THE FUNCTION FOR ELEMENTS
 	ft_clean_map(data, line);
 	ft_check_chars(data);
 	ft_map_anal(data);
-	printf("map parsed\n");
-	ft_print_array(data->map.map_aclean);
 	return (true);
 }
 

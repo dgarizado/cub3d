@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/23 18:33:47 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:37:28 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ bool	ft_check_chars(t_data *data)
 	{
 		if (ft_ismap(data->map.map_aclean[i], "0 1NWSE") == 0)
 		{
+			printf("Found '%d'", data->map.map_aclean[i][j]);
+			getchar();
 			ft_free_maps(data);
 			ft_error("Map is not valid\n");
 		}

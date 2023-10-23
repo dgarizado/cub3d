@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:53:05 by vcereced          #+#    #+#             */
-/*   Updated: 2023/10/23 18:42:09 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/23 20:04:32 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,34 @@ int	ft_check_n_elem(t_data *data, int line_reached)
  * @param data struct(data)->map.map_a(array of the map)
  * @return char** pointer to array converted. 
  */
-char	**ft_swap_tabs_sp(t_data *data)
+
+void	*ft_swap_tabs_sp(char *str, char **arr)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (data->map.map_a[i])
+	while (arr && arr[i])
 	{
 		j = 0;
-		while (data->map.map_a[i][j])
+		while (arr[i][j])
 		{
-			if (data->map.map_a[i][j] == 9)
-				data->map.map_a[i][j] = 32;
+			if (arr[i][j] == 9)
+				arr[i][j] = 32;
 			j++;
 		}
 		i++;
 	}
-	return (data->map.map_a);
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] == 9)
+			str[i] = 32;
+		i++;
+	}
+	if (!str)
+		return (arr);
+	return (str);
 }
 
 void	ft_set_elements(char **elements)
@@ -102,7 +112,8 @@ int	ft_parse_elements(t_data *data)
 	int		line_reached;
 
 	ft_set_elements(elements);
-	data->map.map_a = ft_swap_tabs_sp(data);
+	data->map.map_a = (char **)ft_swap_tabs_sp(NULL, data->map.map_a);
+	data->map.map_s = (char *)ft_swap_tabs_sp(data->map.map_s, NULL);
 	line_reached = ft_check_elements(data, elements);
 	if (line_reached <= 0 || !ft_check_n_elem(data, line_reached) || \
 	!ft_check_paths(data, line_reached) || !ft_check_colors(data, line_reached))
