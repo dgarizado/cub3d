@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/22 21:11:49 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:37:46 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ int		ft_parse_elements(t_data *data);
 void	ft_error(char *err);
 void	msg_error(char *err);
 void	ft_print_array(char **array);
-int		ft_arrlen(char **arr);
 int		ft_ismap(char *line, char *str);
 char	**ft_abort(char **new_array, unsigned int i);
 
 //UTILS2
 void	ft_free_maps(t_data *data);
+int		ft_arrlen(char **arr);
 
 //TEXTURE PARSING
 bool	ft_texture_parse(t_data *data, int i);

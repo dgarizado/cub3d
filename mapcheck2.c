@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/22 20:56:30 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:33:47 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	ft_check_chars(t_data *data)
 {
 	int	i;
 	int	watchdog;
-	int j;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -73,7 +73,7 @@ bool	ft_check_chars(t_data *data)
 		i++;
 	}
 	ft_check_wd(data, watchdog);
-	return	(true);
+	return (true);
 }
 
 /**
@@ -89,7 +89,7 @@ bool	ft_clean_map(t_data *data, int i)
 {
 	int	j;
 	int	firstlen;
-	
+
 	if (i > ft_arrlen(data->map.map_a) - 3 || i < 5)
 	{
 		free(data->map.map_s);

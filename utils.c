@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 19:47:32 by vcereced          #+#    #+#             */
-/*   Updated: 2023/10/22 21:13:34 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:35:59 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,13 @@ void	msg_error(char *err)
 {
 	ft_putstr_fd(RED"Error\n"RST, 2);
 	ft_putstr_fd(err, 2);
-	
 }
 
 void	ft_error(char *err)
 {
 	ft_putstr_fd(RED"Error\n"RST, 2);
 	ft_putstr_fd(err, 2);
-	exit(-1);
-}
-
-void	ft_print_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		ft_putstr_fd(array[i], 1);
-		ft_putstr_fd("\n", 1);
-		i++;
-	}
+	exit(1);
 }
 
 int	ft_arrlen(char **arr)

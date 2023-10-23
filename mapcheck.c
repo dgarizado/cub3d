@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapcheck.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/22 21:19:33 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:32:46 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,16 @@
  */
 bool	ft_parse_info(t_data *data)
 {
-	int	i;
+	int	line;
 
-	i = 0;
+	line = ft_parse_elements(data);
+	printf("line parsed= %d\n", line);
 	//HERE COMES THE FUNCTION FOR ELEMENTS
-	ft_clean_map(data, 6); //Receives 6 from victor
+	ft_clean_map(data, line);
 	ft_check_chars(data);
 	ft_map_anal(data);
+	printf("map parsed\n");
+	ft_print_array(data->map.map_aclean);
 	return (true);
 }
 
@@ -82,7 +85,6 @@ bool	ft_read_map(char **argv, t_data *data, int fd)
 bool	ft_mapcheck(char **argv, t_data *data)
 {
 	int	fd;
-	int line;
 
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4))
 		ft_error(INPUT_EXT);
@@ -102,9 +104,6 @@ bool	ft_mapcheck(char **argv, t_data *data)
 		ft_abort(data->map.map_a, ft_arrlen(data->map.map_a)); //[2 and 3] Freed here
 		ft_error("Map error\n");
 	}
-	//ft_parse_info(data);
-	line = ft_parse_elements(data);
-	
-	printf("line parsed victor %d\n", line);
+	ft_parse_info(data);
 	return (true);
 }
