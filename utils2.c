@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:41:11 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/23 18:36:47 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/23 21:08:22 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_print_array(char **array)
 
 /**
  * @brief This function is used to free all the pointers
- * in the data structure.
+ * in the data structure .
  * 
  * @param data 
  */
