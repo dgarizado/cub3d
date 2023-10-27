@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/23 18:37:46 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/26 22:21:29 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,48 @@
 # define BLUE "\033[0;34m"
 # define RST "\033[0m"
 
-typedef struct	s_map
+
+typedef enum e_mini_map
 {
-	char	*map_s;
-	char	**map_a;
-	char	*map_sclean;
-	char	**map_aclean;
+	EMPTY,
+	WALL,
+	PLAYER,
+	SPACE,
+	M_SPRITES
+}	t_mini_map;
+
+typedef struct minimap
+{
+	int		x;
+	int		y;
 	int		width;
 	int		height;
-	int		bytes;
+	mlx_image_t	*img[M_SPRITES];
+	xpm_t	*xpm[M_SPRITES];
+}	t_minimap;
+
+typedef struct	s_map
+{
+	char		*map_s;
+	char		**map_a;
+	char		*map_sclean;
+	char		**map_aclean;
+	int			width;
+	int			height;
+	int			bytes;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_minimap	minimap;
 }	t_map;
 
 typedef struct	s_player
 {
 	int		x;
 	int		y;
+	bool	flag;
 	double	dir;
 	double	fov;
+	mlx_image_t	*point;
 }	t_player;
 
 typedef struct s_macro_data
@@ -88,6 +113,11 @@ bool	ft_map_anal(t_data *data);
 //MAPANAL2
 void	ft_space_check_aux(t_data *data, int i, int j);
 
+//MINIMAP
+void	ft_minimap(t_data *data);
+
+//MINISPRITES
+void	ft_load_minisprites(t_data *data);
 
 
 
