@@ -6,7 +6,7 @@
 #    By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 18:46:57 by dgarizad          #+#    #+#              #
-#    Updated: 2023/10/24 18:21:22 by vcereced         ###   ########.fr        #
+#    Updated: 2023/10/26 19:50:39 by vcereced         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ LIBFT = ./libft/libft.a
 HEADERS := "-I./inc -I$(LIBMLX)/include"
 HEADER = cub3d.h
 CC = gcc -g
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 LIBS	:= -ldl -lglfw -L "/Users/$(USER)/.brew/opt/glfw/lib/" -lm $(LIBMLX)/libmlx42.a
 OBJDIR = ./obj
 ################################################################################

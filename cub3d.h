@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/23 18:37:46 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:51:46 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -20,6 +21,18 @@
 #include <math.h>
 #include "./lib/MLX42/include/MLX42/MLX42.h"
 #include "./libft/libft.h"
+
+#define WIDTH 						1800
+#define HEIGHT 						1200
+#define WIDTH_IMG_TITLE 			WIDTH*0.9
+#define HEIGHT_IMG_TITLE 			HEIGHT*0.5
+#define WIDTH_IMG_TITLE_MAP			WIDTH_IMG_TITLE *0.5
+//#define WIDTH_IMG_TITLE_MAP			((WIDTH - (WIDTH_IMG_TITLE))*0.9)
+#define HEIGTH_IMG_TITLE_MAP		((HEIGHT - (HEIGHT_IMG_TITLE)) *0.7)
+
+//# define SCALE_WIDTH_TITLE			WIDTH_IMG_TITLE*0.03
+//# define SCALE_HEIGHT_TITLE			HEIGHT_IMG_TITLE*0.1
+
 
 # define INPUT_NBR "WRONG NUMBER OF ARGUMENTS\n"
 # define INPUT_EXT "Wrong extention"
@@ -43,6 +56,17 @@ typedef struct	s_map
 	int		bytes;
 }	t_map;
 
+typedef struct	s_title
+{
+	char		**arr;
+	int			width;
+	int			length;
+	int			row;
+	int			column;
+	int			dx;
+	int			dy;
+}	t_title;
+
 typedef struct	s_player
 {
 	int		x;
@@ -51,10 +75,16 @@ typedef struct	s_player
 	double	fov;
 }	t_player;
 
+
 typedef struct s_macro_data
 {
 	t_map		map;
 	t_player	player;
+	t_title		title;
+	mlx_t* 		mlx;
+	mlx_image_t*		img;
+	mlx_image_t*		img2;
+	int 				plus;
 }	t_data;
 
 //MAPCHECK
@@ -63,6 +93,12 @@ int		ft_check_colors(t_data *data, int line_reached);
 int		ft_check_paths(t_data *data, int line_reached);
 int		ft_check_elements(t_data *data, char **elements);
 int		ft_parse_elements(t_data *data);
+
+//PHASE 1
+void	ft_phase_1(t_data *data, mlx_t* mlx);
+void	draw_title_map(t_data *data, mlx_image_t* img2);
+//void	draw_title_map(t_data *data);
+int		set_color(float y);
 
 //UTILS
 void	ft_error(char *err);
