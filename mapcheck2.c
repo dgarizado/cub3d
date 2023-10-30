@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/23 21:33:15 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:56:04 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * @brief Auxiliary function that
  * gets the player coords and help to check if there is only one.
- * 
+ * Also sets the player angle.
  * @param i 
  * @param j 
  * @param data 
@@ -28,6 +28,14 @@ void	get_player_coords(int i, int j, t_data *data, int *watchdog)
 		data->player.x = j;
 		data->player.y = i;
 		(*watchdog)++;
+		if (data->map.map_aclean[i][j] == 'N')
+			data->player.angle = 90; // Pi/2
+		if (data->map.map_aclean[i][j] == 'S')
+			data->player.angle = 270; // 3Pi/2
+		if (data->map.map_aclean[i][j] == 'W')
+			data->player.angle = 180; // Pi
+		if (data->map.map_aclean[i][j] == 'E')
+			data->player.angle = 0; // 2Pi
 	}
 }
 
