@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:36:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/10/29 14:23:47 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/10/29 21:57:16 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_draw_sq(mlx_image_t* img, t_data * data, int x1, int y1)
 			z = 0;
 			//if (!(y == last_y) && !(x == last_x))
 			//	mlx_put_pixel(img, x, y, set_color(y + data->plus));
-			while(z <= 20)//genera profundidad
+			while(z <= (WIDTH*0.01))//genera profundidad HARDCODED
 			{
 				mlx_put_pixel(img, x+z, y+z, set_color(y + data->plus));
 				if(y == y1+ (data->title.row *10))
@@ -182,16 +182,54 @@ char **ft_skip_sp_arr(char **arr)
 
 void draw(void *d)
 {
-	t_data *data = (t_data *)d;
-	//static int i;
+	int i;
+	static int n;
 	
-	data->plus += 5 ;
-	//if (data->plus == -(HEIGHT_IMG_TITLE))
+	i = 255;
+	t_data *data = (t_data *)d;
+
+	data->plus += 15 ;
 	if (data->plus >= ((HEIGHT_IMG_TITLE)*3))
 		data->plus = 0;
-//	usleep(100000);
-	draw_title(data, data->img);
-	//draw_title_map(data, data->img2);
+	
+	if (mlx_is_key_down(data->mlx, MLX_KEY_ENTER))
+		data->flag = 1;
+	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(data->mlx);
+	if(data->flag == 0)
+		draw_title(data, data->img);
+	if (data->flag == 1)
+	{
+		data->startimg->enabled = 0;
+		n+=2;
+		if(n >400)
+		{
+			ft_memset(data->img->pixels, 0,WIDTH * HEIGHT * sizeof(int32_t));
+			ft_memset(data->img2->pixels, 0,WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
+			ft_memset(data->img3->pixels, 0 ,WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
+		}
+		else if (n > 80)
+		{
+			if (n <255)
+			{
+				ft_memset(data->img3->pixels, 255-n ,WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
+				ft_memset(data->img2->pixels, 255-n,WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
+				
+			}
+				
+			//memset(data->img->pixels, 255-n,WIDTH * HEIGHT * sizeof(int32_t));
+		}
+			
+		else if (n <=80)
+		{
+		ft_memset(data->img3->pixels, 0 ,WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
+		data->map.zoom += 0.1;
+		ft_memset(data->img2->pixels, 0,WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
+		draw_title_map(data, data->img2);
+		draw_title(data, data->img);	
+		}
+		
+	}
 
 	
 }
@@ -200,12 +238,23 @@ void draw(void *d)
 //map de titulo NO CHEKEA ONLY PARSE!!!
 void	ft_phase_1(t_data *data, mlx_t* mlx)
 {
+	data->map.zoom = 0.0; 
 	data->plus = 0;
 	data->mlx = mlx;
 	mlx_image_t* img = mlx_new_image(mlx, WIDTH_IMG_TITLE, HEIGHT_IMG_TITLE);
 	mlx_image_t* img2 = mlx_new_image(mlx, WIDTH_IMG_TITLE_MAP, HEIGTH_IMG_TITLE_MAP);
+	mlx_image_t* img3 = mlx_new_image(mlx, WIDTH, HEIGHT);
 	data->img = img;
 	data->img2 = img2;
+	data->img3 = img3;
+	mlx_texture_t *start;
+	mlx_image_t *startimg;
+	
+	start = mlx_load_png("./map_title/start2.png");
+	startimg = mlx_texture_to_image(data->mlx, start);
+	data->startimg = startimg;
+	//memset(startimg->pixels, 255, startimg->width * startimg->height * sizeof(int32_t));
+	mlx_image_to_window(data->mlx, startimg, (WIDTH / 2) -(startimg->width/2), (HEIGHT/2) - ((startimg->height/2)));
 	//mlx_image_t* img = mlx_new_image(mlx, 100, 100);
 	char *buffer_str;
 	
@@ -215,15 +264,17 @@ void	ft_phase_1(t_data *data, mlx_t* mlx)
 	free(buffer_str);
 	data->title.length = ft_strlen(data->title.arr[0]);
 	data->title.width = ft_arrlen(data->title.arr);
-	//ft_print_array(data->title.arr);
-	draw_title(data, img);
-	//ft_print_array(data->map.map_aclean);
+
+	//draw_title(data, img);
+
 	draw_title_map(data, img2);
 	//memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
 	//memset(img2->pixels, 255,WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
+	//memset(img3->pixels, 255,WIDTH * HEIGHT * sizeof(int32_t));
+	mlx_image_to_window(mlx, img3, 0, 0);
 	mlx_image_to_window(mlx, img, (WIDTH / 2) -(WIDTH_IMG_TITLE/2), (HEIGHT *0.03));
-	mlx_image_to_window(mlx, img2, (WIDTH / 2) -(WIDTH_IMG_TITLE_MAP/2), (HEIGHT *0.55));
+	mlx_image_to_window(mlx, img2, (WIDTH / 2) -(WIDTH_IMG_TITLE_MAP/2), 0);
 	mlx_loop_hook(mlx, draw, data);
 	
 	mlx_loop(mlx);
-}
+}   

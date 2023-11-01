@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/29 13:51:46 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:28:59 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 #define HEIGHT 						1200
 #define WIDTH_IMG_TITLE 			WIDTH*0.9
 #define HEIGHT_IMG_TITLE 			HEIGHT*0.5
-#define WIDTH_IMG_TITLE_MAP			WIDTH_IMG_TITLE *0.5
-//#define WIDTH_IMG_TITLE_MAP			((WIDTH - (WIDTH_IMG_TITLE))*0.9)
-#define HEIGTH_IMG_TITLE_MAP		((HEIGHT - (HEIGHT_IMG_TITLE)) *0.7)
-
+#define WIDTH_IMG_TITLE_MAP			WIDTH*1.0
+#define HEIGTH_IMG_TITLE_MAP		HEIGHT*1.0
+//#define WIDTH_IMG_TITLE_MAP			WIDTH_IMG_TITLE *0.5
+//#define HEIGTH_IMG_TITLE_MAP		((HEIGHT - (HEIGHT_IMG_TITLE)) *0.7)
 //# define SCALE_WIDTH_TITLE			WIDTH_IMG_TITLE*0.03
 //# define SCALE_HEIGHT_TITLE			HEIGHT_IMG_TITLE*0.1
 
@@ -54,6 +54,7 @@ typedef struct	s_map
 	int		width;
 	int		height;
 	int		bytes;
+	double		zoom;
 }	t_map;
 
 typedef struct	s_title
@@ -84,7 +85,10 @@ typedef struct s_macro_data
 	mlx_t* 		mlx;
 	mlx_image_t*		img;
 	mlx_image_t*		img2;
+	mlx_image_t*		img3;
+	mlx_image_t*		startimg;
 	int 				plus;
+	int					flag;
 }	t_data;
 
 //MAPCHECK

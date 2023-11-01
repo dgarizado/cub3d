@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:29:45 by vcereced          #+#    #+#             */
-/*   Updated: 2023/10/29 12:29:28 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:12:42 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,6 @@ static int	range_down(float start)
 
 static int	range_up(int start)
 {
-	/*if (start >= 95)
-		return (0x7B1FA2FF);
-	else if (start >= 85)
-		return (0xBA55D3FF);
-	else if (start >= 70)
-		return (0xFFA500FF);
-	else if (start >= 55)
-		return (0xDAA520FF);
-	else if (start >= 35)
-		return (0xFFD700FF);
-	else if (start >= 25)
-		return (0xDEB887FF);
-	else if (start >= 15)
-		return (0xDCDCDCFF);
-	else
-		return (0x778899);*/
-
 	if (start >= 350)
 		return (0x778899);
 	else if (start >= 300)
@@ -65,9 +48,6 @@ static int	range_up(int start)
 		return (0x778899);
 	else
 		return (0xBA55D3FF);
-	
-
-		
 }
 
 int	set_color(float y)
@@ -98,17 +78,27 @@ static void	ft_draw_sq(mlx_image_t* img2, t_data * data, int x1, int y1)
 	int y;
 	int last_x;
 	int last_y;
-	last_x = x1 + ((fabs)((WIDTH_IMG_TITLE_MAP) / data->map.width));
-	last_y = y1 + ((fabs)(HEIGTH_IMG_TITLE_MAP) / data->map.height);
-
+	last_x = x1 + ((fabs)((WIDTH_IMG_TITLE_MAP)*0.2 / data->map.width));
+	//last_x *= data->map.zoom;
+	last_y = y1 + ((fabs)(HEIGTH_IMG_TITLE_MAP)*0.2 / data->map.height);
+	//last_y *= data->map.zoom;
 	y =y1;
 	while(y <= last_y)
 	{
 		x =x1;
-		
 		while(x <= last_x)
 		{
-			mlx_put_pixel(img2, x, y, 0xDAA520FF);
+			int z;
+			z = 0;
+			while(z <= (WIDTH*0.005))//profundidad HARDCODED
+			{
+				if (x-z < WIDTH_IMG_TITLE_MAP && x-z >= 0 && y-z >= 0 && y-z <= HEIGTH_IMG_TITLE_MAP)
+					mlx_put_pixel(img2, x-z, y-z, 0x9b9b9b80);
+				
+				z++;
+			}
+			if (x-z < WIDTH_IMG_TITLE_MAP && x-z >= 0 && y-z >= 0 && y-z < HEIGTH_IMG_TITLE_MAP)
+				mlx_put_pixel(img2, x-z, y-z, 0x7e7e7e80);
 			x++;
 		}
 		
@@ -120,16 +110,25 @@ static void draw_square(t_data * data, mlx_image_t* img2, int row, int column)
 {
 	int x1;
 	int y1;
+	double center_x_left;
 
-	x1 = column * ((fabs)(WIDTH_IMG_TITLE_MAP) / data->map.width);
-	y1 = row * ((fabs)((HEIGTH_IMG_TITLE_MAP) / data->map.height));
-	ft_draw_sq(img2, data, x1, y1);
+	center_x_left = (data->map.width * ((fabs)(WIDTH_IMG_TITLE_MAP)*0.2 / data->map.width));
+	x1 = (column * ((fabs)(WIDTH_IMG_TITLE_MAP)*0.2 / data->map.width));
+	y1 = row * ((fabs)((HEIGTH_IMG_TITLE_MAP)*0.2 / data->map.height));
+	
+	x1 = x1 + (x1 * data->map.zoom);
+	y1 = y1 + (y1 * data->map.zoom);
+
+	
+	ft_draw_sq(img2, data, x1 + (WIDTH/2)  , y1 + ((HEIGHT*0.6) - ((HEIGHT*0.3) * data->map.zoom)));
+	//ft_draw_sq(img2, data, x1 + (center_x_left/2), y1 + (HEIGHT*0.45));
 }
 
 void	draw_title_map(t_data *data, mlx_image_t* img2)
 {
 	int row;
 	int column;
+	
 
 	row = 0;
 	while(data->map.map_aclean[row])
