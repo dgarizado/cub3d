@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:47:26 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/30 17:42:30 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:40:07 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	ray_charles(t_data *data)
 			ray_angle += 360;
 		if (ray_angle > 360)
 			ray_angle -= 360;
-		ray_xstep = cos(d2r(ray_angle));
-		ray_ystep = sin(d2r(ray_angle));
+		ray_xstep = cos(d2r(ray_angle))/16;
+		ray_ystep = sin(d2r(ray_angle))/16;
 		printf("ray_xstep = %f\n", ray_xstep);
 		printf("ray_ystep = %f\n", ray_ystep);
 		wallhit = 0;
@@ -82,6 +82,7 @@ void	ray_charles(t_data *data)
 		ft_draw_line(data->player.img3d, i, 0, i, screenh/2 - wallheight, 0xACBCBCFF);
 		ft_draw_line(data->player.img3d, i, screenh/2 + wallheight, i, screenh, 0x9DA4CFFF);
 		ray_angle += increment;
+		printf("ray_angle = %f\n", ray_angle);
 	}	
 	// i = 0;
 	// while (i < data->map.width*PPC/2)
