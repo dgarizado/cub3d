@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/30 16:18:28 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:48:17 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define GREEN "\033[0;32m"
 # define BLUE "\033[0;34m"
 # define RST "\033[0m"
+# define YELLOW "\033[0;33m"
 # define FOV 60
 # define PPC 40
 
@@ -44,7 +45,13 @@ typedef enum e_mini_map
 	M_SPRITES
 }	t_mini_map;
 
-typedef struct minimap
+typedef struct s_victor
+{
+	double	x;
+	double	y;
+}	t_victor;
+
+typedef struct s_minimap
 {
 	int		x;
 	int		y;
@@ -76,9 +83,9 @@ typedef struct	s_player
 	double	dir;
 	double	fov;
 	double	angle;
-	mlx_image_t	*point;
 	mlx_image_t	*img3d;
-	
+	t_victor	pos;
+	t_victor	vdir;
 }	t_player;
 
 typedef struct s_macro_data
@@ -126,6 +133,9 @@ void	ft_load_minisprites(t_data *data);
 
 //RAYCHARLES
 void	ray_charles(t_data *data);
+
+//RAY BAN
+void	ray_bang(t_data *data);
 
 //DRAWLINE
 void	ft_draw_line(mlx_image_t *img, int x1, int y1, int x2, int y2, int color);

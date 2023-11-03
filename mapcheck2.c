@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/29 12:56:04 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:42:41 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	get_player_coords(int i, int j, t_data *data, int *watchdog)
 	{
 		data->player.x = j;
 		data->player.y = i;
+		data->player.pos.x = j;
+		data->player.pos.y = i;
 		(*watchdog)++;
 		if (data->map.map_aclean[i][j] == 'N')
 			data->player.angle = 90; // Pi/2
@@ -36,6 +38,15 @@ void	get_player_coords(int i, int j, t_data *data, int *watchdog)
 			data->player.angle = 180; // Pi
 		if (data->map.map_aclean[i][j] == 'E')
 			data->player.angle = 0; // 2Pi
+		//THIS IS THE NEW PART USING VICTORS	
+		if (data->map.map_aclean[i][j] == 'N')
+			data->player.vdir.y = 1;
+		if (data->map.map_aclean[i][j] == 'S')
+			data->player.vdir.y = -1;
+		if (data->map.map_aclean[i][j] == 'W')
+			data->player.vdir.x = -1;
+		if (data->map.map_aclean[i][j] == 'E')
+			data->player.vdir.x = 1;
 	}
 }
 

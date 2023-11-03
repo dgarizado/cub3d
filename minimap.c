@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 21:18:54 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/01 19:30:00 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/03 19:08:50 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_movement_calc(t_data *data, mlx_key_data_t keydata)
 	data->map.map_aclean[data->player.y][data->player.x + 1] != '1')
 	{
 		data->player.flag = true;
-		mlx_put_pixel(data->map.img, (data->player.x)*12 +6, (data->player.y)*12 +6, 0x00000FF);
+		mlx_put_pixel(data->map.img, (data->player.x)*12 +6, (data->player.y)*12 +6, 0x00000FF);	
 		data->player.x += 1;
 	}
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS && \
@@ -56,18 +56,18 @@ void	ft_keyhook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS && data->player.flag == true)
 	{
 		// data->map.img->instances[0].y += 12;
-		data->player.point->instances[0].y -= 12;
 		mlx_put_pixel(data->map.img, (data->player.x)*12 +6, (data->player.y)*12 +6, 0xFF000FF);
 		// ray_charles(data);
+		ray_bang(data);
 		// data->map.minimap.img[PLAYER]->instances[0].y -= 20;
 	}
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS && data->player.flag == true)
 	{
 		// data->map.img->instances[0].y -= 12;
 		// data->map.minimap.img[PLAYER]->instances[0].y += 20;
-		data->player.point->instances[0].y += 12;
 		mlx_put_pixel(data->map.img, (data->player.x)*12 +6, (data->player.y)*12 +6, 0xFF000FF);
 		// ray_charles(data);
+		ray_bang(data);
 	}
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS && data->player.flag == true)
 	{
@@ -230,15 +230,16 @@ void	ft_minimap(t_data *data)
 	mlx_image_to_window(data->map.mlx, data->player.img3d, 0, 0);
 	ft_load_minisprites(data);
 	data->map.img = mlx_new_image(data->map.mlx, data->map.width*12, data->map.height*12);
-	data->player.point = mlx_new_image(data->map.mlx, 4, 4);
+	// data->player.point = mlx_new_image(data->map.mlx, 4, 4);
 	ft_memset(data->map.img->pixels, 0xC0, data->map.img->width * data->map.img->height*4);
-	ft_memset(data->player.point->pixels, 0xFF, data->player.point->width * data->player.point->height*4);
+	// ft_memset(data->player.point->pixels, 0xFF, data->player.point->width * data->player.point->height*4);
 	ft_draw_minimap(data);
 	mlx_image_to_window(data->map.mlx, data->map.img,data->map.width*PPC - data->map.img->width, data->map.height*PPC - data->map.img->height);
-	mlx_image_to_window(data->map.mlx, data->player.point, data->player.x*PPC, data->player.y*PPC);
+	// mlx_image_to_window(data->map.mlx, data->player.point, data->player.x*PPC, data->player.y*PPC);
 	mlx_put_pixel(data->map.img, data->player.x*12 + 6, data->player.y*12 +6, 0xFF00FF);
 	//ft_draw_map(data);
-	ray_charles(data);
+	// ray_charles(data);
+	ray_bang(data);
 	// ft_draw_line(data->player.img3d, 110, 110, 0, 110, 0xFF00FFFF);
 	mlx_key_hook(data->map.mlx, &ft_keyhook, data);
 	mlx_loop_hook(data->map.mlx, ft_hook, data);
