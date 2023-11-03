@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapcheck.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/23 20:18:15 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:48:30 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ bool	ft_mapcheck(char **argv, t_data *data)
 		ft_error("Map error\n");
 	}
 	ft_parse_info(data);
+	
 	return (true);
 }

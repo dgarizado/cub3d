@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/31 18:28:59 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/03 19:45:41 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <math.h>
 #include <fcntl.h>
 #include <math.h>
 #include "./lib/MLX42/include/MLX42/MLX42.h"
@@ -45,16 +46,35 @@
 # define BLUE "\033[0;34m"
 # define RST "\033[0m"
 
+typedef struct	s_atr
+{
+	int		screen_width;
+	int		screen_height;
+	int		screen_half_width;
+	int		screen_half_height;
+	double	scale_width_mini_map;
+	double	scale_height_mini_map;
+	double	render_delay;
+	double 	r_c_increment_angle;
+	double	precision;
+	
+}	t_atr;
+
+
 typedef struct	s_map
 {
 	char	*map_s;
 	char	**map_a;
 	char	*map_sclean;
 	char	**map_aclean;
+	char	*map;
 	int		width;
+	int		ancho;//phase 2
+	int		largo;//pahse 2
 	int		height;
 	int		bytes;
-	double		zoom;
+	double	zoom;
+	t_atr	atr;
 }	t_map;
 
 typedef struct	s_title
@@ -74,19 +94,22 @@ typedef struct	s_player
 	int		y;
 	double	dir;
 	double	fov;
+	double	half_fov;
 }	t_player;
 
 
 typedef struct s_macro_data
 {
-	t_map		map;
-	t_player	player;
-	t_title		title;
-	mlx_t* 		mlx;
+	t_map				map;
+	t_player			player;
+	t_title				title;
+	mlx_t* 				mlx;
 	mlx_image_t*		img;
 	mlx_image_t*		img2;
 	mlx_image_t*		img3;
 	mlx_image_t*		startimg;
+	mlx_image_t*		game;
+	mlx_texture_t*		linktexture;
 	int 				plus;
 	int					flag;
 }	t_data;
@@ -103,6 +126,15 @@ void	ft_phase_1(t_data *data, mlx_t* mlx);
 void	draw_title_map(t_data *data, mlx_image_t* img2);
 //void	draw_title_map(t_data *data);
 int		set_color(float y);
+void draww(void *d);
+
+//PHASE 2
+void	ft_phase_2(t_data *data, mlx_t* mlx);
+void	ft_game_little_map(t_data *data);
+void	draw_link_person(t_data *data, int column, int row);
+void hk2(void *d);
+
+void	ft_game_play(t_data *data);
 
 //UTILS
 void	ft_error(char *err);

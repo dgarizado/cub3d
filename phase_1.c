@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:36:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/10/29 21:57:16 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/03 18:58:35 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ char **ft_skip_sp_arr(char **arr)
 	return(arr);
 }
 
-void draw(void *d)
+void draww(void *d)
 {
 	int i;
 	static int n;
@@ -198,11 +198,20 @@ void draw(void *d)
 		mlx_close_window(data->mlx);
 	if(data->flag == 0)
 		draw_title(data, data->img);
-	if (data->flag == 1)
+	if (data->flag == 1 && n < 421)
 	{
 		data->startimg->enabled = 0;
 		n+=2;
-		if(n >400)
+		if (n > 420)
+		{
+			mlx_delete_image(data->mlx, data->img3);
+			mlx_delete_image(data->mlx, data->img2);
+			mlx_delete_image(data->mlx, data->img);
+			mlx_delete_image(data->mlx, data->startimg);
+			
+			mlx_loop_hook(data->mlx,hk2, data);
+		}
+		else if(n >400)
 		{
 			ft_memset(data->img->pixels, 0,WIDTH * HEIGHT * sizeof(int32_t));
 			ft_memset(data->img2->pixels, 0,WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
@@ -229,9 +238,7 @@ void draw(void *d)
 		draw_title(data, data->img);	
 		}
 		
-	}
-
-	
+	}	
 }
 
 
@@ -274,7 +281,7 @@ void	ft_phase_1(t_data *data, mlx_t* mlx)
 	mlx_image_to_window(mlx, img3, 0, 0);
 	mlx_image_to_window(mlx, img, (WIDTH / 2) -(WIDTH_IMG_TITLE/2), (HEIGHT *0.03));
 	mlx_image_to_window(mlx, img2, (WIDTH / 2) -(WIDTH_IMG_TITLE_MAP/2), 0);
-	mlx_loop_hook(mlx, draw, data);
+	//mlx_loop_hook(mlx, draww, data);
 	
-	mlx_loop(mlx);
+	//mlx_loop(mlx);
 }   

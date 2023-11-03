@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   play.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/20 16:36:08 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/02 20:34:53 by vcereced         ###   ########.fr       */
+/*   Created: 2023/11/03 19:41:44 by vcereced          #+#    #+#             */
+/*   Updated: 2023/11/03 19:46:35 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// void leaks(void)
-// {
-// 	system("leaks cub3d");
-// }
+double 
 
-int	main(int argc, char **argv)
+void	ft_game_play(t_data *data)
 {
-	t_data	data;
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "Test", true);
-
-	if (argc != 2)
-		ft_error(INPUT_NBR);
-	ft_memset(&data, 0, sizeof(t_data));
-	ft_mapcheck(argv, &data);
-	ft_phase_1(&data, mlx);
-	ft_phase_2(&data, mlx);
-	//ft_free_maps(&data);
-	//atexit(leaks);
-	return (0);
+	
 }

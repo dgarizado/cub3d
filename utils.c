@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 19:47:32 by vcereced          #+#    #+#             */
-/*   Updated: 2023/10/23 18:35:59 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/01 18:10:45 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,12 @@ int	ft_ismap(char *line, char *str)
 		line++;
 	}
 	return (flag);
+}
+
+double ft_degre_to_radian(double degre)
+{
+	double radian;
+
+	radian = degre * M_PI / 180;
+	return (radian);
 }
