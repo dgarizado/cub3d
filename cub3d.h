@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/03 17:48:17 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/05 16:50:31 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_victor
 	double	y;
 }	t_victor;
 
+
 typedef struct s_minimap
 {
 	int		x;
@@ -75,6 +76,12 @@ typedef struct	s_map
 	t_minimap	minimap;
 }	t_map;
 
+typedef struct s_sprites
+{
+	mlx_image_t	*pistol_img;
+	mlx_image_t	*pistol_bang;
+}	t_sprites;
+
 typedef struct	s_player
 {
 	int		x;
@@ -83,9 +90,14 @@ typedef struct	s_player
 	double	dir;
 	double	fov;
 	double	angle;
+	t_sprites	sprites;
 	mlx_image_t	*img3d;
 	t_victor	pos;
 	t_victor	vdir;
+	t_victor	plane;
+	int 	mouse_x;
+	int 	mouse_y;
+	int		vertical;
 }	t_player;
 
 typedef struct s_macro_data
@@ -136,6 +148,7 @@ void	ray_charles(t_data *data);
 
 //RAY BAN
 void	ray_bang(t_data *data);
+void	rotate_victor(t_victor *victor, double angle);
 
 //DRAWLINE
 void	ft_draw_line(mlx_image_t *img, int x1, int y1, int x2, int y2, int color);

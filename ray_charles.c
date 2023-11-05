@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:47:26 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/01 20:18:00 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/05 14:25:47 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ray_charles(t_data *data)
 		ray_dist = sqrt(pow(ray_x - data->player.x, 2) + pow(ray_y - data->player.y, 2));
 		// ray_dist = ray_dist * cos(d2r(ray_angle - data->player.angle));
 		wallheight = (int)((screenh/2) / ray_dist);
-		ft_draw_line(data->player.img3d, (int)(i), (int)(screenh/2 - wallheight), (int)(i), (int)(screenh/2 + wallheight), 0xFF00FFFF);
+		ft_draw_line(data->player.img3d, (int)(i), (int)(screenh/2 - wallheight), (int)(i), (int)(screenh/2 + wallheight) -10, 0xFF00FFFF);
 		ft_draw_line(data->player.img3d, i, 0, i, screenh/2 - wallheight, 0xACBCBCFF);
 		ft_draw_line(data->player.img3d, i, screenh/2 + wallheight, i, screenh, 0x9DA4CFFF);
 		ray_angle += increment;
