@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:02:13 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/05 15:34:39 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/06 22:21:53 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ void ray_bang(t_data *data)
 		raydirx = dirx + planex * camerax;
 		raydiry = diry + planey * camerax;
 		printf("raydirx = %f, raydiry = %f\n", raydirx, raydiry);
+		printf(YELLOW"playervdirx = %f, playervdiry = %f\n"RST, data->player.vdir.x, data->player.vdir.y);
+		printf(YELLOW"playerplanex = %f, playerplaney = %f\n"RST, data->player.plane.x, data->player.plane.y);
+		printf("Next x %f\n", posx + data->player.vdir.x * MOVE_SPEED);
 		mapx = (int)posx;
 		mapy = (int)posy;
 		if (raydirx == 0)
@@ -116,15 +119,15 @@ void ray_bang(t_data *data)
 			}
 			printf("mapx = %d, mapy = %d\n", mapx, mapy);
 			
-			// if (mapx >= 0 && mapx < data->map.width*PPC && mapy >= 0 && mapy < data->map.height*PPC)
-			// {
+			if (mapx >= 0 && mapx < data->map.width*PPC && mapy >= 0 && mapy < data->map.height*PPC)
+			{
 				if (data->map.map_aclean[mapy][mapx] == '1')
 				{
 					printf(BLUE"Wallhit at %d, %d\n"RST, mapx, mapy);
 					hit = 1;
 				}
-			// }else 
-			//  	printf(RED"Invalid map coordinates\n"RST); 
+			}else 
+			 	printf(RED"Invalid map coordinates\n"RST); 
 		}
 		if (side == 0)
 		{
