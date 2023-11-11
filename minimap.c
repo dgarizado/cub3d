@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 21:18:54 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/06 23:16:15 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/11 18:08:32 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ void	ft_keyhook(mlx_key_data_t keydata, void *param)
 void	ft_hook2(void *param)
 {
 	t_data *data;
+	double next_x;
+	double next_y;
 
 	data = param;
 	if (mlx_is_key_down(data->map.mlx, MLX_KEY_V))
@@ -140,17 +142,34 @@ void	ft_hook2(void *param)
 //CHECKPOINTTTT
 	if (mlx_is_key_down(data->map.mlx, MLX_KEY_W)  )
 	{
-		double next_x = data->player.x + data->player.vdir.x * MOVE_SPEED;
-		double next_y = data->player.y + data->player.vdir.y * MOVE_SPEED;
-		printf(YELLOW"next_x = %f, next_y = %f\n"RST, next_x, next_y);
-		if ((int)next_x > 0 && data->map.map_aclean[(int)next_y][(int)next_x] != '1')
+		//correction of the bug: 
+		//when you are in the corner of the map, you can't move
+		next_x = data->player.x + data->player.vdir.x * MOVE_SPEED;
+		if (data->map.map_aclean[(int)data->player.y][(int)next_x] != '1')
 		{
-			data->player.flag = true;
 			mlx_put_pixel(data->map.img, (data->player.x)*MINIMAP_SCALE , (data->player.y)*MINIMAP_SCALE , 0x00000FF);
 			data->player.x = next_x;
-			data->player.y = next_y;
-			mlx_put_pixel(data->map.img, (data->player.x)*MINIMAP_SCALE , (data->player.y)*MINIMAP_SCALE , 0xFF000FF);
 		}
+		next_y = data->player.y + data->player.vdir.y * MOVE_SPEED;
+		if (data->map.map_aclean[(int)next_y][(int)data->player.x] != '1')
+		{
+			mlx_put_pixel(data->map.img, (data->player.x)*MINIMAP_SCALE , (data->player.y)*MINIMAP_SCALE , 0x00000FF);
+			data->player.y = next_y;
+		}
+			mlx_put_pixel(data->map.img, (data->player.x)*MINIMAP_SCALE , (data->player.y)*MINIMAP_SCALE , 0xFF000FF);
+		
+		//corrected but not working at corners
+		// double next_x = data->player.x + data->player.vdir.x * MOVE_SPEED;
+		// double next_y = data->player.y + data->player.vdir.y * MOVE_SPEED;
+		// printf(YELLOW"next_x = %f, next_y = %f\n"RST, next_x, next_y);
+		// if ((int)next_x > 0 && data->map.map_aclean[(int)next_y][(int)next_x] != '1')
+		// {
+		// 	data->player.flag = true;
+		// 	mlx_put_pixel(data->map.img, (data->player.x)*MINIMAP_SCALE , (data->player.y)*MINIMAP_SCALE , 0x00000FF);
+		// 	data->player.x = next_x;
+		// 	data->player.y = next_y;
+		// 	mlx_put_pixel(data->map.img, (data->player.x)*MINIMAP_SCALE , (data->player.y)*MINIMAP_SCALE , 0xFF000FF);
+		// }
 		//with no directionns
 		// if (data->map.map_aclean[(int)(data->player.y - 1.0 * MOVE_SPEED)][(int)data->player.x] != '1')
 		// {
@@ -162,16 +181,30 @@ void	ft_hook2(void *param)
 	}
 	if (mlx_is_key_down(data->map.mlx, MLX_KEY_S))
 	{
-		double next_x = data->player.x - data->player.vdir.x * MOVE_SPEED;
-		double next_y = data->player.y - data->player.vdir.y * MOVE_SPEED;
-		if (data->map.map_aclean[(int)next_y][(int)next_x] != '1')
+
+		next_x = data->player.x - data->player.vdir.x * MOVE_SPEED;
+		if (data->map.map_aclean[(int)data->player.y][(int)next_x] != '1')
 		{
-			data->player.flag = true;
 			mlx_put_pixel(data->map.img, (data->player.x)*MINIMAP_SCALE , (data->player.y)*MINIMAP_SCALE , 0x00000FF);
 			data->player.x = next_x;
-			data->player.y = next_y;
-			mlx_put_pixel(data->map.img, (data->player.x)*MINIMAP_SCALE , (data->player.y)*MINIMAP_SCALE , 0xFF000FF);
 		}
+		next_y = data->player.y - data->player.vdir.y * MOVE_SPEED;
+		if (data->map.map_aclean[(int)next_y][(int)data->player.x] != '1')
+		{
+			mlx_put_pixel(data->map.img, (data->player.x)*MINIMAP_SCALE , (data->player.y)*MINIMAP_SCALE , 0x00000FF);
+			data->player.y = next_y;
+		}
+			mlx_put_pixel(data->map.img, (data->player.x)*MINIMAP_SCALE , (data->player.y)*MINIMAP_SCALE , 0xFF000FF);
+		// double next_x = data->player.x - data->player.vdir.x * MOVE_SPEED;
+		// double next_y = data->player.y - data->player.vdir.y * MOVE_SPEED;
+		// if (data->map.map_aclean[(int)next_y][(int)next_x] != '1')
+		// {
+		// 	data->player.flag = true;
+		// 	mlx_put_pixel(data->map.img, (data->player.x)*MINIMAP_SCALE , (data->player.y)*MINIMAP_SCALE , 0x00000FF);
+		// 	data->player.x = next_x;
+		// 	data->player.y = next_y;
+		// 	mlx_put_pixel(data->map.img, (data->player.x)*MINIMAP_SCALE , (data->player.y)*MINIMAP_SCALE , 0xFF000FF);
+		// }
 		// if (data->map.map_aclean[(int)(data->player.y + 1.0 * MOVE_SPEED)][(int)data->player.x] != '1')
 		// {
 		// 	data->player.flag = true;
@@ -227,33 +260,33 @@ void	ft_hook2(void *param)
 	if (mx > data->player.mouse_x && data->player.mouse_x > 0 && data->player.mouse_x < data->map.width*PPC )
 	{
 		data->player.angle += 1;
-		rotate_victor(&data->player.vdir, 5);
-		rotate_victor(&data->player.plane, 5);
+		rotate_victor(&data->player.vdir, 4);
+		rotate_victor(&data->player.plane, 4);
 	}
 	if (mx < data->player.mouse_x && data->player.mouse_x < data->map.width*PPC && data->player.mouse_x > 0)
 	{
 		data->player.angle -= 1;
-		rotate_victor(&data->player.vdir, -5);
-		rotate_victor(&data->player.plane, -5);
+		rotate_victor(&data->player.vdir, -4);
+		rotate_victor(&data->player.plane, -4);
 	}
 	if (my > data->player.mouse_y && data->player.mouse_y > 0 && data->player.mouse_y < data->map.height*PPC)
 	{
-		data->player.vertical += 70;
+		data->player.vertical += 25;
 	}
 	if (my < data->player.mouse_y && data->player.mouse_y < data->map.height*PPC && data->player.mouse_y > 0)
 	{
-		data->player.vertical -= 70;
+		data->player.vertical -= 25;
 	}
 	data->player.mouse_y = my;
 	data->player.mouse_x = mx;
-	if (data->player.sprites.pistol_bang->instances[0].enabled == true)
-		data->player.sprites.pistol_bang->instances[0].enabled = false;
-	if (data->player.sprites.pistol_img->instances[0].enabled == false)
-		data->player.sprites.pistol_img->instances[0].enabled = true;
+	if (data->player.sprites[PISTOL_BANG]->instances[0].enabled == true)
+		data->player.sprites[PISTOL_BANG]->instances[0].enabled = false;
+	if (data->player.sprites[PISTOL]->instances[0].enabled == false)
+		data->player.sprites[PISTOL]->instances[0].enabled = true;
 	if (mlx_is_mouse_down(data->map.mlx, MLX_MOUSE_BUTTON_LEFT))
 	{
-		data->player.sprites.pistol_img->instances[0].enabled = false;
-		data->player.sprites.pistol_bang->instances[0].enabled = true;
+		data->player.sprites[PISTOL]->instances[0].enabled = false;
+		data->player.sprites[PISTOL_BANG]->instances[0].enabled = true;
 	}
 		
 }
@@ -265,6 +298,7 @@ void	ft_hook(void *param)
 	t_data *data;
 
 	data = param;
+	
 	ray_bang(data);
 	
 	
@@ -442,21 +476,20 @@ mlx_image_t *scale_down(mlx_image_t *img, int scale, t_data *data)
 void	ft_minimap(t_data *data)
 {
 	data->map.mlx = mlx_init(data->map.width*PPC, data->map.height*PPC, "Cub3D", true);
-	printf("width = %d, height = %d\n", data->map.width*PPC, data->map.height*PPC);
+	printf("width = %d, height = %d\n", data->map.width*PPC, data->map.height*(PPC));
 	data->player.img3d = mlx_new_image(data->map.mlx,data->map.width*PPC , data->map.height*PPC);
 	data->player.plane.x = 0;
 	data->player.plane.y = 0.56;
-	mlx_get_mouse_pos(data->map.mlx, &data->player.mouse_x, &data->player.mouse_y);
-	mlx_image_to_window(data->map.mlx, data->player.img3d, 0, 0);
 	ft_load_minisprites(data);
+	mlx_image_to_window(data->map.mlx, data->player.img3d, 0, 0);
 	data->map.img = mlx_new_image(data->map.mlx, data->map.width*MINIMAP_SCALE, data->map.height*MINIMAP_SCALE);
 	ft_memset(data->map.img->pixels, 0xC0, data->map.img->width * data->map.img->height*4);
 	ft_draw_minimap(data);
 	mlx_image_to_window(data->map.mlx, data->map.img,data->map.width*PPC - data->map.img->width, data->map.height*PPC - data->map.img->height);
-	mlx_image_to_window(data->map.mlx, data->player.sprites.pistol_bang, data->map.width*PPC/2 - data->player.sprites.pistol_bang->width/2 + 5, data->map.height*PPC - data->player.sprites.pistol_bang->height + 5);
-	data->player.sprites.pistol_bang->instances[0].enabled = false;
-	// data->player.sprites.pistol_img = scale_down(data->player.sprites.pistol_img, 2, data);
-	mlx_image_to_window(data->map.mlx, data->player.sprites.pistol_img, data->map.width*PPC/2 - data->player.sprites.pistol_img->width/2, data->map.height*PPC - data->player.sprites.pistol_img->height);
+	mlx_image_to_window(data->map.mlx, data->player.sprites[PISTOL_BANG], data->map.width*PPC/2 - data->player.sprites[PISTOL_BANG]->width/2 + 10, data->map.height*PPC - data->player.sprites[PISTOL_BANG]->height + 10);
+	data->player.sprites[PISTOL_BANG]->instances[0].enabled = false;
+	// mlx_resize_image(data->player.sprites.pistol_img, data->player.sprites.pistol_img->width/2, data->player.sprites.pistol_img->height/2);
+	mlx_image_to_window(data->map.mlx, data->player.sprites[PISTOL], data->map.width*PPC/2 - data->player.sprites[PISTOL]->width/2, data->map.height*PPC - data->player.sprites[PISTOL]->height);
 	mlx_put_pixel(data->map.img, data->player.x*MINIMAP_SCALE , data->player.y*MINIMAP_SCALE , 0xFF00FF);
 	mlx_key_hook(data->map.mlx, ft_keyhook, data);
 	mlx_loop_hook(data->map.mlx, ft_hook, data);

@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:02:13 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/06 22:21:53 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/11 18:19:14 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,49 @@ void rotate_victor(t_victor *victor, double angle)
 	y = victor->y;
 	victor->x = x * cos(angle * M_PI / 180) - y * sin(angle * M_PI / 180);
 	victor->y = x * sin(angle * M_PI / 180) + y * cos(angle * M_PI / 180);
+}
+
+void ft_draw_line2(mlx_image_t *img, int x, int start, int end, int color, t_data *data, int texx)
+{
+	int	y;
+	
+	y = start;
+	while (y <= end)
+	{
+		((uint32_t*)img->pixels)[y * img->width + x] = color;
+		y++;
+	}
+	if (color == 0)
+	{
+		//HERE WE DRAW THE WALL TEXTURE
+		int texHeight = data->player.sprites[WALL_E]->height;
+        int texWidth = data->player.sprites[WALL_E]->width;
+        y = start;
+		while (y <= end)
+		{
+			// Calculate the corresponding position in the texture
+			int texY = (y - start) * texHeight / (end - start);
+
+			// Get the color from the texture
+			uint32_t texColor = ((uint32_t*)data->player.sprites[WALL_E]->pixels)[texY * texWidth + texx];
+
+			// Draw the pixel onto the image
+			((uint32_t*)img->pixels)[y * img->width + x] = texColor;
+			y++;
+		}
+		// for (int y = start; y <= end; y++)
+        // {
+        //     // Calculate the corresponding position in the texture
+        //     int texY = (y - start) * texHeight / (end - start);
+
+        //     // Get the color from the texture
+        //     uint32_t texColor = ((uint32_t*)data->player.textures[TEX_E]->pixels)[texY * texWidth + texx];
+
+        //     // Draw the pixel onto the image
+        //     ((uint32_t*)img->pixels)[y * img->width + x] = texColor;
+        // }
+		
+	}
 }
 
 void ray_bang(t_data *data)
@@ -64,6 +107,7 @@ void ray_bang(t_data *data)
 		printf(YELLOW"playervdirx = %f, playervdiry = %f\n"RST, data->player.vdir.x, data->player.vdir.y);
 		printf(YELLOW"playerplanex = %f, playerplaney = %f\n"RST, data->player.plane.x, data->player.plane.y);
 		printf("Next x %f\n", posx + data->player.vdir.x * MOVE_SPEED);
+		printf("player posx = %f, posy = %f\n", posx, posy);
 		mapx = (int)posx;
 		mapy = (int)posy;
 		if (raydirx == 0)
@@ -113,7 +157,7 @@ void ray_bang(t_data *data)
 			}
 			else
 			{
-				sidedisty += deltadisty;
+				sidedisty += deltadisty;                                                                                                                                
 				mapy += stepy;
 				side = 1;
 			}
@@ -124,22 +168,33 @@ void ray_bang(t_data *data)
 				if (data->map.map_aclean[mapy][mapx] == '1')
 				{
 					printf(BLUE"Wallhit at %d, %d\n"RST, mapx, mapy);
+					printf("side = %d\n", side);
+					printf("posx = %f, posy = %f\n", posx, posy);
 					hit = 1;
 				}
 			}else 
 			 	printf(RED"Invalid map coordinates\n"RST); 
 		}
+		double wallx;
 		if (side == 0)
 		{
 
 			perpwalldist = (sidedistx -  deltadistx);
-			
+			wallx = posy + perpwalldist * raydiry;	
 		}
 		else
 		{
 			perpwalldist = (sidedisty -  deltadisty);
+			wallx = posx + perpwalldist * raydirx;
 		}
+		// int texx = (int)(wallx * (double)data->player.sprites.wall->width);
+		int texx = (x )%(350);
+		if (side == 0 && raydirx > 0)
+			texx = (350) - texx - 1;
+		if (side == 1 && raydiry < 0)
+			texx = (350) - texx - 1;
 		
+				
 		int lineheight = (int)(data->map.height*PPC / perpwalldist);
 		printf("raydirx = %f, raydiry = %f\n", raydirx, raydiry);
 		printf("lineheight = %d\n", lineheight);
@@ -159,11 +214,21 @@ void ray_bang(t_data *data)
 		printf("drawstart = %d, drawend = %d\n", drawstart, drawend);
 		//position
 		printf("posx = %f, posy = %f\n", posx, posy);
-		//first draw the ceiling
-		ft_draw_line(data->player.img3d, x, 0, x, drawstart -data->player.vertical, 0x9DA4CFFF);
-		ft_draw_line(data->player.img3d, x, drawstart -data->player.vertical, x, drawend -data->player.vertical, color);
-		//then draw the floor
-		ft_draw_line(data->player.img3d, x, drawend -data->player.vertical, x, data->map.height*PPC, 0xCCAABFFF);
+		// //first draw the ceiling
+		//DRAW CEILING
+		ft_draw_line2(data->player.img3d, x, 0, drawstart, 0x9DA4CFFF, data, texx);
+		//DRAW WALL
+		if (side == 0)
+			ft_draw_line2(data->player.img3d, x, drawstart, drawend, 0, data, texx);
+		else
+			ft_draw_line2(data->player.img3d, x, drawstart, drawend, 0xFFA4CFFF, data, texx);
+		//DRAW FLOOR
+		ft_draw_line2(data->player.img3d, x, drawend, data->map.height*PPC -1, 0xCC00BFFF, data, texx);
+		
+		// ft_draw_line(data->player.img3d, x, 0, x, drawstart -data->player.vertical, 0x9DA4CFFF);
+		// ft_draw_line(data->player.img3d, x, drawstart -data->player.vertical, x, drawend -data->player.vertical, color);
+		// //then draw the floor
+		// ft_draw_line(data->player.img3d, x, drawend -data->player.vertical, x, data->map.height*PPC, 0xCCAABFFF);
 		x++;
 	}	
 }

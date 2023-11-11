@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/06 22:55:24 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/11 19:09:50 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,27 @@ typedef enum e_mini_map
 	M_SPRITES
 }	t_mini_map;
 
+typedef enum e_sprites{
+	PISTOL,
+	PISTOL_BANG,
+	WALL_N,
+	WALL_S,
+	WALL_E,
+	WALL_W,
+	ENEMY,
+	BAULT,
+	DOOR,
+	SPRITES_COUNT
+} t_sprites;
+
+typedef enum e_textures{
+	TEX_N,
+	TEX_S,
+	TEX_E,
+	TEX_W,
+	TEX_COUNT
+} t_textures;
+
 typedef struct s_victor
 {
 	double	x;
@@ -78,21 +99,15 @@ typedef struct	s_map
 	t_minimap	minimap;
 }	t_map;
 
-typedef struct s_sprites
-{
-	mlx_image_t	*pistol_img;
-	mlx_image_t	*pistol_bang;
-}	t_sprites;
-
 typedef struct	s_player
 {
 	double		x;
 	double		y;
 	bool	flag;
 	double	dir;
-	double	fov;
 	double	angle;
-	t_sprites	sprites;
+	mlx_image_t	*sprites[SPRITES_COUNT];
+	mlx_texture_t	*textures[TEX_COUNT];
 	mlx_image_t	*img3d;
 	t_victor	pos;
 	t_victor	vdir;
