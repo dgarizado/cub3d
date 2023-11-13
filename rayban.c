@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:02:13 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/11 18:19:14 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/13 19:42:07 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void ft_draw_line2(mlx_image_t *img, int x, int start, int end, int color, t_dat
 	if (color == 0)
 	{
 		//HERE WE DRAW THE WALL TEXTURE
-		int texHeight = data->player.sprites[WALL_E]->height;
-        int texWidth = data->player.sprites[WALL_E]->width;
+		int texHeight = data->sprites[WALL_E]->height;
+        int texWidth = data->sprites[WALL_E]->width;
         y = start;
 		while (y <= end)
 		{
@@ -54,181 +54,142 @@ void ft_draw_line2(mlx_image_t *img, int x, int start, int end, int color, t_dat
 			int texY = (y - start) * texHeight / (end - start);
 
 			// Get the color from the texture
-			uint32_t texColor = ((uint32_t*)data->player.sprites[WALL_E]->pixels)[texY * texWidth + texx];
+			uint32_t texColor = ((uint32_t*)data->sprites[WALL_E]->pixels)[texY * texWidth + texx];
 
 			// Draw the pixel onto the image
 			((uint32_t*)img->pixels)[y * img->width + x] = texColor;
 			y++;
 		}
-		// for (int y = start; y <= end; y++)
-        // {
-        //     // Calculate the corresponding position in the texture
-        //     int texY = (y - start) * texHeight / (end - start);
-
-        //     // Get the color from the texture
-        //     uint32_t texColor = ((uint32_t*)data->player.textures[TEX_E]->pixels)[texY * texWidth + texx];
-
-        //     // Draw the pixel onto the image
-        //     ((uint32_t*)img->pixels)[y * img->width + x] = texColor;
-        // }
 		
 	}
 }
 
+void ray_checkdir(t_data *data)
+{
+	if (data->ray.raydirx < 0)
+	{
+		data->ray.stepx = -1;
+		data->ray.sidedistx = (data->player.pos.x - data->ray.mapx) * \
+		data->ray.deltadistx;
+	}
+	else
+	{
+		data->ray.stepx = 1;
+		data->ray.sidedistx = (data->ray.mapx + 1.0 - data->player.pos.x) * \
+		data->ray.deltadistx;
+	}
+	if (data->ray.raydiry < 0)
+	{
+		data->ray.stepy = -1;
+		data->ray.sidedisty = (data->player.pos.y - data->ray.mapy) * \
+		data->ray.deltadisty;
+	}
+	else
+	{
+		data->ray.stepy = 1;
+		data->ray.sidedisty = (data->ray.mapy + 1.0 - data->player.pos.y) * \
+		data->ray.deltadisty;
+	}
+}
+
+/**
+ * @brief Here we update
+ * the ray direction according to the pixel we are drawing
+ * and the player position. 
+ * 
+ * @param data 
+ */
+void ray_update(t_data *data)
+{	
+	data->ray.camerax = 2 * data->ray.x / \
+	(double)(data->map.width * PPC) - 1;
+	data->ray.raydirx = data->player.vdir.x + \
+	data->player.plane.x * data->ray.camerax;
+	data->ray.raydiry =data->player.vdir.y + \
+	data->player.plane.y * data->ray.camerax;
+	data->ray.mapx = (int)data->player.pos.x;
+	data->ray.mapy = (int)data->player.pos.y;
+	if (data->ray.raydirx == 0)
+		data->ray.raydirx = 0.0000001;
+	if (data->ray.raydiry == 0)
+		data->ray.raydiry = 0.0000001;
+	data->ray.deltadistx = fabs(1 / data->ray.raydirx);
+	data->ray.deltadisty = fabs(1 / data->ray.raydiry);
+	data->ray.hit = 0;
+}
+//chekcpoint
 void ray_bang(t_data *data)
 {
-	double planex = data->player.plane.x;
-	double planey = data->player.plane.y;
-	double dirx = data->player.vdir.x;
-	double diry = data->player.vdir.y;
-	double posx = data->player.x;
-	double posy = data->player.y;
-	double camerax;
-	double raydirx;
-	double raydiry;
-	int mapx;
-	int mapy;
-	double sidedistx;
-	double sidedisty;
-	int stepx;
-	int stepy;
-	int hit;
-	int side;
-	int x = 0;
-	while (x < data->map.width*PPC)
+	data->ray.x = 0;
+	while (data->ray.x < data->map.width * PPC)
 	{
-		printf("x = %d\n", x);
-		// posx = data->player.x;
-		// posy = data->player.y;
-		camerax = 2 * x / (double)(data->map.width*PPC) - 1;
-		raydirx = dirx + planex * camerax;
-		raydiry = diry + planey * camerax;
-		printf("raydirx = %f, raydiry = %f\n", raydirx, raydiry);
-		printf(YELLOW"playervdirx = %f, playervdiry = %f\n"RST, data->player.vdir.x, data->player.vdir.y);
-		printf(YELLOW"playerplanex = %f, playerplaney = %f\n"RST, data->player.plane.x, data->player.plane.y);
-		printf("Next x %f\n", posx + data->player.vdir.x * MOVE_SPEED);
-		printf("player posx = %f, posy = %f\n", posx, posy);
-		mapx = (int)posx;
-		mapy = (int)posy;
-		if (raydirx == 0)
+		ray_update(data);
+		ray_checkdir(data);
+		while (data->ray.hit == 0)
 		{
-			printf("raydirx = 0\n");
-			// getchar();
-			raydirx = 0.0000001;
-		}
-		double deltadistx = fabs(1 / raydirx);
-		if (raydiry == 0)
-		{
-			printf("raydiry = 0\n");
-			// getchar();
-			raydiry = 0.0000001;
-		}
-		double deltadisty = fabs(1 / raydiry);
-		printf("deltadistx = %f, deltadisty = %f\n", deltadistx, deltadisty);
-		double perpwalldist;
-		hit = 0;
-		if (raydirx < 0)
-		{
-			stepx = -1;
-			sidedistx = (posx - mapx) * deltadistx;
-		}
-		else
-		{
-			stepx = 1;
-			sidedistx = (mapx + 1.0 - posx) * deltadistx;
-		}
-		if (raydiry < 0)
-		{
-			stepy = -1;
-			sidedisty = (posy - mapy) * deltadisty;
-		}
-		else
-		{
-			stepy = 1;
-			sidedisty = (mapy + 1.0 - posy) * deltadisty;
-		}
-		while (hit == 0)
-		{
-			if (sidedistx < sidedisty)
+			if (data->ray.sidedistx < data->ray.sidedisty)
 			{
-				sidedistx += deltadistx;
-				mapx += stepx;
-				side = 0;
+				data->ray.sidedistx += data->ray.deltadistx;
+				data->ray.mapx += data->ray.stepx;
+				data->ray.side = 0;
 			}
 			else
 			{
-				sidedisty += deltadisty;                                                                                                                                
-				mapy += stepy;
-				side = 1;
+				data->ray.sidedisty += data->ray.deltadisty;                                                                                                                                
+				data->ray.mapy += data->ray.stepy;
+				data->ray.side = 1;
 			}
-			printf("mapx = %d, mapy = %d\n", mapx, mapy);
-			
-			if (mapx >= 0 && mapx < data->map.width*PPC && mapy >= 0 && mapy < data->map.height*PPC)
+			if (data->ray.mapx >= 0 && data->ray.mapx < data->map.width * PPC && data->ray.mapy >= 0 && data->ray.mapy < data->map.height * PPC)
 			{
-				if (data->map.map_aclean[mapy][mapx] == '1')
-				{
-					printf(BLUE"Wallhit at %d, %d\n"RST, mapx, mapy);
-					printf("side = %d\n", side);
-					printf("posx = %f, posy = %f\n", posx, posy);
-					hit = 1;
-				}
-			}else 
-			 	printf(RED"Invalid map coordinates\n"RST); 
+				if (data->map.map_aclean[data->ray.mapy][data->ray.mapx] == '1')
+					data->ray.hit = 1;
+			}
 		}
 		double wallx;
-		if (side == 0)
+		if (data->ray.side == 0)
 		{
-
-			perpwalldist = (sidedistx -  deltadistx);
-			wallx = posy + perpwalldist * raydiry;	
+			data->ray.perpwalldist = (data->ray.sidedistx -  data->ray.deltadistx);
+			wallx = data->player.pos.y + data->ray.perpwalldist * data->ray.raydiry;	
 		}
 		else
 		{
-			perpwalldist = (sidedisty -  deltadisty);
-			wallx = posx + perpwalldist * raydirx;
+			data->ray.perpwalldist = (data->ray.sidedisty -  data->ray.deltadisty);
+			wallx = data->player.pos.x + data->ray.perpwalldist * data->ray.raydirx;
 		}
+		if (fabs(data->ray.perpwalldist) < 0.001)
+			data->ray.perpwalldist = 0.001;
 		// int texx = (int)(wallx * (double)data->player.sprites.wall->width);
-		int texx = (x )%(350);
-		if (side == 0 && raydirx > 0)
+		int texx = (data->ray.x )%(350);
+		if (data->ray.side == 0 && data->ray.raydirx > 0)
 			texx = (350) - texx - 1;
-		if (side == 1 && raydiry < 0)
-			texx = (350) - texx - 1;
-		
-				
-		int lineheight = (int)(data->map.height*PPC / perpwalldist);
-		printf("raydirx = %f, raydiry = %f\n", raydirx, raydiry);
-		printf("lineheight = %d\n", lineheight);
-		printf("perpwalldist = %f\n", perpwalldist);
-		printf("data->map.height*PPC = %d\n", data->map.height*PPC);
-		int drawstart = -lineheight / 2 + data->map.height*PPC / 2;
+		if (data->ray.side == 1 && data->ray.raydiry < 0)
+			texx = (350) - texx - 1;	
+		int lineheight = (int)(data->map.height * PPC / data->ray.perpwalldist);
+		int drawstart = data->map.height * PPC / 2 - lineheight / 2;
 		if (drawstart < 0)
 			drawstart = 0;
-		int drawend = lineheight / 2 + data->map.height*PPC / 2;
-		if (drawend >= data->map.height*PPC || drawend < 0)
-			drawend = data->map.height*PPC - 1;
+		int drawend = lineheight / 2 + data->map.height * PPC / 2;
+		if (drawend >= data->map.height * PPC || drawend < 0)
+			drawend = data->map.height * PPC - 1;
 		int color;
-		if (side == 1)
+		if (data->ray.side == 1)
 			color = 0xAC00AA55;
 		else
 			color = 0xACDDBCAA;
-		printf("drawstart = %d, drawend = %d\n", drawstart, drawend);
-		//position
-		printf("posx = %f, posy = %f\n", posx, posy);
 		// //first draw the ceiling
-		//DRAW CEILING
-		ft_draw_line2(data->player.img3d, x, 0, drawstart, 0x9DA4CFFF, data, texx);
-		//DRAW WALL
-		if (side == 0)
-			ft_draw_line2(data->player.img3d, x, drawstart, drawend, 0, data, texx);
-		else
-			ft_draw_line2(data->player.img3d, x, drawstart, drawend, 0xFFA4CFFF, data, texx);
-		//DRAW FLOOR
-		ft_draw_line2(data->player.img3d, x, drawend, data->map.height*PPC -1, 0xCC00BFFF, data, texx);
-		
-		// ft_draw_line(data->player.img3d, x, 0, x, drawstart -data->player.vertical, 0x9DA4CFFF);
-		// ft_draw_line(data->player.img3d, x, drawstart -data->player.vertical, x, drawend -data->player.vertical, color);
-		// //then draw the floor
-		// ft_draw_line(data->player.img3d, x, drawend -data->player.vertical, x, data->map.height*PPC, 0xCCAABFFF);
-		x++;
+		// //DRAW CEILING
+		// ft_draw_line2(data->map.img3d, x, 0, drawstart - data->player.step_v, 0x9DA4CFFF, data, texx);
+		// //DRAW WALL
+		// if (side == 0)
+		// 	ft_draw_line2(data->map.img3d, x, drawstart - data->player.step_v, drawend - data->player.step_v, 0, data, texx);
+		// else
+		// 	ft_draw_line2(data->map.img3d, x, drawstart - data->player.step_v, drawend - data->player.step_v, 0xFFA4CFFF, data, texx);
+		// //DRAW FLOOR
+		// ft_draw_line2(data->map.img3d, x, drawend - data->player.step_v, data->map.height * PPC -1, 0xCC00BFFF, data, texx);
+		ft_draw_line(data->map.img3d, data->ray.x, 0, data->ray.x, drawstart -data->player.step_v, 0x9DA4CFFF);
+		ft_draw_line(data->map.img3d, data->ray.x, drawstart -data->player.step_v, data->ray.x, drawend -data->player.step_v, color);
+		//then draw the floor
+		ft_draw_line(data->map.img3d, data->ray.x, drawend -data->player.step_v, data->ray.x, data->map.height*PPC, 0xCCAABFFF);
+		data->ray.x++;
 	}	
 }

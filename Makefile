@@ -6,7 +6,7 @@
 #    By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 18:46:57 by dgarizad          #+#    #+#              #
-#    Updated: 2023/10/27 14:20:20 by dgarizad         ###   ########.fr        #
+#    Updated: 2023/11/12 19:15:01 by dgarizad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,5 +70,7 @@ fclean: clean
 	@$(MAKE) -C ./libft fclean
 
 re: clean all
+
+bonus: all
 
 .PHONY: all, clean, fclean, re, libmlx

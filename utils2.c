@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:41:11 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/23 21:08:22 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/12 12:01:39 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	ft_print_array(char **array)
 //DELETE THIS AT THE END OF THE PROJECT
 
 /**
- * @brief This function is used to free all the pointers
- * in the data structure .
+ * @brief This function is used to free all the pointers allocated
+ * in the data structure regarding the map.
  * 
  * @param data 
  */
@@ -39,4 +39,27 @@ void	ft_free_maps(t_data *data)
 	ft_abort(data->map.map_a, ft_arrlen(data->map.map_a)); //[2 and 3] Freed here
 	free(data->map.map_sclean); //[4] Freed here
 	ft_abort(data->map.map_aclean, ft_arrlen(data->map.map_aclean)); //[5] Freed here	
+}
+
+/**
+ * @brief Textures are allocated in the mlx_load_png function
+ * and then converted to images in the mlx_texture_to_image function.
+ * they also allocate memory for the pixels.
+ * 
+ * @param data 
+ */
+void	ft_free_textures(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < TEX_COUNT)
+	{
+		if (data->textures[i])
+		{
+			free(data->textures[i]->pixels);
+			free(data->textures[i]);
+		}	
+		i++;
+	}
 }

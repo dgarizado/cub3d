@@ -6,16 +6,46 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/01 20:42:41 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/12 14:20:01 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
+ * @brief Set the camera plane vector
+ * relative to the player direction. It is always perpendicular.
+ * @param data 
+ */
+void	set_camera(t_data *data)
+{
+	if (data->player.vdir.x == 1)
+	{
+		data->player.plane.y = 0.9;
+		data->player.plane.x = 0;
+	}
+	if (data->player.vdir.x == -1)
+	{
+		data->player.plane.y = -0.9;
+		data->player.plane.x = 0;
+	}
+	if (data->player.vdir.y == 1)
+	{
+		data->player.plane.y = 0;
+		data->player.plane.x = -0.9;
+	}
+	if (data->player.vdir.y == -1)
+	{
+		data->player.plane.y = 0;
+		data->player.plane.x = 0.9;
+	}
+}
+
+/**
  * @brief Auxiliary function that
  * gets the player coords and help to check if there is only one.
  * Also sets the player angle.
+ * Watchdog is used to check if there is only one player character.
  * @param i 
  * @param j 
  * @param data 
@@ -25,29 +55,20 @@ void	get_player_coords(int i, int j, t_data *data, int *watchdog)
 {
 	if (ft_strchr("NWSE", data->map.map_aclean[i][j]) != NULL)
 	{
-		data->player.x = j;
-		data->player.y = i;
 		data->player.pos.x = j;
 		data->player.pos.y = i;
 		(*watchdog)++;
-		if (data->map.map_aclean[i][j] == 'N')
-			data->player.angle = 90; // Pi/2
-		if (data->map.map_aclean[i][j] == 'S')
-			data->player.angle = 270; // 3Pi/2
-		if (data->map.map_aclean[i][j] == 'W')
-			data->player.angle = 180; // Pi
-		if (data->map.map_aclean[i][j] == 'E')
-			data->player.angle = 0; // 2Pi
 		//THIS IS THE NEW PART USING VICTORS	
 		if (data->map.map_aclean[i][j] == 'N')
-			data->player.vdir.y = 1;
-		if (data->map.map_aclean[i][j] == 'S')
 			data->player.vdir.y = -1;
+		if (data->map.map_aclean[i][j] == 'S')
+			data->player.vdir.y = 1;
 		if (data->map.map_aclean[i][j] == 'W')
 			data->player.vdir.x = -1;
 		if (data->map.map_aclean[i][j] == 'E')
 			data->player.vdir.x = 1;
 	}
+	set_camera(data);
 }
 
 void	ft_check_wd(t_data *data, int watchdog)
