@@ -1,0 +1,27 @@
+WE ./imgs/wall1.png
+
+
+
+EA ./imgs/wall1.png
+NO ./imgs/wall1.png
+
+F 220,100,1
+SO ./imgs/wall1.png
+
+
+C  225,30,0
+
+
+111
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+1S1
+111

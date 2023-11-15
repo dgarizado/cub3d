@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/12 14:20:01 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/15 19:26:02 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,23 @@ void	set_camera(t_data *data)
 {
 	if (data->player.vdir.x == 1)
 	{
-		data->player.plane.y = 0.9;
+		data->player.plane.y = 0.8;
 		data->player.plane.x = 0;
 	}
 	if (data->player.vdir.x == -1)
 	{
-		data->player.plane.y = -0.9;
+		data->player.plane.y = -0.8;
 		data->player.plane.x = 0;
 	}
 	if (data->player.vdir.y == 1)
 	{
 		data->player.plane.y = 0;
-		data->player.plane.x = -0.9;
+		data->player.plane.x = -0.8;
 	}
 	if (data->player.vdir.y == -1)
 	{
 		data->player.plane.y = 0;
-		data->player.plane.x = 0.9;
+		data->player.plane.x = 0.8;
 	}
 }
 
@@ -97,6 +97,7 @@ bool	ft_check_chars(t_data *data)
 	i = 0;
 	j = 0;
 	watchdog = 0;
+	ft_print_array(data->map.map_aclean);
 	while (data->map.map_aclean[i] != NULL)
 	{
 		if (ft_ismap(data->map.map_aclean[i], "0 1NWSE") == 0)
@@ -128,23 +129,19 @@ bool	ft_check_chars(t_data *data)
 bool	ft_clean_map(t_data *data, int i)
 {
 	int	j;
-	int	firstlen;
 
 	if (i > ft_arrlen(data->map.map_a) - 3 || i < 5)
 	{
 		free(data->map.map_s);
 		ft_abort(data->map.map_a, ft_arrlen(data->map.map_a)); //[2 and 3] Freed here
-		ft_error("Map is not valid");
+		ft_error("Map is not valid, size");
 	}
+	data->map.map_aclean = ft_calloc(ft_arrlen(data->map.map_a) - i + 1, sizeof(char *));
 	j = 0;
-	firstlen = 0;
-	while (j < i)
+	while (j < ft_arrlen(data->map.map_a) - i)
 	{
-		firstlen += ft_strlen(data->map.map_a[j]) + 1;
+		data->map.map_aclean[j] = ft_strdup(data->map.map_a[i + j]);
 		j++;
 	}
-	j = firstlen;
-	data->map.map_sclean = ft_strdup(data->map.map_s + firstlen); //[4] malloc Take care of this!!
-	data->map.map_aclean = ft_split(data->map.map_sclean, '\n'); //[5] malloc Take care of this!!
 	return (true);
 }

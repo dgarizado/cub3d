@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 19:47:32 by vcereced          #+#    #+#             */
-/*   Updated: 2023/10/23 18:35:59 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:23:56 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	msg_error(char *err)
 {
-	ft_putstr_fd(RED"Error\n"RST, 2);
+	ft_putstr_fd(YELLOW"Error\n"RST, 2);
 	ft_putstr_fd(err, 2);
 }
 

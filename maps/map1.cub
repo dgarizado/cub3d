@@ -1,7 +1,7 @@
-NO ./maps/cub1.cub
-SO ./maps/cub1.cub
-WE ./maps/cub1.cub
-EA ./maps/cub1.cub
+NO ./imgs/wall1.png
+SO ./imgs/wall1.png
+WE ./imgs/wall1.png
+EA ./imgs/wall1.png
 F 220,100,0
 C 225,30,0
 1111111111111

@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/13 21:45:15 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/15 22:26:25 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,18 @@
 # define HEIGHT 768
 # define MOVE_SPEED 0.05
 # define MINIMAP_SCALE 12
+# define NORTH 0
+# define EAST 1
+# define FLOOR 0
+# define CEILING 1
 
 typedef enum e_sprites{
-	PISTOL,
-	PISTOL_BANG,
 	WALL_N,
 	WALL_S,
 	WALL_E,
 	WALL_W,
+	PISTOL,
+	PISTOL_BANG,
 	ENEMY,
 	BAULT,
 	DOOR,
@@ -95,6 +99,8 @@ typedef struct	s_map
 	int			height;
 	int			bytes;
 	int			ppc;
+	int			minimap_scale;
+	int			colors[2];
 	mlx_t		*mlx;
 	mlx_image_t	*img3d;
 	mlx_image_t	*mini;
@@ -119,14 +125,18 @@ typedef struct s_macro_data
 	t_ray_charles	ray;
 	mlx_image_t		*sprites[SPRITES_COUNT];
 	mlx_texture_t	*textures[TEX_COUNT];
+	char 			*paths[TEX_COUNT];
 }	t_data;
 
 //MAPCHECK
 bool	ft_mapcheck(char **argv, t_data *data);
 int		ft_check_colors(t_data *data, int line_reached);
 int		ft_check_paths(t_data *data, int line_reached);
-int		ft_check_elements(t_data *data, char **elements);
+
+//PARSING_ELEMENTS
 int		ft_parse_elements(t_data *data);
+int		ft_check_elements(t_data *data, char **elements);
+void	ft_special_abort(char **arr, int len);
 
 //UTILS
 void	ft_error(char *err);
@@ -141,7 +151,7 @@ int		ft_arrlen(char **arr);
 void	ft_free_textures(t_data *data);
 
 //TEXTURE PARSING
-bool	ft_texture_parse(t_data *data, int i);
+bool	ft_texture_parse(t_data *data, int flag);
 
 //MAPCHECK2
 bool	ft_clean_map(t_data *data, int i);
@@ -155,13 +165,9 @@ void	ft_space_check_aux(t_data *data, int i, int j);
 
 //GAME
 void	ft_game(t_data *data);
-mlx_image_t *scale_down(mlx_image_t *img, int scale, t_data *data);
-mlx_texture_t *scale_down_texture(mlx_texture_t *img, int scale);
+mlx_image_t	*scale_down(mlx_image_t *texture, int scale, t_data *data);
 //MINISPRITES
 void	ft_load_minisprites(t_data *data);
-
-//RAYCHARLES
-void	ray_charles(t_data *data);
 
 //RAY BAN
 void	ray_bang(t_data *data);

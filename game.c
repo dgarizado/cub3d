@@ -6,12 +6,14 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 21:18:54 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/13 21:50:26 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/15 21:48:59 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <time.h>
+
+u_int32_t mlx_get_pixel(mlx_image_t *img, int x, int y);
 
 void    ft_keyhook(mlx_key_data_t keydata, void *param)
 {
@@ -42,7 +44,26 @@ void    ft_hook2(void *param)
 		data->sprites[PISTOL]->instances[0].enabled = false;
 		data->sprites[PISTOL_BANG]->instances[0].enabled = true;
 	}
-	}
+}
+
+void ft_fix_images(t_data *data)
+{
+	mlx_resize_image(data->map.img3d, data->map.mlx->width, \
+	data->map.mlx->height);
+	data->map.ppc = data->map.mlx->width / data->map.width;
+	data->sprites[PISTOL]->instances[0].x = data->map.mlx->width / 2 - \
+	data->sprites[PISTOL]->width/2;
+	data->sprites[PISTOL]->instances[0].y = data->map.mlx->height - \
+	data->sprites[PISTOL]->height;
+	data->sprites[PISTOL_BANG]->instances[0].x = data->map.mlx->width / 2 - \
+	data->sprites[PISTOL_BANG]->width/2 + 10;
+	data->sprites[PISTOL_BANG]->instances[0].y = data->map.mlx->height - \
+	data->sprites[PISTOL_BANG]->height + 10;
+	data->map.mini->instances[0].x = data->map.mlx->width - \
+	data->map.mini->width;
+	data->map.mini->instances[0].y = data->map.mlx->height - \
+	data->map.mini->height;
+}
 
 void    ft_hook(void *param)
 {
@@ -53,6 +74,10 @@ void    ft_hook(void *param)
 
 	data = param;
 	start = (double)clock() / CLOCKS_PER_SEC;
+	//chech if mlx window was resized 
+	if (data->map.mlx->width != data->map.width * data->map.ppc || \
+	data->map.mlx->height != data->map.height * data->map.ppc)
+		ft_fix_images(data);
 	ray_bang(data);
 	if (mlx_is_key_down(data->map.mlx, MLX_KEY_RIGHT))
 	{
@@ -79,12 +104,12 @@ void ft_paintblock(t_data *data, int x, int y, int color)
 
 	i = 0;
 	j = 0;
-	x = x * MINIMAP_SCALE;
-	y = y * MINIMAP_SCALE;
-	while(i < MINIMAP_SCALE)
+	x = x * data->map.minimap_scale;
+	y = y * data->map.minimap_scale;
+	while(i < data->map.minimap_scale)
 	{
 		j = 0;
-		while(j < MINIMAP_SCALE)
+		while(j < data->map.minimap_scale)
 		{
 			mlx_put_pixel(data->map.mini, x + i, y + j, color);
 			j++;
@@ -115,9 +140,11 @@ void ft_draw_minimap(t_data *data)
 		}
 		i++;
 	}
-	mlx_put_pixel(data->map.mini, data->player.pos.x*MINIMAP_SCALE , \
-	data->player.pos.y*MINIMAP_SCALE , 0xFF00FF);
-
+	mlx_put_pixel(data->map.mini, data->player.pos.x*data->map.minimap_scale , \
+	data->player.pos.y*data->map.minimap_scale , 0xFF00FF);
+	mlx_put_pixel(data->map.mini, data->player.pos.x*data->map.minimap_scale + 10, \
+	data->player.pos.y*data->map.minimap_scale , 0xFF0000FF);
+	printf("x = %f, y = %f\n", data->player.pos.x, data->player.pos.y);
 }
 
 void ft_draw_line(mlx_image_t *img, int x1, int y1, int x2, int y2, int color)
@@ -158,9 +185,9 @@ void ft_draw_line(mlx_image_t *img, int x1, int y1, int x2, int y2, int color)
 	}
 }
 
-int mlx_get_pixel(mlx_image_t *img, int x, int y)
+uint32_t mlx_get_pixel(mlx_image_t *img, int x, int y)
 {
-	int color;
+	uint32_t color;
 	int i;
 
 	i = 0;
@@ -169,97 +196,49 @@ int mlx_get_pixel(mlx_image_t *img, int x, int y)
 	{
 		while (i < 4)
 		{
-			color += img->pixels[(y * img->width + x) * 4 + i] << (8 * i);
+			color += ((uint32_t *)img->pixels)[y * img->width + x];
 			i++;
 		}
 	}
 	return (color);
 }
 
-mlx_texture_t *scale_down_texture(mlx_texture_t *tex, int scale)
-{
-    mlx_texture_t *new_tex;
-    int i, j, k, l;
-    int r, g, b, color;
-
-    new_tex = malloc(sizeof(mlx_texture_t));
-    new_tex->width = tex->width / scale;
-    new_tex->height = tex->height / scale;
-    new_tex->bytes_per_pixel = tex->bytes_per_pixel;
-    new_tex->pixels = malloc(new_tex->width * new_tex->height * new_tex->bytes_per_pixel);
-
-    i = 0;
-    while (i < (int)new_tex->height)
-    {
-        j = 0;
-        while (j < (int)new_tex->width)
-        {
-            k = 0;
-            r = g = b = 0;
-            while (k < scale)
-            {
-                l = 0;
-                while (l < scale)
-                {
-                    color = tex->pixels[(j*scale + k) + (i*scale + l)*tex->width];
-                    r += (color >> 24) & 0xFF;
-                    g += (color >> 16) & 0xFF;
-                    b += (color >> 8) & 0xFF;
-                    l++;
-                }
-                k++;
-            }
-            r /= scale * scale;
-            g /= scale * scale;
-            b /= scale * scale;
-            color = (r << 24) | (g << 16) | (b << 8);
-            new_tex->pixels[j + i*new_tex->width] = color;
-            j++;
-        }
-        i++;
-    }
-    return (new_tex);
-}
-
 mlx_image_t *scale_down(mlx_image_t *img, int scale, t_data *data)
 {
-    mlx_image_t *new_img;
-    int i, j, k, l;
-    int r, g, b, color;
+	mlx_image_t *new_img;
+	int i;
+	int j;
+	int k;
+	int l;
+	int color;
 
-    new_img = mlx_new_image(data->map.mlx, img->width / scale, img->height / scale);
-    i = 0;
-    while (i < (int)new_img->height)
-    {
-        j = 0;
-        while (j < (int)new_img->width)
-        {
-            k = 0;
-            r = g = b = 0;
-            while (k < scale)
-            {
-                l = 0;
-                while (l < scale)
-                {
-                    color = mlx_get_pixel(img, j*scale + k, i*scale + l);
-                    r += (color >> 16) & 0xFF;
-                    g += (color >> 8) & 0xFF;
-                    b += color & 0xFF;
-                    l++;
-                }
-                k++;
-            }
-            r /= scale * scale;
-            g /= scale * scale;
-            b /= scale * scale;
-            color = (r << 16) | (g << 8) | b;
-            mlx_put_pixel(new_img, j, i, color);
-            j++;
-        }
-        i++;
-    }
-    return (new_img);
-}
+	new_img = mlx_new_image(data->map.mlx, img->width/scale, img->height/scale);
+	i = 0;
+	while (i < (int)new_img->height)
+	{
+		j = 0;
+		while (j < (int)new_img->width)
+		{
+			k = 0;
+			color = 0;
+			while (k < scale)
+			{
+				l = 0;
+				while (l < scale)
+				{
+					color = mlx_get_pixel(img, j*scale + k, i*scale + l);
+					l++;
+				}
+				k++;
+			}
+			color /= scale*scale;
+			((u_int32_t *)new_img->pixels)[i * new_img->width + j] = color;
+			j++;
+		}
+		i++;
+	}
+	return (new_img);
+	}
 
 /**
  * @brief Create a mlx_image_t object
@@ -269,12 +248,23 @@ mlx_image_t *scale_down(mlx_image_t *img, int scale, t_data *data)
  */
 void    ft_init_graphics(t_data *data)
 {
-    data->map.mlx = mlx_init(data->map.width * data->map.ppc, data->map.height * data->map.ppc, \
+	data->map.ppc = WIDTH / data->map.width;
+	data->map.minimap_scale = 340/data->map.width;
+	if (140 / data->map.height < data->map.minimap_scale)
+		data->map.minimap_scale = 140 / data->map.height;
+	if (data->map.minimap_scale < 1)
+		data->map.minimap_scale = 1;
+	printf("ppc = %d\n", data->map.ppc);
+	printf("data->map.minimap_scale = %d\n", data->map.minimap_scale);
+	printf("mini map width = %d\n", data->map.width * data->map.minimap_scale);
+	printf("mini map height = %d\n", data->map.height * data->map.minimap_scale);
+	printf("mini map height scale = %d\n", 140/data->map.width);
+    data->map.mlx = mlx_init(WIDTH, HEIGHT, \
     "Cub3D", true);
     data->map.img3d = mlx_new_image(data->map.mlx,data->map.width * data->map.ppc, \
     data->map.height * data->map.ppc);
-    data->map.mini = mlx_new_image(data->map.mlx, data->map.width * MINIMAP_SCALE, \
-    data->map.height * MINIMAP_SCALE);
+    data->map.mini = mlx_new_image(data->map.mlx, data->map.width * data->map.minimap_scale, \
+    data->map.height * data->map.minimap_scale);
     ft_memset(data->map.mini->pixels, 0xC0, data->map.mini->width * \
     data->map.mini->height * 4);
     mlx_image_to_window(data->map.mlx, data->map.img3d, 0, 0);
@@ -285,8 +275,6 @@ void    ft_init_graphics(t_data *data)
 
 void    ft_game(t_data *data)
 {
-	data->map.ppc = WIDTH / data->map.width;
-	
     ft_init_graphics(data);
     ft_load_minisprites(data);
     ft_draw_minimap(data);
