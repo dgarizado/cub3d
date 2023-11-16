@@ -1,35 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.c                                             :+:      :+:    :+:   */
+/*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 21:18:54 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/16 18:10:29 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/16 18:07:55 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <time.h>
 
-u_int32_t mlx_get_pixel(mlx_image_t *img, int x, int y);
+void ft_draw_minimap(t_data *data);
 
-void    ft_keyhook(mlx_key_data_t keydata, void *param)
+void	ft_keyhook(mlx_key_data_t keydata, void *param)
 {
-    t_data *data;
+	t_data	*data;
+	double	next_x;
+	double	next_y;
 
-    data = param;
+	data = param;
 
-    if (keydata.key == MLX_KEY_ESCAPE)
-        mlx_close_window(data->map.mlx);
-    if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
-    {
-        data->map.mini->instances[0].enabled ^= true;
-    }
+	if (keydata.key == MLX_KEY_ESCAPE)
+		mlx_close_window(data->map.mlx);
+	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
+	{
+		data->map.mini->instances[0].enabled ^= true;
+	}
+	if (keydata.key == MLX_KEY_X && keydata.action == MLX_PRESS)
+	{
+		next_x = data->player.pos.x + data->player.vdir.x;
+		next_y = data->player.pos.y + data->player.vdir.y;
+		if (data->map.map_aclean[(int)next_y][(int)next_x] == 'D' || \
+		data->map.map_aclean[(int)next_y][(int)next_x] == 'O')
+		{
+			data->map.map_aclean[(int)next_y][(int)next_x] = '0';
+			ft_draw_minimap(data);
+		}
+	}
 }
 
-void    ft_hook2(void *param)
+void	ft_hook2(void *param)
 {
 	t_data	*data;
 
@@ -97,10 +110,10 @@ void    ft_hook(void *param)
 	} 	
 }
 
-void ft_paintblock(t_data *data, int x, int y, int color)
+void ft_paintblock(t_data *data, int x, int y, u_int32_t color)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -122,7 +135,10 @@ void ft_draw_minimap(t_data *data)
 {
 	int i;
 	int j;
+	
 	i = 0;
+	ft_memset(data->map.mini->pixels, 0xC0, data->map.mini->width * \
+	data->map.mini->height * 4);
 	while (data->map.map_aclean[i])
 	{
 		j = 0;
@@ -133,9 +149,16 @@ void ft_draw_minimap(t_data *data)
 			data->map.map_aclean[i][j] == 'S' || \
 			data->map.map_aclean[i][j] == 'W' || \
 			data->map.map_aclean[i][j] == 'E')
+			{
+				data->map.map_aclean[i][j] = '0';
 				ft_paintblock(data, j, i, 0x0000FF);
+			}
 			if (data->map.map_aclean[i][j] == ' ')
-				ft_paintblock(data, j, i, 0x000000);	
+				ft_paintblock(data, j, i, 0x000000);
+			if (data->map.map_aclean[i][j] == 'D')
+				ft_paintblock(data, j, i, 0x882200F0);
+			if (data->map.map_aclean[i][j] == 'O')
+				ft_paintblock(data, j, i, 0xFFFF00FF);
 			j++;
 		}
 		i++;
@@ -143,7 +166,7 @@ void ft_draw_minimap(t_data *data)
 	mlx_put_pixel(data->map.mini, data->player.pos.x*data->map.minimap_scale , \
 	data->player.pos.y*data->map.minimap_scale , 0xFF00FF);
 	mlx_put_pixel(data->map.mini, data->player.pos.x*data->map.minimap_scale + 10, \
-	data->player.pos.y*data->map.minimap_scale , 0xFF0000FF);
+	data->player.pos.y*data->map.minimap_scale , 0xFF0000FF);//This is Steve's position
 	printf("x = %f, y = %f\n", data->player.pos.x, data->player.pos.y);
 }
 
@@ -184,6 +207,7 @@ void ft_draw_line(mlx_image_t *img, int x1, int y1, int x2, int y2, int color)
 		}
 	}
 }
+
 /**
  * @brief Create a mlx_image_t object
  * Creates the render image for the game and
@@ -203,18 +227,16 @@ void    ft_init_graphics(t_data *data)
 	printf("mini map width = %d\n", data->map.width * data->map.minimap_scale);
 	printf("mini map height = %d\n", data->map.height * data->map.minimap_scale);
 	printf("mini map height scale = %d\n", 140/data->map.width);
-    data->map.mlx = mlx_init(WIDTH, HEIGHT, \
-    "Cub3D", true);
-    data->map.img3d = mlx_new_image(data->map.mlx,data->map.width * data->map.ppc, \
-    data->map.height * data->map.ppc);
-    data->map.mini = mlx_new_image(data->map.mlx, data->map.width * data->map.minimap_scale, \
-    data->map.height * data->map.minimap_scale);
-    ft_memset(data->map.mini->pixels, 0xC0, data->map.mini->width * \
-    data->map.mini->height * 4);
-    mlx_image_to_window(data->map.mlx, data->map.img3d, 0, 0);
-    mlx_image_to_window(data->map.mlx, data->map.mini, \
-    data->map.width * data->map.ppc - data->map.mini->width, data->map.height * data->map.ppc \
-    - data->map.mini->height);  
+	data->map.mlx = mlx_init(WIDTH, HEIGHT, \
+	"Cub3D", true);
+	data->map.img3d = mlx_new_image(data->map.mlx,data->map.width * data->map.ppc, \
+	data->map.height * data->map.ppc);
+	data->map.mini = mlx_new_image(data->map.mlx, data->map.width * data->map.minimap_scale, \
+	data->map.height * data->map.minimap_scale);
+	mlx_image_to_window(data->map.mlx, data->map.img3d, 0, 0);
+	mlx_image_to_window(data->map.mlx, data->map.mini, \
+	data->map.width * data->map.ppc - data->map.mini->width, data->map.height * data->map.ppc \
+	- data->map.mini->height);  
 }
 
 void    ft_game(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/15 22:26:25 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/16 13:46:24 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ typedef struct s_macro_data
 	mlx_image_t		*sprites[SPRITES_COUNT];
 	mlx_texture_t	*textures[TEX_COUNT];
 	char 			*paths[TEX_COUNT];
+	bool			bonus;
 }	t_data;
 
 //MAPCHECK
