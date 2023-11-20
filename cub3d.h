@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/03 19:45:41 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/05 18:50:15 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ typedef struct	s_atr
 	double	scale_height_mini_map;
 	double	render_delay;
 	double 	r_c_increment_angle;
+	double	ray_angle;
 	double	precision;
-	
+	double 	screen_up;
 }	t_atr;
 
 
@@ -94,6 +95,7 @@ typedef struct	s_player
 	int		y;
 	double	dir;
 	double	fov;
+	double 	angle;
 	double	half_fov;
 }	t_player;
 
@@ -109,6 +111,8 @@ typedef struct s_macro_data
 	mlx_image_t*		img3;
 	mlx_image_t*		startimg;
 	mlx_image_t*		game;
+	int32_t 			inst;
+	mlx_image_t*		play;
 	mlx_texture_t*		linktexture;
 	int 				plus;
 	int					flag;
@@ -132,8 +136,14 @@ void draww(void *d);
 void	ft_phase_2(t_data *data, mlx_t* mlx);
 void	ft_game_little_map(t_data *data);
 void	draw_link_person(t_data *data, int column, int row);
+void	draw_vision(t_data *data);
 void hk2(void *d);
 
+
+//PHASE_3
+double ft_degre_to_radian(double degre);
+void	ft_phase_3(t_data *data);
+void drawLine(double x1, double y1, double x2, double y2, int color, mlx_image_t *ptr, t_data *data);
 void	ft_game_play(t_data *data);
 
 //UTILS

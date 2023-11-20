@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 19:47:32 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/01 18:10:45 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/04 19:42:35 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,3 +72,5 @@ double ft_degre_to_radian(double degre)
 	radian = degre * M_PI / 180;
 	return (radian);
 }
+
+

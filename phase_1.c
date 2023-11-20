@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:36:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/03 18:58:35 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:15:08 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ void draww(void *d)
 	i = 255;
 	t_data *data = (t_data *)d;
 
+	usleep(10000);
 	data->plus += 15 ;
 	if (data->plus >= ((HEIGHT_IMG_TITLE)*3))
 		data->plus = 0;
@@ -208,7 +209,6 @@ void draww(void *d)
 			mlx_delete_image(data->mlx, data->img2);
 			mlx_delete_image(data->mlx, data->img);
 			mlx_delete_image(data->mlx, data->startimg);
-			
 			mlx_loop_hook(data->mlx,hk2, data);
 		}
 		else if(n >400)
