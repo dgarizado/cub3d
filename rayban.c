@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:02:13 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/20 16:40:11 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:57:26 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	ray_render(t_data *data)
 			wallx = data->player.pos.x + data->ray.perpwalldist * data->ray.raydirx;
 			wallx -= floor((wallx));
 			texx = (int)(wallx * (double)data->sprites[WALL_E]->width) % (data->sprites[WALL_E]->width);
-			texx = (data->sprites[WALL_E]->width) - texx - 1;
+			// texx = (data->sprites[WALL_E]->width) - texx - 1;
 			texx = (int)(wallx * 1000) % (1000);
 		}
 		if (fabs(data->ray.perpwalldist) < 0.1)
@@ -100,7 +100,7 @@ void	ray_render(t_data *data)
 		// 	texx = (data->sprites[WALL_E]->width) - texx - 1;
 		// if (data->ray.side == 1 && data->ray.raydiry < 0)
 		// 	texx = (data->sprites[WALL_E]->width) - texx - 1;		
-		int lineheight = (int)(data->map.mlx->height / data->ray.perpwalldist);
+		int lineheight = (int)((data->map.mlx->height) / data->ray.perpwalldist);
 		if (lineheight > data->map.mlx->height)
 			lineheight = data->map.mlx->height;
 		// printf("lineheight %d\n", lineheight);
@@ -121,8 +121,8 @@ void	ray_render(t_data *data)
 		// printf("drawstart %d drawend %d\n", drawstart, drawend);
 		printf("drawstart %d drawend %d\n", drawstart, drawend);
 		printf("lineheight %d\n", lineheight);
-		// drawLineTexture(data->ray.x, drawstart -data->player.step_v, data->ray.x, drawend -data->player.step_v, texx, data);
-		ft_draw_line2(data->map.img3d, data->ray.x, drawstart -data->player.step_v, drawend -data->player.step_v, 0, data, texx);
+		drawLineTexture(data->ray.x, drawstart -data->player.step_v, data->ray.x, drawend -data->player.step_v, texx, data);
+		// ft_draw_line2(data->map.img3d, data->ray.x, drawstart -data->player.step_v, drawend -data->player.step_v, 0, data, texx);
 		//then draw the floor
 		ft_draw_line(data->map.img3d, data->ray.x, drawend -data->player.step_v, data->ray.x, data->map.mlx->height, data->map.colors[FLOOR]);
 }
