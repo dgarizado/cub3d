@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+         #
+#    By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 10:24:42 by dgarizad          #+#    #+#              #
-#    Updated: 2023/04/09 17:18:44 by dgarizad         ###   ########.fr        #
+#    Updated: 2023/11/20 16:06:59 by vcereced         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 SRC = ft_isalpha.c ft_isdigit.c ft_toupper.c ft_strlen.c ft_calloc.c \
-		ft_isalnum.c ft_isascii.c ft_isprint.c ft_memset.c ft_bzero.c \
+		ft_isalnum.c ft_isascii.c ft_isprint.c .c ft_bzero.c \
 		ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_tolower.c \
 		ft_strchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c \
 		ft_atoi.c ft_strdup.c ft_strrchr.c ft_substr.c ft_strjoin.c \
