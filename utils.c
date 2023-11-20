@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 19:47:32 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/14 19:23:56 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/20 19:56:56 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,40 @@ int	ft_ismap(char *line, char *str)
 		line++;
 	}
 	return (flag);
+}
+
+char **ft_skip_sp_arr(char **arr)
+{
+	int i;
+	int j;
+	int n;
+
+	char *buffer;
+	int len;
+	
+	len = 0;
+	i = 0;
+	while(arr[0][i])
+	{
+		if(ft_isdigit(arr[0][i]))
+			len++;
+		i++;
+	}
+	i = 0;
+	while(arr[i])
+	{
+		j=0;
+		n = 0;
+		buffer = (char *)calloc(len + 1,  1);
+		while (arr[i][n])
+		{
+			if(ft_isdigit(arr[i][n]))
+			buffer[j++] = arr[i][n];
+			n++;
+		}
+		free(arr[i]);
+		arr[i] = buffer;
+		i++;
+	}
+	return(arr);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/20 16:31:30 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/20 20:18:43 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,19 @@
 #include "./lib/MLX42/include/MLX42/MLX42.h"
 #include "./libft/libft.h"
 
+#define HEIGHT						data->mlx->height
+#define WIDTH 						data->mlx->width
+#define WIDTH_IMG_TITLE 			data->mlx->width * 0.9
+#define HEIGHT_IMG_TITLE 			data->mlx->height * 0.4
+#define WIDTH_IMG_TITLE_MAP			data->mlx->width
+#define HEIGTH_IMG_TITLE_MAP		data->mlx->height
+# define BUFFER_SIZE 70
+
 # define INPUT_NBR "WRONG NUMBER OF ARGUMENTS\n"
 # define INPUT_EXT "Wrong extention"
 # define INPUT_OPN "Can't open file or doesn't exist\n"
 # define READ_ERR "Can't read file or is empty\n"
 
-# define BUFFER_SIZE 70
 # define RED "\033[0;31m"
 # define GREEN "\033[0;32m"
 # define BLUE "\033[0;34m"
@@ -34,8 +41,6 @@
 # define YELLOW "\033[0;33m"
 # define FOV 60
 # define PPC 40
-# define WIDTH 1360
-# define HEIGHT 768
 # define MOVE_SPEED 0.05
 # define MINIMAP_SCALE 12
 # define NORTH 0
@@ -106,6 +111,22 @@ typedef struct	s_map
 	mlx_image_t	*mini;
 }	t_map;
 
+typedef struct	s_title
+{
+	mlx_image_t*		title_img;
+	mlx_image_t*		title_map;
+	mlx_image_t*		start_img;
+	char				**TEMP;//modificar al array del mapa real
+	char				**arr;//Titulo!!!
+	int 				color_up;
+	int					flag;
+	int					heigth;
+	int					length;
+	int					screen_width;
+	int					screen_heigth;
+	float 				boom;
+}	t_title;
+
 typedef struct	s_player
 {
 	t_victor	pos;
@@ -120,6 +141,8 @@ typedef struct	s_player
 
 typedef struct s_macro_data
 {
+	t_title				title;
+	mlx_t		*mlx;
 	t_map			map;
 	t_player		player;
 	t_ray_charles	ray;
@@ -130,6 +153,7 @@ typedef struct s_macro_data
 }	t_data;
 
 //RENDER
+
 void ft_draw_line(mlx_image_t *img, int x1, int y1, int x2, int y2, int color);
 void drawLineTexture(double x1, double y1, double x2, double y2, int column_texture, t_data *data);
 
@@ -193,4 +217,15 @@ void	laterals_a(t_data *data);
 void	laterals_d(t_data *data);
 void	mouse(t_data *data);
 
+//INTRO
+void 	ft_intro(mlx_t*mlx, t_data *data);
+ void draw_title(t_data * data);
+void	draw_title_map(t_data *data);
+void	ft_intro_loop(void *d);
+int	ft_changed_resolution(t_data *data);
+void drawLine(double x1, double y1, double x2, double y2, int color, mlx_image_t *ptr, t_data *data);
+int	set_color(float y, t_data *data);
+char	*ft_parse_title(t_data *data);
+char **ft_skip_sp_arr(char **arr);
+void	ft_draw_start_texture(float wallheight, float wallweight, float column, t_data *data);
 #endif
