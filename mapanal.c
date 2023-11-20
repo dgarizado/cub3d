@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 23:57:37 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/23 19:00:21 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/13 21:51:08 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ char	*ft_myrealloc(char *str, int size)
 /**
  * @brief Resizes the map to a square.
  * each line is resized to the longest line and filled with spaces.
+ * Also stores the new width and height of the map.
  * @return true 
  * @return false 
  */
@@ -87,6 +88,8 @@ bool	ft_resize_aux(t_data *data, size_t max_len)
 	int		i;
 
 	i = 0;
+	data->map.width = max_len;
+	data->map.height = ft_arrlen(data->map.map_aclean);
 	while (data->map.map_aclean[i])
 	{
 		if (ft_strlen(data->map.map_aclean[i]) < max_len)

@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/10/23 20:18:15 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/14 23:01:09 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ bool	ft_parse_info(t_data *data)
 	int	line;
 
 	line = ft_parse_elements(data);
+	if (line == 0)
+	{
+		free(data->map.map_s);
+		ft_abort(data->map.map_a, ft_arrlen(data->map.map_a));
+		ft_special_abort(data->paths, TEX_COUNT);
+		exit(1);
+	}
 	ft_clean_map(data, line);
 	ft_check_chars(data);
 	ft_map_anal(data);
