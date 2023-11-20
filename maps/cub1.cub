@@ -2,7 +2,7 @@ WE ./imgs/wall1.png
 
 
 EA ./imgs/wall1.png
-NO ./imgs/wall1.png
+NO ./imgs/wall2.png
 
 F 100,200,1
 SO ./imgs/wall1.png

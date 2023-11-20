@@ -6,13 +6,13 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:36:08 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/15 13:52:12 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/17 15:14:12 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void leaks(void)
+void	leaks(void)
 {
 	system("leaks cub3d");
 }

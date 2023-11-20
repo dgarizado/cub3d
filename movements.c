@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:23:06 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/16 17:46:14 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:50:40 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	verticals_w(t_data *data)
 		}
 		mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
 		(data->player.pos.y) * data->map.minimap_scale, 0xFF000FF);
-		data->player.step_count++;
-		data->player.step_v = 2 * sin(data->player.step_count * 0.19);
 	}
 }
 
@@ -63,8 +61,6 @@ void	verticals_s(t_data *data)
 		}
 		mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
 		(data->player.pos.y) * data->map.minimap_scale, 0xFF000FF);
-		data->player.step_count++;
-		data->player.step_v = 2 * sin(data->player.step_count * 0.19);
 	}
 }
 
@@ -86,8 +82,6 @@ void	laterals_a(t_data *data)
 			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0xFF000FF);
 		}
-		data->player.step_count++;
-		data->player.step_v = 2 * sin(data->player.step_count * 0.19);
 	}
 }
 
@@ -109,8 +103,6 @@ void	laterals_d(t_data *data)
 			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0xFF000FF);
 		}
-		data->player.step_count++;
-		data->player.step_v = 2 * sin(data->player.step_count * 0.19);
 	}
 }
 

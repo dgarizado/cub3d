@@ -6,7 +6,7 @@
 #    By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 18:46:57 by dgarizad          #+#    #+#              #
-#    Updated: 2023/11/16 16:18:20 by dgarizad         ###   ########.fr        #
+#    Updated: 2023/11/17 17:19:52 by dgarizad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,24 +44,29 @@ CC = gcc -g
 CFLAGS = -Wall -Wextra -Werror
 LIBS	:= -ldl -lglfw -L "/Users/dgarizad/.brew/opt/glfw/lib/" -lm $(LIBMLX)/libmlx42.a
 OBJDIR = ./obj
+OBJDIRBONUS = ./obj_bonus
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
 
 SRC = cub3d.c game.c mapanal.c mapanal2.c mapcheck.c mapcheck2.c mini_sprites.c \
 movements.c parsing_elements.c parsing_elements_2.c parsing_elements_3.c \
-rayban.c textureparsing.c utils.c utils2.c
+rayban.c textureparsing.c utils.c utils2.c render.c game_aux.c
 
 SRCBONUS = cub3d.c game_bonus.c mapanal.c mapanal2.c mapcheck.c mapcheck2_bonus.c mini_sprites.c \
 movements.c parsing_elements.c parsing_elements_2.c parsing_elements_3.c \
-rayban.c textureparsing.c utils.c utils2.c
+rayban.c textureparsing.c utils.c utils2.c render.c game_aux_bonus.c 
 
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
-OBJSBONUS = $(addprefix $(OBJDIR)/, $(SRCBONUS:.c=.o))
+OBJSBONUS = $(addprefix $(OBJDIRBONUS)/, $(SRCBONUS:.c=.o))
 
 $(OBJDIR)/%.o: %.c $(HEADER)
 	@mkdir -p $(OBJDIR)
+	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
+
+$(OBJDIRBONUS)/%.o: %.c $(HEADER)
+	@mkdir -p $(OBJDIRBONUS)
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 ################################################################################
@@ -89,7 +94,7 @@ $(LIBFT):
 	@make -C ./libft
 
 clean:
-	@rm -rf $(OBJDIR)
+	@rm -rf $(OBJDIR) $(OBJDIRBONUS)
 
 fclean: clean
 	@rm -f $(NAME) $(NAMEBONUS)

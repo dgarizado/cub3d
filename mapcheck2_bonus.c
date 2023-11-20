@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/16 13:46:47 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:34:55 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ bool	ft_check_chars(t_data *data)
 	i = 0;
 	j = 0;
 	watchdog = 0;
-	ft_print_array(data->map.map_aclean);
 	while (data->map.map_aclean[i] != NULL)
 	{
 		if (ft_ismap(data->map.map_aclean[i], "0 1NWSEDXO") == 0)

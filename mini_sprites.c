@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:24:27 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/15 17:38:24 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/17 18:43:30 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	ft_load_minisprites(t_data *data)
 		data->textures[i]);
 		i++;
 	}
-	ft_load_aux(data);
+	if (data->bonus == true)
+		ft_load_aux(data);
 }
 

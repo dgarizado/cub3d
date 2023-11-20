@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:02:13 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/15 22:35:12 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/20 16:40:11 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,67 +69,60 @@ void ft_draw_line2(mlx_image_t *img, unsigned int x, int start, unsigned int end
 void	ray_render(t_data *data)
 {
 	double wallx;
+	int texx;
 		if (data->ray.side == 0)
 		{
-			data->ray.perpwalldist = (data->ray.sidedistx -  data->ray.deltadistx);
+			// data->ray.perpwalldist = (data->ray.sidedistx -  data->ray.deltadistx);
+			data->ray.perpwalldist = (data->ray.mapx - data->player.pos.x + (1 - data->ray.stepx) / 2) / data->ray.raydirx;
+			if (data->ray.camerax == 0)
+				printf("perpwalldist %f\n", data->ray.perpwalldist);
 			wallx = data->player.pos.y + data->ray.perpwalldist * data->ray.raydiry;	
+			wallx -= floor((wallx));
+			texx = (int)(wallx * (double)data->sprites[WALL_E]->width) % (data->sprites[WALL_E]->width);
+			// texx = (data->sprites[WALL_E]->width) - texx - 1;
+			// texx = (int) wallx * data->sprites[WALL_E]->width % data->sprites[WALL_E]->width;
+			texx = (int)(wallx * 1000) % (1000);
 		}
 		else
 		{
-			data->ray.perpwalldist = (data->ray.sidedisty -  data->ray.deltadisty);
+			// data->ray.perpwalldist = (data->ray.sidedisty -  data->ray.deltadisty);
+			data->ray.perpwalldist = (data->ray.mapy - data->player.pos.y + (1 - data->ray.stepy) / 2) / data->ray.raydiry;
 			wallx = data->player.pos.x + data->ray.perpwalldist * data->ray.raydirx;
-		}
-		if (fabs(data->ray.perpwalldist) < 0.001)
-			data->ray.perpwalldist = 0.001;
-		// int texx = (int)(wallx * (double)data->player.sprites.wall->width);
-		int texx = (data->ray.x )%(data->sprites[WALL_E]->width);
-		if (data->ray.side == 0 && data->ray.raydirx > 0)
+			wallx -= floor((wallx));
+			texx = (int)(wallx * (double)data->sprites[WALL_E]->width) % (data->sprites[WALL_E]->width);
 			texx = (data->sprites[WALL_E]->width) - texx - 1;
-		if (data->ray.side == 1 && data->ray.raydiry < 0)
-			texx = (data->sprites[WALL_E]->width) - texx - 1;	
+			texx = (int)(wallx * 1000) % (1000);
+		}
+		if (fabs(data->ray.perpwalldist) < 0.1)
+			data->ray.perpwalldist = 0.1;
+		// int texx = (data->ray.x ) % (data->sprites[WALL_E]->width);
+		// if (data->ray.side == 0 && data->ray.raydirx > 0)
+		// 	texx = (data->sprites[WALL_E]->width) - texx - 1;
+		// if (data->ray.side == 1 && data->ray.raydiry < 0)
+		// 	texx = (data->sprites[WALL_E]->width) - texx - 1;		
 		int lineheight = (int)(data->map.mlx->height / data->ray.perpwalldist);
+		if (lineheight > data->map.mlx->height)
+			lineheight = data->map.mlx->height;
+		// printf("lineheight %d\n", lineheight);
 		int drawstart = data->map.mlx->height / 2 - lineheight / 2;
+		// printf("drawstart %d\n", drawstart);
 		if (drawstart < 0)
 			drawstart = 0;
 		int drawend = lineheight / 2 + data->map.mlx->height / 2;
 		if (drawend >= data->map.mlx->height || drawend < 0)
-			drawend = data->map.mlx->height - 1;
+			drawend = data->map.mlx->height -1;
 		int color;
 		if (data->ray.side == NORTH)
 			color = 0xAAAA33CC;
 		else
 			color = 0xACDDBCAA;
-		// //first draw the ceiling
-		// //DRAW CEILING
-		// ft_draw_line2(data->map.img3d, data->ray.x, 0, drawstart - data->player.step_v, 0x9DA4CFFF, data, texx);
-		// //DRAW WALL
-		// if (data->ray.side == 0)
-		// 	ft_draw_line2(data->map.img3d, data->ray.x, drawstart - data->player.step_v, drawend - data->player.step_v, 0, data, texx);
-		// else
-		// 	ft_draw_line2(data->map.img3d,data->ray.x, drawstart - data->player.step_v, drawend - data->player.step_v, 0xFFA4CFFF, data, texx);
-		// //DRAW FLOOR
-		// ft_draw_line2(data->map.img3d, data->ray.x, drawend - data->player.step_v, data->map.height * data->map.ppc -1, 0xCC00BFFF, data, texx);
-		// Calculate the brightness factor
-// double brightness = 10 / data->ray.perpwalldist;
-
-
-// // Apply the brightness factor to the color
-// int r = ((color >> 16) & 0x77) * brightness;
-// int g = ((color >> 8) & 0x77) * brightness;
-// int b = (color & 0x77) * brightness;
-
-// r = r > 255 ? 255 : r;
-// g = g > 255 ? 255 : g;
-// b = b > 255 ? 255 : b;
-
-// // Combine the components back into a single color value
-// color = (r << 16) | (g << 8) | b;
-
-// Draw the wall with the adjusted color
-// ft_draw_line(data->map.img3d, data->ray.x, drawstart -data->player.step_v, data->ray.x, drawend -data->player.step_v, color);
-		
 		ft_draw_line(data->map.img3d, data->ray.x, 0, data->ray.x, drawstart -data->player.step_v, data->map.colors[CEILING]);
-		ft_draw_line(data->map.img3d, data->ray.x, drawstart -data->player.step_v, data->ray.x, drawend -data->player.step_v, color);
+		// ft_draw_line(data->map.img3d, data->ray.x, drawstart -data->player.step_v, data->ray.x, drawend -data->player.step_v, color);
+		// printf("drawstart %d drawend %d\n", drawstart, drawend);
+		printf("drawstart %d drawend %d\n", drawstart, drawend);
+		printf("lineheight %d\n", lineheight);
+		// drawLineTexture(data->ray.x, drawstart -data->player.step_v, data->ray.x, drawend -data->player.step_v, texx, data);
+		ft_draw_line2(data->map.img3d, data->ray.x, drawstart -data->player.step_v, drawend -data->player.step_v, 0, data, texx);
 		//then draw the floor
 		ft_draw_line(data->map.img3d, data->ray.x, drawend -data->player.step_v, data->ray.x, data->map.mlx->height, data->map.colors[FLOOR]);
 }
@@ -150,7 +143,7 @@ void	ray_checkwall(t_data *data)
 				data->ray.mapy += data->ray.stepy;
 				data->ray.side = EAST;
 			}
-			if (data->ray.mapx >= 0 && data->ray.mapx < data->map.width * data->map.ppc && data->ray.mapy >= 0 && data->ray.mapy < data->map.height * data->map.ppc)
+			if (data->ray.mapx >= 0 && data->ray.mapx < data->map.width  && data->ray.mapy >= 0 && data->ray.mapy < data->map.height )
 			{
 				if (data->map.map_aclean[data->ray.mapy][data->ray.mapx] == '1')
 					data->ray.hit = 1;
@@ -207,8 +200,10 @@ void ray_update(t_data *data)
 		data->ray.raydirx = 0.0000001;
 	if (data->ray.raydiry == 0)
 		data->ray.raydiry = 0.0000001;
-	data->ray.deltadistx = fabs(1 / data->ray.raydirx);
-	data->ray.deltadisty = fabs(1 / data->ray.raydiry);
+	// data->ray.deltadistx = fabs(1 / data->ray.raydirx);
+	data->ray.deltadistx = sqrt(1 + (data->ray.raydiry * data->ray.raydiry) / (data->ray.raydirx * data->ray.raydirx));
+	// data->ray.deltadisty = fabs(1 / data->ray.raydiry);
+	data->ray.deltadisty = sqrt(1 + (data->ray.raydirx * data->ray.raydirx) / (data->ray.raydiry * data->ray.raydiry));
 	data->ray.hit = 0;
 }
 //chekcpoint

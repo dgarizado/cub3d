@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:48:22 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/15 13:59:48 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:33:15 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ bool	ft_texture_parse(t_data *data, int flag)
 	texture = mlx_load_png(data->paths[flag]);
 	if (texture == NULL)
 	{
-		printf("Error\nTexture '%s' not found\n", data->paths[flag]);
 		return (false);
 	}
 	data->textures[flag] = texture;

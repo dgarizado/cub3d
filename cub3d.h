@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/16 13:46:24 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/20 16:31:30 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,10 @@ typedef struct s_macro_data
 	bool			bonus;
 }	t_data;
 
+//RENDER
+void ft_draw_line(mlx_image_t *img, int x1, int y1, int x2, int y2, int color);
+void drawLineTexture(double x1, double y1, double x2, double y2, int column_texture, t_data *data);
+
 //MAPCHECK
 bool	ft_mapcheck(char **argv, t_data *data);
 int		ft_check_colors(t_data *data, int line_reached);
@@ -166,7 +170,12 @@ void	ft_space_check_aux(t_data *data, int i, int j);
 
 //GAME
 void	ft_game(t_data *data);
-mlx_image_t	*scale_down(mlx_image_t *texture, int scale, t_data *data);
+
+//GAME_AUX
+void ft_draw_minimap(t_data *data);
+void ft_paintblock(t_data *data, int x, int y, int color);
+void ft_fix_images(t_data *data);
+
 //MINISPRITES
 void	ft_load_minisprites(t_data *data);
 
