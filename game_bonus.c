@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 21:18:54 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/18 19:18:32 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:37:32 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <time.h>
-
+/*
 void ft_draw_minimap(t_data *data);
 
 void	ft_keyhook(mlx_key_data_t keydata, void *param)
@@ -129,5 +129,5 @@ void	ft_game(t_data *data)
 	mlx_loop_hook(data->map.mlx, ft_hook2, data);
 	mlx_loop(data->map.mlx);
 	mlx_terminate(data->map.mlx);
-}
+}*/
 

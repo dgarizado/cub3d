@@ -6,7 +6,7 @@
 #    By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 18:46:57 by dgarizad          #+#    #+#              #
-#    Updated: 2023/11/20 19:47:10 by vcereced         ###   ########.fr        #
+#    Updated: 2023/11/21 13:54:50 by vcereced         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,9 @@ OBJDIRBONUS = ./obj_bonus
 ################################################################################
 
 SRC = cub3d.c game.c mapanal.c mapanal2.c mapcheck.c mapcheck2.c mini_sprites.c \
-movements.c parsing_elements.c parsing_elements_2.c parsing_elements_3.c \
-rayban.c textureparsing.c utils.c utils2.c render.c game_aux.c draw_map_intro.c \
-draw_title_intro.c draw_title_intro_2.c intro.c utils_2.c
+movement.c parsing_elements.c parsing_elements_2.c parsing_elements_3.c \
+textureparsing.c utils.c utils2.c  game_aux.c draw_map_intro.c draw_texture.c draw_steven.c\
+draw_title_intro.c draw_title_intro_2.c intro.c utils_2.c utils3.c mini_map.c raycasting_minimap.c casting.c casting_2.c raycasting.c
 
 SRCBONUS = cub3d.c game_bonus.c mapanal.c mapanal2.c mapcheck.c mapcheck2_bonus.c mini_sprites.c \
 movements.c parsing_elements.c parsing_elements_2.c parsing_elements_3.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapcheck2_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/17 13:34:55 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:45:53 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ bool	ft_check_chars(t_data *data)
 	watchdog = 0;
 	while (data->map.map_aclean[i] != NULL)
 	{
-		if (ft_ismap(data->map.map_aclean[i], "0 1NWSEDXO") == 0)
+		if (ft_ismap(data->map.map_aclean[i], "0 1986NWSEDXO") == 0)
 		{
 			ft_free_maps(data);
 			ft_error("Map is not valid\n");

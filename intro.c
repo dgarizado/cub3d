@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:36:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/21 12:05:05 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:07:04 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,14 @@ void	ft_transition(int *n, t_data *data)
 	(*n) += 1;
 	if (*n == 155)
 	{
-		//FUNCION LOOP JUEGO O CHANGE FLAG
+		data->title.title_map->enabled = 0;
+		data->title.title_img->enabled = 0;
+		data->phase = 1;
 	}
 	else if ((*n) == 150)
+	{
 		ft_memset(data->title.title_img->pixels, 0, WIDTH_IMG_TITLE * HEIGHT_IMG_TITLE * sizeof(int32_t));
+	}
 	else if ((*n) > 30 && (*n) < 120)
 		ft_memset(data->title.title_map->pixels, 255 - ((*n) * 2),WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
 	else if ((*n) < 30)
@@ -112,6 +116,7 @@ void	ft_intro_loop(t_data		*data)
 			ft_memset(data->title.title_map->pixels, 0, WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));//POSIBLES SEG FAULT I DONT KNOW WHYYY
 			draw_title_map(data);
 		}
+		draw_title_map(data);
 		draw_title(data);
 		ft_draw_start_texture(HEIGTH_IMG_TITLE_MAP * 0.04, WIDTH_IMG_TITLE_MAP * 0.3, (WIDTH / 2), data);
 	}

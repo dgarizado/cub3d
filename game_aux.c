@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   game_aux.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:07:18 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/17 15:14:52 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:23:54 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+/*
 void	ft_fix_images(t_data *data)
 {
 	mlx_resize_image(data->map.img3d, data->map.mlx->width, \
@@ -77,4 +77,4 @@ void	ft_draw_minimap(t_data *data)
 		i++;
 	}
 	ft_draw_players(data);
-}
+}*/

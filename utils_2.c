@@ -6,12 +6,12 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 00:47:57 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/20 20:40:31 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:13:48 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+/*
 void drawLine(double x1, double y1, double x2, double y2, int color, mlx_image_t *ptr, t_data *data)
 {
 	double dx = x2 - x1;
@@ -32,7 +32,7 @@ void drawLine(double x1, double y1, double x2, double y2, int color, mlx_image_t
 		x1 += dx;
 		y1 += dy;
 	}
-}
+}*/
 
 void draw_start(double x1, double y1, double x2, double y2, int column_texture, t_data *data)
 {
@@ -82,7 +82,7 @@ void	ft_draw_start_texture(float wallheight, float wallweight, float column, t_d
 		column++;
 	}
 }
-
+/*
 int	ft_changed_resolution(t_data *data)
 {
 	if ((int)(data->mlx->width) != (int)(data->title.screen_width) || (int)(data->mlx->height) != (int)(data->title.screen_heigth))
@@ -92,4 +92,4 @@ int	ft_changed_resolution(t_data *data)
 		return (1);
 	}
 	return (0);
-}
+}*/
