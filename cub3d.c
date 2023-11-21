@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:36:08 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/20 20:25:05 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:07:35 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,20 @@ void	init_intro(mlx_t* mlx, t_data	*data)
 	mlx_image_to_window(mlx, data->title.title_map, 0, 0);
 }
 
-void	ft_intro(mlx_t*mlx, t_data *data)
+void	ft_load_intro(mlx_t*mlx, t_data *data)
 {
 	ft_parse_title(data);//parsear antes del init pues seg fault en ptr a mapa juego
 	init_intro(mlx, data);
+}
+
+void	ft_loop(void *d)
+{
+	t_data		*data;
+
+	data = (t_data *)d;
+
 	draw_title_map(data);
-	mlx_loop_hook(mlx, ft_intro_loop, data);
-	mlx_loop(mlx);
+	ft_intro_loop(data);
 }
 
 int	main(int argc, char **argv)
@@ -54,7 +61,10 @@ int	main(int argc, char **argv)
 		ft_error(INPUT_NBR);
 	ft_memset(&data, 0, sizeof(t_data));
 	ft_mapcheck(argv, &data);
-	ft_intro(mlx, &data);
+	ft_load_intro(mlx, &data);
+	
+	mlx_loop_hook(mlx, ft_loop, &data);
+	mlx_loop(mlx);
 	//ft_game(&data);
 	//ft_free_maps(&data);
 	//ft_free_textures(&data);

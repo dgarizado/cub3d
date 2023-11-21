@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 21:18:54 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/18 18:59:47 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:05:22 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <time.h>
-
+/*
 void	ft_keyhook(mlx_key_data_t keydata, void *param)
 {
 	t_data	*data;
@@ -52,7 +52,7 @@ void	ft_hook(void *param)
 	data->map.mlx->height != data->map.height * data->map.ppc)
 		ft_fix_images(data);
 	ray_bang(data);
-}
+}*/
 
 /**
  * @brief Create a mlx_image_t object
@@ -60,6 +60,7 @@ void	ft_hook(void *param)
  * the minimap image.
  * @param data
  */
+/*
 void	ft_init_graphics(t_data *data)
 {
 	data->map.ppc = WIDTH / data->map.width;
@@ -85,16 +86,16 @@ void	ft_init_graphics(t_data *data)
 	- data->map.mini->height);
 	// data->map.mini->instances[0].enabled = false;
 }
-
+*/
 void	ft_game(t_data *data)
 {
-	ft_init_graphics(data);
-	ft_load_minisprites(data);
-	ft_draw_minimap(data);
-	mlx_set_cursor_mode(data->map.mlx, MLX_MOUSE_HIDDEN);
-	mlx_key_hook(data->map.mlx, ft_keyhook, data);
-	mlx_loop_hook(data->map.mlx, ft_hook, data);
-	mlx_loop_hook(data->map.mlx, ft_hook2, data);
-	mlx_loop(data->map.mlx);
-	mlx_terminate(data->map.mlx);
+	//ft_init_graphics(data);
+	//ft_load_minisprites(data);
+	//ft_draw_minimap(data);
+	//mlx_set_cursor_mode(data->map.mlx, MLX_MOUSE_HIDDEN);
+	//mlx_key_hook(data->map.mlx, ft_keyhook, data);
+	//mlx_loop_hook(data->map.mlx, ft_hook, data);
+	//mlx_loop_hook(data->map.mlx, ft_hook2, data);
+	//mlx_loop(data->map.mlx);
+	//mlx_terminate(data->map.mlx);
 }

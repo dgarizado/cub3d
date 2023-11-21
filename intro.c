@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:36:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/20 20:41:13 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:05:05 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_transition(int *n, t_data *data)
 	(*n) += 1;
 	if (*n == 155)
 	{
-		//FUNCION LOOP JUEGO
+		//FUNCION LOOP JUEGO O CHANGE FLAG
 	}
 	else if ((*n) == 150)
 		ft_memset(data->title.title_img->pixels, 0, WIDTH_IMG_TITLE * HEIGHT_IMG_TITLE * sizeof(int32_t));
@@ -89,12 +89,12 @@ void	ft_transition(int *n, t_data *data)
 	}
 }
 
-void	ft_intro_loop(void *d)
+void	ft_intro_loop(t_data		*data)
 {
-	t_data		*data;
+	//t_data		*data;
 	static int	n;
 
-	data = (t_data *)d;
+	//data = (t_data *)d;
 	data->title.color_up += 15 ;
 	if (data->title.color_up >= ((HEIGHT_IMG_TITLE) * 3))
 		data->title.color_up = 0;

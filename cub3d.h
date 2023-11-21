@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/20 20:18:43 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:19:42 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,33 +75,14 @@ typedef struct s_victor
 	double	y;
 }	t_victor;
 
-typedef struct s_ray_charles
-{
-	double	camerax;
-	double	raydirx;
-	double	raydiry;
-	double	sidedistx;
-	double	sidedisty;
-	double	deltadistx;
-	double	deltadisty;
-	double	perpwalldist;
-	int		mapx;
-	int		mapy;
-	int		stepx;
-	int		stepy;
-	int		hit;
-	int		side;
-	int		x;
-} t_ray_charles;
-
 typedef struct	s_map
 {
 	char		*map_s;
 	char		**map_a;
 	char		*map_sclean;
-	char		**map_aclean;
-	int			width;
-	int			height;
+	char		**map_aclean; // mapa CHAR **
+	int			width;  //LARGO
+	int			height;	//ALTO
 	int			bytes;
 	int			ppc;
 	int			minimap_scale;
@@ -141,11 +122,10 @@ typedef struct	s_player
 
 typedef struct s_macro_data
 {
-	t_title				title;
-	mlx_t		*mlx;
+	t_title			title;
+	mlx_t			*mlx;
 	t_map			map;
 	t_player		player;
-	t_ray_charles	ray;
 	mlx_image_t		*sprites[SPRITES_COUNT];
 	mlx_texture_t	*textures[TEX_COUNT];
 	char 			*paths[TEX_COUNT];
@@ -221,7 +201,7 @@ void	mouse(t_data *data);
 void 	ft_intro(mlx_t*mlx, t_data *data);
  void draw_title(t_data * data);
 void	draw_title_map(t_data *data);
-void	ft_intro_loop(void *d);
+void	ft_intro_loop(t_data		*data);
 int	ft_changed_resolution(t_data *data);
 void drawLine(double x1, double y1, double x2, double y2, int color, mlx_image_t *ptr, t_data *data);
 int	set_color(float y, t_data *data);
