@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/20 16:31:30 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/20 20:53:45 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # define YELLOW "\033[0;33m"
 # define FOV 60
 # define PPC 40
-# define WIDTH 1360
-# define HEIGHT 768
+# define WIDTH 1000
+# define HEIGHT 1000
 # define MOVE_SPEED 0.05
 # define MINIMAP_SCALE 12
 # define NORTH 0

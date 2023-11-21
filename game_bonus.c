@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 21:18:54 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/18 19:18:32 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/20 18:09:45 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void    ft_hook(void *param)
 	if (end - start < 0.016)
 	{
 		elapsed = 0.016 - (end - start);
-		usleeºp(elapsed * 1000000);
+		usleep(elapsed * 1000000);
 	} 	
 }
 

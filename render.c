@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:11:40 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/18 19:22:09 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/21 18:00:28 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void ft_draw_line(mlx_image_t *img, int x1, int y1, int x2, int y2, int color)
 	}
 }
 
+
+
+
 void drawLineTexture(double x1, double y1, double x2, double y2, int column_texture, t_data *data)
 {
     double dx = x2 - x1;//pantalla
@@ -72,9 +75,9 @@ void drawLineTexture(double x1, double y1, double x2, double y2, int column_text
 	// int texture_height = (int)(texture_scale * img->height);
 	// int texture_start = (img->height - texture_height) / 2;
 	// int texture_end = texture_start + texture_height;
-	int lineheight = (int)(data->map.mlx->height / data->ray.perpwalldist);
-		if (lineheight > data->map.mlx->height)
-			lineheight = data->map.mlx->height;
+	int lineheight = (int)((data->map.mlx->height)/2 / data->ray.perpwalldist);
+		// if (lineheight > data->map.mlx->height)
+		// 	lineheight = data->map.mlx->height;
     if ((abs)((int)dx) >= (abs)((int)dy))
         steps = (fabs)(dx);//pantalla
     else
@@ -82,14 +85,26 @@ void drawLineTexture(double x1, double y1, double x2, double y2, int column_text
     // float step_y_texture = (float)img->height/(float)steps;
 	// int texture_middle = img->height / 2;
 	double textStep = 1.0 * img->height / lineheight;
+	if (textStep > img->height) {
+    textStep = img->height;
+}
+double offset = (lineheight - data->map.mlx->height / 2) * textStep;
+if (offset < 0) {
+    offset = 0;
+}
     // double texpos = (y1 - data->map.mlx->height / 2 + lineheight / 2) * textStep;
 	// double textStep = 1.0 * (img->height - texture_middle) / (data->map.mlx->height / 2);
 	dx = dx / steps;//pantalla
     dy = dy / steps;//pantalla es 1 pa la textura
     int n = 0;
+	if (data->ray.perpwalldist < 1)
+	{
+		textStep *= data->ray.perpwalldist;
+	}
     while ((int)fabs(x2 - x1) || (int)fabs(y2 - y1))
     {
-        row_texture = floor(textStep * n);
+		 row_texture = (int)(textStep * n + offset) % img->height;
+        // row_texture = (int)(textStep * n);
         if(x1 >= 0 && x1 <= WIDTH && y1 >= 0 && y1 <= HEIGHT)
         {
             color = ((uint32_t*)img->pixels)[row_texture * img->width + column_texture];
