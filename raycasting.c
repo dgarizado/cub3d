@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 17:33:42 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/21 12:30:46 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:36:18 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,9 @@ void draw_colision(int rayCount, float angle, int n, t_data *data)
 	wallheight = floor(data->mlx->height/2)  /  data->cast.bonus.distance[n];
 	if (last_colision_arr(data->cast.bonus.type_wall_bonus) == n)//ONLY DRAW IN LAST COLISIONS MEANS WALL OPTIMITATION
 	{
-		drawLine(rayCount, 0, rayCount, (HEIGHT/2) - wallheight , 0x00FFFF1A, data->game,data);
-		drawLine(rayCount, (HEIGHT/2)+ wallheight, rayCount, HEIGHT, 0x00FF001A, data->game,data);
+		drawLine(rayCount, 0, rayCount, (HEIGHT/2) - wallheight , 0x00FFFF1A, data->img[GAME],data);
+		drawLine(rayCount, (HEIGHT/2)+ wallheight, rayCount, HEIGHT, 0x00FF001A, data->img[GAME],data);
 	}
-	//drawLineTexture_bonus(rayCount, (HEIGHT/2) - wallheight, (HEIGHT/2) + wallheight, colum_texture, data, n);
 	drawLineTexture_bonus(rayCount, (data->mlx->height/2) - wallheight, (data->mlx->height/2) + wallheight, colum_texture, data, n);
 }
 
@@ -158,7 +157,7 @@ void raycast_game(mlx_image_t *game, t_data *data)
 	for(int rayCount = 0; rayCount < WIDTH; rayCount++) 
 	{
 		ft_memset((&data->cast.bonus), 0, sizeof(t_bonus));//borrar primero array
-		rays(data->game, data, angle);//fill array colisions
+		rays(data->img[GAME], data, angle);//fill array colisions
 		draw_colisions(rayCount, angle, 1, data);
 	 	angle+= increment_angle;
 	}
@@ -167,7 +166,7 @@ void raycast_game(mlx_image_t *game, t_data *data)
 	for(int rayCount = 0; rayCount < WIDTH; rayCount++) 
 	{
 	 	ft_memset((&data->cast.bonus), 0, sizeof(t_bonus));//borrar primero array
-		rays(data->game, data, angle);//fill array colisions
+		rays(data->img[GAME], data, angle);//fill array colisions
 		draw_colisions(rayCount, angle, 0, data);
 	 	angle+= increment_angle;
 	}

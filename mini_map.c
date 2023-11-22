@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:56:18 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/21 17:31:27 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/22 11:19:23 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void paint_square(int column, int row, int color, t_data *data)
 	while(y < HEIGHT_MAP_GAME/data->map.height &&  row * SCALE_Y + y < HEIGHT_MAP_GAME)
 	{
 		if ((column * SCALE_X) + SCALE_X <= WIDTH_MAP_GAME)
-			drawLine(column * SCALE_X , row * SCALE_Y + y, (column * SCALE_X) + SCALE_X, row *SCALE_Y + y, color, data->mapp, data);
+			drawLine(column * SCALE_X , row * SCALE_Y + y, (column * SCALE_X) + SCALE_X, row *SCALE_Y + y, color, data->img[MINIMAP_GAME], data);
 		y++;
 	}
 }
@@ -58,7 +58,7 @@ void draw_player(t_data *data, int radio)
 		x = (data->px * SCALE_X)+ (radio * cos(radianes));
        	y = (data->py *SCALE_Y) + (radio * sin(radianes));
 		if (x > 0 && x < WIDTH_MAP_GAME && y > 0 && y < HEIGHT_MAP_GAME)
-        	mlx_put_pixel(data->mapp, x, y, 0xFFFFFFFF);
+        	mlx_put_pixel(data->img[MINIMAP_GAME], x, y, 0xFFFFFFFF);
     }
 }
 
@@ -74,7 +74,7 @@ void draw_steven(t_data *data, int radio)
 			x = (data->steven_x * SCALE_X)+ (radio * cos(radianes));
 			y = (data->steven_y * SCALE_Y) + (radio * sin(radianes));
 			if (x > 0 && x < WIDTH_MAP_GAME && y > 0 && y < HEIGHT_MAP_GAME)
-				mlx_put_pixel(data->mapp, x, y, 0xFF0000FF);
+				mlx_put_pixel(data->img[MINIMAP_GAME], x, y, 0xFF0000FF);
 		}
 		radio--;
 	}
@@ -86,5 +86,5 @@ void ft_draw_minimap(t_data *data)
 	draw_player(data, 5);//HARCODED A RADIO 10
 	draw_steven(data, 5);//HARCODED A RADIO 10
 	
-	draw_raycast_map(data->mapp, data);
+	draw_raycast_map(data->img[MINIMAP_GAME], data);
 }

@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:57:25 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/21 13:42:26 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/22 11:19:18 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void paint_colision_map(float distance, t_data *data)
 		float xx =radio * cos(radianes);
 		float yy = radio * sin(radianes);
 		if (data->cast.ray_x_start * SCALE_X + x + xx > 0 && data->cast.ray_x_start * SCALE_X + x + xx < WIDTH_MAP_GAME && data->cast.ray_y_start *SCALE_Y + y + yy > 0 && data->cast.ray_y_start *SCALE_Y + y + yy < HEIGHT_MAP_GAME)
-			mlx_put_pixel(data->mapp, data->cast.ray_x_start * SCALE_X + x + xx ,data->cast.ray_y_start *SCALE_Y + y + yy , 0xFFFF00FF);
+			mlx_put_pixel(data->img[MINIMAP_GAME], data->cast.ray_x_start * SCALE_X + x + xx ,data->cast.ray_y_start *SCALE_Y + y + yy , 0xFFFF00FF);
 	}
 	radio = radio -1;
 	}

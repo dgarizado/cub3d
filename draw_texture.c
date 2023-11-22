@@ -6,26 +6,43 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:10:37 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/21 13:54:04 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:41:54 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+mlx_image_t* choose_orientation(int j, t_data *data)
+{
+	if (data->cast.bonus.flag_bonus[j] == 'x' && data->cast.bonus.cell_step_bonus[j] == -1)
+		return (data->sprites[WALL_W]);
+	else if (data->cast.bonus.flag_bonus[j] == 'x' && data->cast.bonus.cell_step_bonus[j] == 1)
+		return (data->sprites[WALL_E]);
+	else if (data->cast.bonus.flag_bonus[j] == 'y' && data->cast.bonus.cell_step_bonus[j] == -1)
+		return (data->sprites[WALL_N]);
+	else if (data->cast.bonus.flag_bonus[j] == 'y' && data->cast.bonus.cell_step_bonus[j] == 1)
+		return (data->sprites[WALL_S]);
+	return (NULL);
+}
 
 mlx_image_t* choose_image(int j, t_data *data)
 {
 	mlx_image_t* img;
 	
 	if (j == -1)//OJO ZOMIBEEEEEEE
-		img = data->zombie;
+		img = data->sprites[ENEMY];
+	else if(data->cast.bonus.type_wall_bonus[j] == '1')
+	{
+		img = choose_orientation(j, data);
+	}
 	else if(data->cast.bonus.type_wall_bonus[j] == '9' || data->cast.bonus.type_wall_bonus[j] == '1')//OJO IGUAL PUERTA Y MURO
-		img = data->wall_img;
+	img = data->sprites[WALL_N];
 	else if(data->cast.bonus.type_wall_bonus[j] == '8')
-		img = data->broken;
+	img = data->sprites[BROKEN];
 	else if(data->cast.bonus.type_wall_bonus[j] == '6')
-		img = data->grass;
+		img = data->sprites[GRASS];
 	else if(data->cast.bonus.type_wall_bonus[j] == '5')
-		img = data->aura;
+		img = data->sprites[AURA];
 	return (img);
 }
 
@@ -52,7 +69,7 @@ void drawLineTexture_bonus(double x1, double y1, double y2, int column_texture, 
 			row_texture = floor(step_y_texture * n);
 			color = ((uint32_t*)img->pixels)[row_texture * img->width + column_texture];
 			if(color != 0)
-				((uint32_t*)data->game->pixels)[((int)y1 * data->game->width + (int)x1)] = color;
+				((uint32_t*)data->img[GAME]->pixels)[((int)y1 * data->img[GAME]->width + (int)x1)] = color;
 		}
 		y1 += dy;
 		n++;

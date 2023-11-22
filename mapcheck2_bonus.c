@@ -6,40 +6,11 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/21 17:45:53 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/22 10:57:40 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/**
- * @brief Set the camera plane vector
- * relative to the player direction. It is always perpendicular.
- * @param data 
- */
-void	set_camera(t_data *data)
-{
-	if (data->player.vdir.x == 1)
-	{
-		data->player.plane.y = 0.8;
-		data->player.plane.x = 0;
-	}
-	if (data->player.vdir.x == -1)
-	{
-		data->player.plane.y = -0.8;
-		data->player.plane.x = 0;
-	}
-	if (data->player.vdir.y == 1)
-	{
-		data->player.plane.y = 0;
-		data->player.plane.x = -0.8;
-	}
-	if (data->player.vdir.y == -1)
-	{
-		data->player.plane.y = 0;
-		data->player.plane.x = 0.8;
-	}
-}
 
 /**
  * @brief Auxiliary function that
@@ -55,20 +26,35 @@ void	get_player_coords(int i, int j, t_data *data, int *watchdog)
 {
 	if (ft_strchr("NWSE", data->map.map_aclean[i][j]) != NULL)
 	{
-		data->player.pos.x = j;
-		data->player.pos.y = i;
+		data->px = (double)(j + 0.5f);
+		data->py = (double)(i + 0.5f);
+		
 		(*watchdog)++;
 		//THIS IS THE NEW PART USING VICTORS	
 		if (data->map.map_aclean[i][j] == 'N')
-			data->player.vdir.y = -1;
+			data->angle = 270;
 		if (data->map.map_aclean[i][j] == 'S')
-			data->player.vdir.y = 1;
+			data->angle = 90;
 		if (data->map.map_aclean[i][j] == 'W')
-			data->player.vdir.x = -1;
+			data->angle = 180;
 		if (data->map.map_aclean[i][j] == 'E')
-			data->player.vdir.x = 1;
+			data->angle = 0;
 	}
-	set_camera(data);
+	if (ft_strchr("Z", data->map.map_aclean[i][j]) != NULL)
+	{
+		data->steven_x = (double)(j + 0.5f);
+		data->steven_y = (double)(i + 0.5f);
+		
+		//THIS IS THE NEW PART USING VICTORS	
+		if (data->map.map_aclean[i][j] == 'N')
+			data->angle = 270;
+		if (data->map.map_aclean[i][j] == 'S')
+			data->angle = 90;
+		if (data->map.map_aclean[i][j] == 'W')
+			data->angle = 180;
+		if (data->map.map_aclean[i][j] == 'E')
+			data->angle = 0;
+	}
 }
 
 void	ft_check_wd(t_data *data, int watchdog)
@@ -78,7 +64,7 @@ void	ft_check_wd(t_data *data, int watchdog)
 		ft_free_maps(data);
 		ft_error("Check player Character!\n");
 	}
-	data->bonus = true;
+	//data->bonus = true;
 }
 
 /**
@@ -100,7 +86,7 @@ bool	ft_check_chars(t_data *data)
 	watchdog = 0;
 	while (data->map.map_aclean[i] != NULL)
 	{
-		if (ft_ismap(data->map.map_aclean[i], "0 1986NWSEDXO") == 0)
+		if (ft_ismap(data->map.map_aclean[i], "0 19865NWSEDXOZ") == 0)//CORREGUIR 
 		{
 			ft_free_maps(data);
 			ft_error("Map is not valid\n");

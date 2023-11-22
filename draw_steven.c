@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 19:04:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/20 16:15:46 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:35:55 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void ft_draw_steven(float wallheight, float column, t_data *data)
 	column = column - wallheight/2;
 	
 	int column_texture = 0; 
-	float incremente_texture_column = data->wall_img->width/wallheight;
+	//float incremente_texture_column = data->wall_img->width/wallheight;
+	float incremente_texture_column = data->sprites[WALL_N]->width/wallheight;
 	int n = 0.0;
 
 	data->cast.type_wall = 7;
-	while(column_texture < data->zombie->width)
+	while(column_texture < data->sprites[ENEMY]->width)
 	{
 		column_texture = incremente_texture_column * n;
-		//drawLineTexture_bonus(column, ((HEIGHT) / 2) , ((HEIGHT) / 2)+ (wallheight), (int)column_texture, data, -1);
 		drawLineTexture_bonus(column, ((data->mlx->height) / 2) , ((data->mlx->height) / 2)+ (wallheight), (int)column_texture, data, -1);
 		n++;
 		column++;

@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:36:08 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/21 17:48:26 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/22 13:00:47 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,74 +17,52 @@ void	leaks(void)
 	system("leaks cub3d");
 }
 
-void	init_intro(mlx_t* mlx, t_data	*data)
+void	init_params(mlx_t* mlx, t_data	*data)
 {
 	data->mlx = mlx;
-	/*--------WHAAAAAACHAAAAAAOUUUUUUTTTTTT-------------*/
-	data->title.TEMP = data->map.map_aclean;		//IS MAAAAAAAAAAAAAAP
-	/*--------------------------------------------------*/
-	data->title.screen_width = mlx->width;
-	data->title.screen_heigth = mlx->height;
-	//data->title.length = data->map.width;  PENDIENTE
-	//data->title.heigth = data->map.height;  PENDIENTE
-	data->title.boom = 1;
-	data->title.title_map = mlx_new_image(mlx, WIDTH_IMG_TITLE_MAP, HEIGTH_IMG_TITLE_MAP);
-	data->title.title_img = mlx_new_image(mlx, WIDTH_IMG_TITLE, HEIGHT_IMG_TITLE);
-	mlx_texture_t *txt = mlx_load_png("./map_title/start.png");
-	data->title.start_img = mlx_texture_to_image(mlx, txt);
-	mlx_delete_texture(txt);
-	mlx_image_to_window(mlx, data->title.title_img, (WIDTH / 2) - (WIDTH_IMG_TITLE/2), (HEIGHT *0.03));
-	mlx_image_to_window(mlx, data->title.title_map, 0, 0);
-}
-
-void init_game(t_data *data, mlx_t* mlx)
-{
-	data->mlx = mlx;
-	mlx_image_t* map = mlx_new_image(mlx, (int)(WIDTH_MAP_GAME) , (int)(HEIGHT_MAP_GAME));
-	mlx_image_t* game = mlx_new_image(mlx, WIDTH , HEIGHT);
-	mlx_image_t *wall_img;
-	mlx_image_t *broken;
-	mlx_image_t *zombie;
-	mlx_image_t *grass;
-	mlx_image_t *aura;
-	mlx_texture_t *tex;
-	tex = mlx_load_png("./textures/wall.png");
-	wall_img = mlx_texture_to_image(mlx, tex);
-	mlx_delete_texture(tex);
-	tex = mlx_load_png("./textures/break.png");
-	broken = mlx_texture_to_image(mlx, tex);
-	mlx_delete_texture(tex);
-	tex = mlx_load_png("./textures/zombie.png");
-	zombie = mlx_texture_to_image(mlx, tex);
-	mlx_delete_texture(tex);
-	tex = mlx_load_png("./textures/grass.png");
-	grass = mlx_texture_to_image(mlx, tex);
-	mlx_delete_texture(tex);
-	tex = mlx_load_png("./textures/aura.png");
-	aura = mlx_texture_to_image(mlx, tex);
-	mlx_delete_texture(tex);
-	data->wall_img = wall_img;
-	data->broken = broken;
-	data->zombie = zombie;
-	data->grass = grass;
-	data->aura = aura;
-	data->mapp = map;
-	data->game = game;
-	data->px = 2;//not controled is init in wall!!!
-	data->py = 2;//not controled is init in wall!!!
-	data->steven_x = 5;//not controled is init in wall!!!
-	data->steven_y = 5;//not controled is init in wall!!!
-	data->angle=90;
-	//data->size = WIDTH/10;//HARDCODEEEEED
 	data->screen_width = mlx->width;
 	data->screen_heigth = mlx->height;
-	mlx_image_to_window(mlx, data->game, 0, 0);
-	mlx_image_to_window(mlx, data->mapp, mlx->width * 0.01, mlx->height *0.01);
+	data->title.boom = 1;
+ }
+
+void put_images_to_windows(t_data *data, mlx_t* mlx)
+{
+	mlx_image_to_window(mlx, data->img[GAME], 0, 0);
+	mlx_image_to_window(mlx, data->img[MINIMAP_GAME], mlx->width * 0.01, mlx->height *0.01);
+	mlx_image_to_window(mlx, data->img[TITLE_INTRO], (WIDTH / 2) - (WIDTH_IMG_TITLE/2), (HEIGHT *0.03));
+	mlx_image_to_window(mlx, data->img[MAP_INTRO], 0, 0);
 }
+
+void load_graphics(mlx_t* mlx, t_data *data)
+{
+	data->img[TITLE_INTRO] = mlx_new_image(mlx, WIDTH_IMG_TITLE, HEIGHT_IMG_TITLE);
+	data->img[MAP_INTRO] = mlx_new_image(mlx, WIDTH_IMG_TITLE_MAP, HEIGTH_IMG_TITLE_MAP);
+	data->img[MINIMAP_GAME] = mlx_new_image(mlx, (int)(WIDTH_MAP_GAME) , (int)(HEIGHT_MAP_GAME));
+	data->img[GAME] = mlx_new_image(mlx, WIDTH , HEIGHT);
+	
+	
+	//------------SEG FAULT SI NO ASIGNA WALLS SE SUPONE QUE SE SETEA EN PARSEO*****************************
+	data->textures[WALL_N] = mlx_load_png(data->paths[PATH_N]);
+	data->textures[WALL_S] = mlx_load_png(data->paths[PATH_S]);
+	data->textures[WALL_E] = mlx_load_png(data->paths[PATH_E]);
+	data->textures[WALL_W] = mlx_load_png(data->paths[PATH_W]);
+	data->textures[ENEMY] = mlx_load_png("./imgs/zombie.png");
+	data->textures[AURA] = mlx_load_png("./imgs/aura.png");
+	data->textures[GRASS] = mlx_load_png("./imgs/grass.png");
+	data->textures[BROKEN] = mlx_load_png("./imgs/break.png");
+	data->textures[START_INTRO] = mlx_load_png("./imgs/start.png");
+	ft_load_minisprites(data);
+	//write(1, "y", 1);
+	//printf("n =  %s, s = %s, e= %s, w= %s\n", data->paths[PATH_N], data->paths[PATH_S], data->paths[PATH_E], data->paths[PATH_W]);
+	ft_free_textures(data);
+	//write(1, "x", 1);
+//	getchar();
+}
+
 
 void ft_draw_game(t_data *data)
 {
-	raycast_game(data->game, data);
+	raycast_game(data->img[GAME], data);
 }
 
 void hk2(void *d)
@@ -94,27 +72,15 @@ void hk2(void *d)
 	data = (t_data *)d; 
 	if (ft_changed_resolution(data))
 	{
-		mlx_resize_image(data->mapp, (int)(WIDTH_MAP_GAME), (int)(HEIGHT_MAP_GAME));
-		mlx_resize_image(data->game, WIDTH, HEIGHT);
+		mlx_resize_image(data->img[MINIMAP_GAME], (int)(WIDTH_MAP_GAME), (int)(HEIGHT_MAP_GAME));
+		mlx_resize_image(data->img[GAME], WIDTH, HEIGHT);
 	}
 	ft_move_players(data);
 	ft_check_door(data);
-	ft_memset(data->mapp->pixels, 0, HEIGHT_MAP_GAME* WIDTH_MAP_GAME * sizeof(int));//HARCODED*********************
-	ft_memset(data->game->pixels, 0, WIDTH * HEIGHT* sizeof(int));//HARCODED********************
+	ft_memset(data->img[MINIMAP_GAME]->pixels, 0, HEIGHT_MAP_GAME* WIDTH_MAP_GAME * sizeof(int));//HARCODED*********************
+	ft_memset(data->img[GAME]->pixels, 0, WIDTH * HEIGHT* sizeof(int));//HARCODED********************
 	ft_draw_minimap(data);
 	ft_draw_game(data);
-}
-
-void	ft_load_intro(mlx_t*mlx, t_data *data)
-{
-	ft_parse_title(data);//parsear antes del init pues seg fault en ptr a mapa juego
-	init_intro(mlx, data);
-}
-
-void ft_load_game(mlx_t*mlx, t_data *data)
-{
-
-	init_game(data, mlx);
 }
 
 void	ft_loop(void *d)
@@ -122,14 +88,18 @@ void	ft_loop(void *d)
 	t_data		*data;
 
 	data = (t_data *)d;
-
 	if(data->phase == 0)
-	{
-		//draw_title_map(data);
 		ft_intro_loop(data);
-	}
 	else if(data->phase == 1)
 		hk2(data);
+}
+
+void ft_load(mlx_t*mlx, t_data *data)
+{
+	ft_parse_title(data);
+	init_params(mlx, data);
+	load_graphics(mlx, data);
+	put_images_to_windows(data, mlx);
 }
 
 int	main(int argc, char **argv)
@@ -140,10 +110,8 @@ int	main(int argc, char **argv)
 		ft_error(INPUT_NBR);
 	ft_memset(&data, 0, sizeof(t_data));
 	ft_mapcheck(argv, &data);
-	ft_load_intro(mlx, &data);
-	ft_load_game(mlx, &data);
+	ft_load(mlx, &data);
 	mlx_loop_hook(mlx, ft_loop, &data);
-	//mlx_loop_hook(mlx, hk2, &data);
 	mlx_loop(mlx);
 	//ft_game(&data);
 	//ft_free_maps(&data);

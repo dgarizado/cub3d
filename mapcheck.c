@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapcheck.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/14 23:01:09 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/22 11:47:14 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	ft_parse_info(t_data *data)
 	{
 		free(data->map.map_s);
 		ft_abort(data->map.map_a, ft_arrlen(data->map.map_a));
-		ft_special_abort(data->paths, TEX_COUNT);
+		ft_special_abort(data->paths, PATH_COUNT);
 		exit(1);
 	}
 	ft_clean_map(data, line);

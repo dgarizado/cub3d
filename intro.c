@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:36:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/21 14:07:04 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/22 13:07:10 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,31 +74,27 @@ void	ft_transition(int *n, t_data *data)
 	(*n) += 1;
 	if (*n == 155)
 	{
-		data->title.title_map->enabled = 0;
-		data->title.title_img->enabled = 0;
+		data->img[MAP_INTRO]->enabled = 0;
+		data->img[TITLE_INTRO]->enabled = 0;
 		data->phase = 1;
 	}
 	else if ((*n) == 150)
-	{
-		ft_memset(data->title.title_img->pixels, 0, WIDTH_IMG_TITLE * HEIGHT_IMG_TITLE * sizeof(int32_t));
-	}
+		ft_memset(data->img[TITLE_INTRO]->pixels, 0, WIDTH_IMG_TITLE * HEIGHT_IMG_TITLE * sizeof(int32_t));
 	else if ((*n) > 30 && (*n) < 120)
-		ft_memset(data->title.title_map->pixels, 255 - ((*n) * 2),WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
+		ft_memset(data->img[MAP_INTRO]->pixels, 255 - ((*n) * 2), WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
 	else if ((*n) < 30)
 	{
 		data->title.boom += 0.2;
-		ft_memset(data->title.title_map->pixels, 0, WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
+		ft_memset(data->img[MAP_INTRO]->pixels, 0, WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
 		draw_title(data);
 		draw_title_map(data);
 	}
 }
 
-void	ft_intro_loop(t_data		*data)
+void	ft_intro_loop(t_data	*data)
 {
-	//t_data		*data;
 	static int	n;
 
-	//data = (t_data *)d;
 	data->title.color_up += 15 ;
 	if (data->title.color_up >= ((HEIGHT_IMG_TITLE) * 3))
 		data->title.color_up = 0;
@@ -110,10 +106,10 @@ void	ft_intro_loop(t_data		*data)
 	{
 		if (ft_changed_resolution(data))
 		{
-			mlx_resize_image(data->title.title_img, (int)(WIDTH_IMG_TITLE), (int)(HEIGHT_IMG_TITLE));
-			mlx_resize_image(data->title.title_map, WIDTH_IMG_TITLE_MAP, HEIGTH_IMG_TITLE_MAP);
-			ft_memset(data->title.title_img->pixels, 0, (int)(WIDTH_IMG_TITLE) * (int)(HEIGHT_IMG_TITLE) * sizeof(int32_t));//POSIBLES SEG FAULT I DONT KNOW WHYYY
-			ft_memset(data->title.title_map->pixels, 0, WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));//POSIBLES SEG FAULT I DONT KNOW WHYYY
+			mlx_resize_image(data->img[TITLE_INTRO], (int)(WIDTH_IMG_TITLE), (int)(HEIGHT_IMG_TITLE));
+			mlx_resize_image(data->img[MAP_INTRO], WIDTH_IMG_TITLE_MAP, HEIGTH_IMG_TITLE_MAP);
+			ft_memset(data->img[TITLE_INTRO]->pixels, 0, (int)(WIDTH_IMG_TITLE)*(int)(HEIGHT_IMG_TITLE) * sizeof(int32_t));
+			ft_memset(data->img[MAP_INTRO]->pixels, 0, WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
 			draw_title_map(data);
 		}
 		draw_title_map(data);

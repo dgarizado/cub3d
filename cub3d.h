@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/21 17:49:12 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:12:35 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,27 +61,32 @@ typedef enum e_sprites{
 	WALL_S,
 	WALL_E,
 	WALL_W,
-	PISTOL,
-	PISTOL_BANG,
+	//PISTOL,
+	//PISTOL_BANG,
 	ENEMY,
-	BAULT,
-	DOOR,
+	AURA,
+	//DOOR,
+	GRASS,
+	BROKEN,
+	START_INTRO,
 	SPRITES_COUNT
 } t_sprites;
 
-typedef enum e_textures{
-	TEX_N,
-	TEX_S,
-	TEX_E,
-	TEX_W,
-	TEX_COUNT
-} t_textures;
+typedef enum e_img{
+	TITLE_INTRO,
+	MAP_INTRO,
+	MINIMAP_GAME,
+	GAME,
+	IMG_COUNT
+} t_img;
 
-typedef struct s_victor
-{
-	double	x;
-	double	y;
-}	t_victor;
+typedef enum e_path{
+	PATH_N,
+	PATH_S,
+	PATH_E,
+	PATH_W,
+	PATH_COUNT
+} t_path;
 
 typedef struct	s_map
 {
@@ -95,38 +100,18 @@ typedef struct	s_map
 	int			ppc;
 	int			minimap_scale;
 	int			colors[2];
-	mlx_t		*mlx;
-	mlx_image_t	*img3d;
-	mlx_image_t	*mini;
+	//mlx_t		*mlx;
 }	t_map;
 
 typedef struct	s_title
 {
-	mlx_image_t*		title_img;
-	mlx_image_t*		title_map;
-	mlx_image_t*		start_img;
-	char				**TEMP;//modificar al array del mapa real
-	char				**arr;//Titulo!!!
+	char				**arr;
 	int 				color_up;
 	int					flag;
 	int					heigth;
 	int					length;
-	int					screen_width;
-	int					screen_heigth;
 	float 				boom;
 }	t_title;
-
-typedef struct	s_player
-{
-	t_victor	pos;
-	t_victor	vdir;
-	t_victor	plane;
-	int 		mouse_x;
-	int 		mouse_y;
-	int			vertical;
-	double 		step_v;
-	int			step_count;
-}	t_player;
 
 typedef struct s_bonus
 {
@@ -135,7 +120,6 @@ typedef struct s_bonus
 	char 		flag_bonus[10];
 	int			type_wall_bonus[10];
 	float 		distance[10];
-	
 }	t_bonus;
 
 typedef struct s_cast
@@ -153,36 +137,26 @@ typedef struct s_cast
 	float 	ray_y_unit_length;
 	float 	ray_y_length;
 	int 	current_y_cell;
-
 	int 		cell_step;
 	int 		current_cell;
 	char 		flag;
-	int			type_wall;//1 wall 8 roto 7 zombie
-	/*----------------------------------*/
+	int			type_wall;
 	t_bonus		bonus;
-/*------------------------------------------*/
 }	t_cast;
 
 typedef struct s_macro_data
 {
-	t_title			title;
 	mlx_t			*mlx;
+	t_title			title;
 	t_map			map;
-	t_player		player;
+	mlx_texture_t	*textures[SPRITES_COUNT];
 	mlx_image_t		*sprites[SPRITES_COUNT];
-	mlx_texture_t	*textures[TEX_COUNT];
-	char 			*paths[TEX_COUNT];
-	bool			bonus;
+	mlx_image_t		*img[IMG_COUNT];
+	char 			*paths[PATH_COUNT];
 
 	/*------VICTOR------*/
 	t_cast		cast;
-	mlx_image_t* mapp;//************************CAMBIAR NOMBRE A MAP IMAGEN 
-	mlx_image_t* game;
-	mlx_image_t* wall_img;
-	mlx_image_t* broken;
-	mlx_image_t* zombie;
-	mlx_image_t* grass;
-	mlx_image_t* aura;
+	
 	double 		px;
 	double 		py;
 	double 		steven_x;
@@ -190,7 +164,6 @@ typedef struct s_macro_data
 	double 		angle_steven;
 	double 		angle;
 	int			phase;
-	//int 		size;
 	int			screen_width;  // guarda la ventana para resize
 	int			screen_heigth; // guarda la ventana para resize
 	
@@ -245,7 +218,7 @@ void	ft_load_minisprites(t_data *data);
 
 //RAY BAN
 void	ray_bang(t_data *data);
-void	rotate_victor(t_victor *victor, double angle);
+//void	rotate_victor(t_victor *victor, double angle);
 
 //DRAWLINE
 void	ft_draw_line(mlx_image_t *img, int x1, int y1, int x2, int y2, int color);
