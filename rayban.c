@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:02:13 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/21 18:06:38 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/22 21:41:06 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,42 @@ void drawLineTexture_bonus(double x1, double y1, double y2, int column_texture, 
 	step_y_texture = (float)img->height/(float)steps;
 	dy = 1;//pantalla es 1 pa la textura
 	n = 0;
+	if (data->ray.perpwalldist < 1)
+	{
+		// int lineheight = (int)(((data->map.mlx->height)) / data->ray.perpwalldist);
+		int lineheight = (int)steps;
+		if (lineheight > data->map.mlx->height)
+			lineheight = data->map.mlx->height;
+		int drawstart = data->map.mlx->height / 2 - lineheight / 2;
+		if (drawstart < 0 || drawstart >= data->map.mlx->height)
+			drawstart = 0;
+		int drawend = lineheight / 2 + data->map.mlx->height / 2;
+		if (drawend >= data->map.mlx->height || drawend < 0)
+			drawend = data->map.mlx->height;
+		double textStep = 1.0 * img->height / lineheight * data->ray.perpwalldist;
+		// if (textStep > img->height)
+		// 	textStep = img->height;
+		int y = drawstart;
+		while (y < drawend)
+		{
+			row_texture = (int)((y - data->map.mlx->height / 2) * textStep + img->height / 2);
+			while (row_texture < 0) {
+				row_texture += img->height;
+			}
+			while (row_texture >= (int)img->height) {
+				row_texture -= img->height;
+			}
+			color = ((uint32_t*)img->pixels)[row_texture * img->width + column_texture];
+			if(color != 0)
+				((uint32_t*)data->map.img3d->pixels)[((int)y1 * data->map.mlx->width + (int)x1)] = color;
+
+			y++;
+			y1++;
+			n++;
+		}
+	}else {
 	while ((int)fabs(y2 - y1))
 	{
-		//if(x1 >= 0 && x1 <= WIDTH && y1 >= 0 && y1 <= HEIGHT)
 		if(x1 >= 0 && x1 <= WIDTH && y1 >= 0 && y1 <= data->map.mlx->height)
 		{
 			row_texture = floor(step_y_texture * n);
@@ -93,68 +126,123 @@ void drawLineTexture_bonus(double x1, double y1, double y2, int column_texture, 
 		}
 		y1 += dy;
 		n++;
-	}
+	}}
 }
 
+// // void drawLineTexture_bonus(t_data *data, int x, t_img *img, int lineheight)
+// void drawLineTexture_bonus(double x1, double y1, double y2, int column_texture, t_data *data, int j)
+// {
+//     // Calculate drawstart and drawend based on player's distance from the wall
+// 	mlx_image_t* img;
+//     img = data->sprites[WALL_E];
+// 	uint32_t color;
+// 	int lineheight = (int)(((data->map.mlx->height)) / data->ray.perpwalldist);
+// 		if (lineheight > data->map.mlx->height)
+// 			lineheight = data->map.mlx->height;
+// 		int drawstart = data->map.mlx->height / 2 - lineheight / 2;
+// 		if (drawstart < 0 || drawstart >= data->map.mlx->height)
+// 			drawstart = 0;
+// 		int drawend = lineheight / 2 + data->map.mlx->height / 2;
+// 		if (drawend >= data->map.mlx->height || drawend < 0)
+// 			drawend = data->map.mlx->height;
 
+//     // Calculate textStep based on player's distance from the wall
+//     double textStep = 1.0 * img->height / lineheight * data->ray.perpwalldist;
+//     if (textStep > img->height)
+//         textStep = img->height;
+
+//     // Draw the texture
+// 	y2 = drawend -data->player.step_v;
+// 	j = 0;
+//   // Calculate the offset based on the player's vertical position
+// double offset = (data->player.step_v - data->map.mlx->height / 2) * textStep;
+
+// // Draw the texture
+// // Draw the texture
+// // Draw the texture
+// // Draw the texture
+// int n = 0;
+// for (int y = drawstart; y < drawend; y++)
+// {
+//     int row_texture;
+//     if (data->ray.perpwalldist < 1) {
+//         // When the player is close to the wall, only draw a portion of the texture
+//         row_texture = (int)((y - data->map.mlx->height / 2) * textStep + img->height / 2);
+//     } else {
+//         // When the player is far from the wall, draw the whole texture
+//         row_texture = (int)(textStep * n - offset);
+//     }
+//     while (row_texture < 0) {
+//         row_texture += img->height;
+//     }
+//     while (row_texture >= (int)img->height) {
+//         row_texture -= img->height;
+//     }
+//     // Draw the texture pixel at (x, y) using the color at (column_texture, row_texture)
+//     color = ((uint32_t*)img->pixels)[row_texture * img->width + column_texture];
+//     if(color != 0)
+//         ((uint32_t*)data->map.img3d->pixels)[((int)y1 * data->map.mlx->width + (int)x1)] = color;
+   
+//     y1++;
+//     n++;
+// }
+// }
+
+void drawLine(double x1, double y1, double x2, double y2, int color, mlx_image_t *ptr)
+{
+	double dx = x2 - x1;
+	double dy =  y2 -y1;
+	double steps;
+
+	if ((abs)((int)dx) >= (abs)((int)dy))
+		steps = (fabs)(dx);
+	else
+		steps = (fabs)(dy);
+	dx = dx / steps;
+	dy = dy / steps;
+	while ((int)fabs(x2 - x1) || (int)fabs(y2 - y1))
+	{
+		if(x1 >= 0 && x1 <= WIDTH && y1 >= 0 && y1 <= HEIGHT)
+			mlx_put_pixel(ptr, (int)x1, (int)y1, color);
+		x1 += dx;
+		y1 += dy;
+	}
+}
+//CCHECKPOINT
 void	ray_render(t_data *data)
 {
-	double wallx;
-	int texx;
-		if (data->ray.side == 0)
-		{
-			data->ray.perpwalldist = (data->ray.sidedistx -  data->ray.deltadistx);
-			// data->ray.perpwalldist = (data->ray.mapx - data->player.pos.x + (1 - data->ray.stepx) / 2) / data->ray.raydirx;
-			if (data->ray.camerax == 0)
-				printf("perpwalldist %f\n", data->ray.perpwalldist);
-			wallx = data->player.pos.y + data->ray.perpwalldist * data->ray.raydiry;	
-			wallx -= floor((wallx));
-			texx = (int)(wallx * (double)data->sprites[WALL_E]->width) % (data->sprites[WALL_E]->width);
-		}
-		else
-		{
-			data->ray.perpwalldist = (data->ray.sidedisty -  data->ray.deltadisty);
-			// data->ray.perpwalldist = (data->ray.mapy - data->player.pos.y + (1 - data->ray.stepy) / 2) / data->ray.raydiry;
-			wallx = data->player.pos.x + data->ray.perpwalldist * data->ray.raydirx;
-			wallx -= floor((wallx));
-			texx = (int)(wallx * (double)data->sprites[WALL_E]->width) % (data->sprites[WALL_E]->width);
-			// texx = (data->sprites[WALL_E]->width) - texx - 1;
-			// texx = (int)(wallx * 1000) % (1000);
-		}
-		// if (fabs(data->ray.perpwalldist) < 0.1)
-		// 	data->ray.perpwalldist = 0.1;
-		// int texx = (data->ray.x ) % (data->sprites[WALL_E]->width);
-		// if (data->ray.side == 0 && data->ray.raydirx > 0)
-		// 	texx = (data->sprites[WALL_E]->width) - texx - 1;
-		// if (data->ray.side == 1 && data->ray.raydiry < 0)
-		// 	texx = (data->sprites[WALL_E]->width) - texx - 1;		
-		int lineheight = (int)(((data->map.mlx->height))/2 / data->ray.perpwalldist);
-		// if (lineheight > data->map.mlx->height)
-		// 	lineheight = data->map.mlx->height;
-		// printf("lineheight %d\n", lineheight);
-		int drawstart = data->map.mlx->height / 2 - lineheight / 2;
-		// printf("drawstart %d\n", drawstart);
-		// if (drawstart < 0)
-		// 	drawstart = 0;
-		int drawend = lineheight / 2 + data->map.mlx->height / 2;
-		// if (drawend >= data->map.mlx->height || drawend < 0)
-		// 	drawend = data->map.mlx->height -1;
-		int color;
-		if (data->ray.side == NORTH)
-			color = 0xAAAA33CC;
-		else
-			color = 0xACDDBCAA;
-		ft_draw_line(data->map.img3d, data->ray.x, 0, data->ray.x, drawstart -data->player.step_v, data->map.colors[CEILING]);
-		// ft_draw_line(data->map.img3d, data->ray.x, drawstart -data->player.step_v, data->ray.x, drawend -data->player.step_v, color);
-		// printf("drawstart %d drawend %d\n", drawstart, drawend);
-		printf("dist %f\n", data->ray.perpwalldist);
-		printf("lineheight %d\n", lineheight);
-		drawLineTexture_bonus(data->ray.x, drawstart -data->player.step_v, drawend -data->player.step_v, texx, data, 0);
-		// drawLineTexture(data->ray.x, drawstart -data->player.step_v,data->ray.x, drawend -data->player.step_v, texx, data);
-		
-		// ft_draw_line2(data->map.img3d, data->ray.x, drawstart -data->player.step_v, drawend -data->player.step_v, 0, data, texx);
-		//then draw the floor
-		ft_draw_line(data->map.img3d, data->ray.x, drawend -data->player.step_v, data->ray.x, data->map.mlx->height, data->map.colors[FLOOR]);
+	double	wallx;
+	int		texx;
+	int		lineheight;
+	int		drawstart;
+	int		drawend;
+
+	if (data->ray.side == 0)
+	{
+		data->ray.perpwalldist = (data->ray.sidedistx -  data->ray.deltadistx);
+		wallx = data->player.pos.y + data->ray.perpwalldist * data->ray.raydiry;	
+		wallx -= floor((wallx));
+		texx = (int)(wallx * (double)data->sprites[WALL_E]->width) % (data->sprites[WALL_E]->width);
+	}
+	else
+	{
+		data->ray.perpwalldist = (data->ray.sidedisty -  data->ray.deltadisty);
+		wallx = data->player.pos.x + data->ray.perpwalldist * data->ray.raydirx;
+		wallx -= floor((wallx));
+		texx = (int)(wallx * (double)data->sprites[WALL_E]->width) % (data->sprites[WALL_E]->width);
+	}
+	lineheight = (int)(((data->map.mlx->height)) / data->ray.perpwalldist);
+	if (lineheight > data->map.mlx->height)
+		lineheight = data->map.mlx->height;
+	drawstart = data->map.mlx->height / 2 - lineheight / 2;
+	if (drawstart < 0 || drawstart >= data->map.mlx->height)
+		drawstart = 0;
+	drawend = lineheight / 2 + data->map.mlx->height / 2;
+	if (drawend >= data->map.mlx->height || drawend < 0)
+		drawend = data->map.mlx->height;
+	drawLine(data->ray.x, 0, data->ray.x, drawstart -data->player.step_v, data->map.colors[CEILING], data->map.img3d);
+	drawLineTexture_bonus(data->ray.x, drawstart -data->player.step_v, drawend -data->player.step_v, texx, data, 0);
+	drawLine(data->ray.x, drawend -data->player.step_v, data->ray.x, data->map.mlx->height, data->map.colors[FLOOR], data->map.img3d);
 }
 
 void	ray_checkwall(t_data *data)

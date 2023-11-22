@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:23:06 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/17 13:50:40 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/21 18:19:48 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	verticals_w(t_data *data)
 	if (mlx_is_key_down(data->map.mlx, MLX_KEY_W))
 	{
 		next_x = data->player.pos.x + data->player.vdir.x * MOVE_SPEED;
-		if (data->map.map_aclean[(int)data->player.pos.y][(int)next_x] == '0')
+		if (data->map.map_aclean[(int)data->player.pos.y][(int)next_x] != '1')
 		{
 			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0x00000FF);
 			data->player.pos.x = next_x;
 		}
 		next_y = data->player.pos.y + data->player.vdir.y * MOVE_SPEED;
-		if (data->map.map_aclean[(int)next_y][(int)data->player.pos.x] == '0')
+		if (data->map.map_aclean[(int)next_y][(int)data->player.pos.x] != '1')
 		{
 			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0x00000FF);
@@ -46,14 +46,14 @@ void	verticals_s(t_data *data)
 	if (mlx_is_key_down(data->map.mlx, MLX_KEY_S))
 	{
 		next_x = data->player.pos.x - data->player.vdir.x * MOVE_SPEED;
-		if (data->map.map_aclean[(int)data->player.pos.y][(int)next_x] == '0')
+		if (data->map.map_aclean[(int)data->player.pos.y][(int)next_x] != '1')
 		{
 			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0x00000FF);
 			data->player.pos.x = next_x;
 		}
 		next_y = data->player.pos.y - data->player.vdir.y * MOVE_SPEED;
-		if (data->map.map_aclean[(int)next_y][(int)data->player.pos.x] == '0')
+		if (data->map.map_aclean[(int)next_y][(int)data->player.pos.x] != '1')
 		{
 			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0x00000FF);
@@ -73,7 +73,7 @@ void	laterals_a(t_data *data)
 	{
 		next_x = data->player.pos.x - data->player.plane.x * MOVE_SPEED;
 		next_y = data->player.pos.y - data->player.plane.y * MOVE_SPEED;
-		if (data->map.map_aclean[(int)next_y][(int)next_x] == '0')
+		if (data->map.map_aclean[(int)next_y][(int)next_x] != '1')
 		{
 			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0x00000FF);
@@ -94,7 +94,7 @@ void	laterals_d(t_data *data)
 	{
 		next_x = data->player.pos.x + data->player.plane.x * MOVE_SPEED;
 		next_y = data->player.pos.y + data->player.plane.y * MOVE_SPEED;
-		if (data->map.map_aclean[(int)next_y][(int)next_x] == '0')
+		if (data->map.map_aclean[(int)next_y][(int)next_x] != '1')
 		{
 			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0x00000FF);

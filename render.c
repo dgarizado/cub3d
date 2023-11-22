@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:11:40 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/21 18:00:28 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/22 17:29:13 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void ft_draw_line(mlx_image_t *img, int x1, int y1, int x2, int y2, int color)
 		sy = 1;
 	else
 		sy = -1;
+	printf("SEGFAULT C\n");
+	printf("x1: %d, y1: %d, x2: %d, y2: %d\n", x1, y1, x2, y2);
+	printf("sy: %d, sx: %d, err: %d\n", sy, sx, err);
 	while (x1 != x2 || y1 != y2)
 	{
 		if (x1 >= 0 && x1 < (int)img->width && y1 >= 0 && y1 < (int)img->height)
