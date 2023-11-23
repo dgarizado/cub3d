@@ -88,6 +88,15 @@ typedef enum e_path{
 	PATH_COUNT
 } t_path;
 
+typedef struct s_coord{
+	int last_y;
+	int last_x;
+	int x;
+	int y;
+	int x2;
+	int y2;
+} t_coord;
+
 typedef struct	s_map
 {
 	char		*map_s;
@@ -149,6 +158,7 @@ typedef struct s_macro_data
 	mlx_t			*mlx;
 	t_title			title;
 	t_map			map;
+	t_coord			coord;
 	mlx_texture_t	*textures[SPRITES_COUNT];
 	mlx_image_t		*sprites[SPRITES_COUNT];
 	mlx_image_t		*img[IMG_COUNT];

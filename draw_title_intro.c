@@ -44,33 +44,31 @@ void	ft_draw_border(int x, int y, mlx_image_t *img, t_data *data)
 	}
 }
 
-void	ft_draw_sq(mlx_image_t *img, t_data *data, int x1, int y1)
+void	ft_draw_sq(mlx_image_t *img, t_data *data, int start_x, int start_y)
 {
-	int	x;
-	int	y;
-	int	last_x;
-	int	last_y;
+	t_coord *p;
+	p = &data->coord;
 
-	last_y = y1 + ((fabs)(HEIGHT_IMG_TITLE / data->title.heigth));
-	last_x = x1 + ((fabs)(WIDTH_IMG_TITLE / data->title.length));
-	y = y1;
-	while (y < last_y)
+	p->last_y = start_y + ((fabs)(HEIGHT_IMG_TITLE / data->title.heigth));
+	p->last_x = start_x + ((fabs)(WIDTH_IMG_TITLE / data->title.length));
+	p->y = start_y;
+	while (p->y < p->last_y)
 	{
-		if (check_limits(x1, y1, data) && check_limits(last_x, last_y, data))
+		if (check_limits(start_x, start_y, data) && check_limits(p->last_x, p->last_y, data))
 		{
-			drawLine(x1, y, last_x, y, set_color(y + data->title.color_up, data), img, data);
-			drawLine(last_x, y, last_x + (WIDTH * 0.01), y + (WIDTH * 0.01), set_color(y + data->title.color_up, data), img, data);
+			drawLine(start_x, p->y, p->last_x, p->y, set_color(p->y + data->title.color_up, data), img, data);
+			drawLine(p->last_x, p->y, p->last_x + (WIDTH * 0.01), p->y + (WIDTH * 0.01), set_color(p->y + data->title.color_up, data), img, data);
 		}
-		y++;
+		p->y++;
 	}
-	x = x1;
-	while (x <= last_x)
+	p->x = start_x;
+	while (p->x <= p->last_x)
 	{
-		if (check_limits(x1, y1, data) && check_limits(last_x, last_y, data))
-			drawLine(x, y, x + (WIDTH * 0.01), y + (WIDTH * 0.01), set_color(y + data->title.color_up, data), img, data);
-		x++;
+		if (check_limits(start_x, start_y, data) && check_limits(p->last_x, p->last_y, data))
+			drawLine(p->x, p->y, p->x + (WIDTH * 0.01), p->y + (WIDTH * 0.01), set_color(p->y + data->title.color_up, data), img, data);
+		p->x++;
 	}
-	ft_draw_border(x1, y1, img, data);
+	ft_draw_border(start_x, start_y, img, data);
 }
 
 void	draw_square_img(t_data *data, int column, int row)
