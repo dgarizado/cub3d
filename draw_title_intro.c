@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:10:41 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/22 13:17:33 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:23:31 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,6 @@ int	check_limits(int x, int y, t_data *data)
 	return (1);
 }
 
-void	ft_draw_border(int x, int y, mlx_image_t *img, t_data *data)
-{
-	int	last_x;
-	int	last_y;
-
-	last_y = y + ((fabs)(HEIGHT_IMG_TITLE / data->title.heigth));
-	last_x = x + ((fabs)(WIDTH_IMG_TITLE / data->title.length));
-	if (check_limits(x, y, data) && check_limits(last_x, last_y, data))
-	{
-		drawLine(x, y, last_x, y, 0x000000FF, img, data);
-		drawLine(x, y, x, last_y, 0x000000FF, img, data);
-		drawLine(last_x, y, last_x, last_y, 0x000000FF, img, data);
-		drawLine(x, last_y, last_x, last_y, 0x000000FF, img, data);
-		drawLine(last_x, y, last_x + (WIDTH * 0.01), y + (WIDTH * 0.01), 0x000000FF, img, data);
-		drawLine(last_x + (WIDTH * 0.01), y + (WIDTH * 0.01), last_x + (WIDTH * 0.01), last_y + (WIDTH * 0.01), 0x000000FF, img, data);
-		drawLine(last_x, last_y, last_x + (WIDTH * 0.01), last_y + (WIDTH * 0.01), 0x000000FF, img, data);
-		drawLine(x, last_y, x + (WIDTH * 0.01), last_y + (WIDTH * 0.01), 0x000000FF, img, data);
-		drawLine(x + (WIDTH * 0.01), last_y + (WIDTH * 0.01), last_x + (WIDTH * 0.01), last_y + (WIDTH * 0.01), 0x000000FF, img, data);
-	}
-}
-
 void	ft_draw_sq(mlx_image_t *img, t_data *data, int start_x, int start_y)
 {
 	t_coord *p;
@@ -56,19 +35,11 @@ void	ft_draw_sq(mlx_image_t *img, t_data *data, int start_x, int start_y)
 	{
 		if (check_limits(start_x, start_y, data) && check_limits(p->last_x, p->last_y, data))
 		{
-			drawLine(start_x, p->y, p->last_x, p->y, set_color(p->y + data->title.color_up, data), img, data);
-			drawLine(p->last_x, p->y, p->last_x + (WIDTH * 0.01), p->y + (WIDTH * 0.01), set_color(p->y + data->title.color_up, data), img, data);
+			p->x1 = start_x; p->y1 = p->y; p->x2 = p->last_x; p->y2 = p->y;
+			drawLine(p, set_color(p->y + data->title.color_up, data), img, data);
 		}
-		p->y++;
+		(p->y)++;
 	}
-	p->x = start_x;
-	while (p->x <= p->last_x)
-	{
-		if (check_limits(start_x, start_y, data) && check_limits(p->last_x, p->last_y, data))
-			drawLine(p->x, p->y, p->x + (WIDTH * 0.01), p->y + (WIDTH * 0.01), set_color(p->y + data->title.color_up, data), img, data);
-		p->x++;
-	}
-	ft_draw_border(start_x, start_y, img, data);
 }
 
 void	draw_square_img(t_data *data, int column, int row)

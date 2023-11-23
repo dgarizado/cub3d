@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:36:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/22 13:07:10 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:36:06 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void	ft_intro_loop(t_data	*data)
 		}
 		draw_title_map(data);
 		draw_title(data);
-		ft_draw_start_texture(HEIGTH_IMG_TITLE_MAP * 0.04, WIDTH_IMG_TITLE_MAP * 0.3, (WIDTH / 2), data);
 	}
 	if (data->title.flag == 1)
 		ft_transition(&n, data);

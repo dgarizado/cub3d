@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/22 12:12:35 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:57:18 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ typedef struct s_coord{
 	int last_x;
 	int x;
 	int y;
+	int x1;
+	int y1;
 	int x2;
 	int y2;
 } t_coord;
@@ -102,14 +104,12 @@ typedef struct	s_map
 	char		*map_s;
 	char		**map_a;
 	char		*map_sclean;
-	char		**map_aclean; // mapa CHAR **
-	int			width;  //LARGO
-	int			height;	//ALTO
+	char		**map_aclean;
+	int			width;
+	int			height;
 	int			bytes;
-	int			ppc;
-	int			minimap_scale;
 	int			colors[2];
-	//mlx_t		*mlx;
+	int			flag;
 }	t_map;
 
 typedef struct	s_title
@@ -124,6 +124,7 @@ typedef struct	s_title
 
 typedef struct s_bonus
 {
+	int			n;
 	int 		cell_step_bonus[10];
 	int 		current_cell_bonus[10];
 	char 		flag_bonus[10];
@@ -163,10 +164,8 @@ typedef struct s_macro_data
 	mlx_image_t		*sprites[SPRITES_COUNT];
 	mlx_image_t		*img[IMG_COUNT];
 	char 			*paths[PATH_COUNT];
-
 	/*------VICTOR------*/
 	t_cast		cast;
-	
 	double 		px;
 	double 		py;
 	double 		steven_x;
@@ -174,6 +173,7 @@ typedef struct s_macro_data
 	double 		angle_steven;
 	double 		angle;
 	int			phase;
+	int			column_texture;
 	int			screen_width;  // guarda la ventana para resize
 	int			screen_heigth; // guarda la ventana para resize
 	
@@ -246,11 +246,10 @@ void 	draw_title(t_data * data);
 void	draw_title_map(t_data *data);
 void	ft_intro_loop(t_data		*data);
 int		ft_changed_resolution(t_data *data);
-void 	drawLine(double x1, double y1, double x2, double y2, int color, mlx_image_t *ptr, t_data *data);
 int		set_color(float y, t_data *data);
 char	*ft_parse_title(t_data *data);
 char 	**ft_skip_sp_arr(char **arr);
-void	ft_draw_start_texture(float wallheight, float wallweight, float column, t_data *data);
+//void	ft_draw_start_texture(float wallheight, float wallweight, float column, t_data *data);
 void 	ft_move_players(t_data *data);
 void 	ft_check_door(t_data *data);
 double ft_degre_to_radian(double degre);
@@ -264,10 +263,13 @@ void set_params_colision(int n, t_data *data);
 void raycast_game(mlx_image_t *game, t_data *data);
 float fix_fish_eye(float distance, float angle, float angle_player);
 int last_colision_arr(int *arr);
-void drawLineTexture_bonus(double x1, double y1, double y2, int column_texture, t_data *data, int j);
-void ft_draw_steven(float wallheight, float column, t_data *data);
+//void drawLineTexture_bonus(double x1, double y1, double y2, int column_texture, t_data *data);
+void drawLineTexture_bonus(double x1, double y1, double y2, t_data *data);
+
 void normalize_angle(double *angulo_me, double *angle_steven_from_me);
-void ft_draw_steven(float wallheight, float column, t_data *data);
+void ft_draw_steven(float wallheight, int column, t_data *data);
 void draw_steven_sprite(t_data *data);
+//void 	drawLine(double x1, double y1, double x2, double y2, int color, mlx_image_t *ptr, t_data *data);
+void 	drawLine(t_coord *p, int color, mlx_image_t *ptr, t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:10:37 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/22 12:41:54 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:51:40 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,27 @@ mlx_image_t* choose_orientation(int j, t_data *data)
 mlx_image_t* choose_image(int j, t_data *data)
 {
 	mlx_image_t* img;
+	int n = data->cast.bonus.n;
 	
-	if (j == -1)//OJO ZOMIBEEEEEEE
+	if (n == -1)//OJO ZOMIBEEEEEEE
 		img = data->sprites[ENEMY];
-	else if(data->cast.bonus.type_wall_bonus[j] == '1')
+	else if(data->cast.bonus.type_wall_bonus[n] == '1')
 	{
-		img = choose_orientation(j, data);
+		img = choose_orientation(n, data);
 	}
-	else if(data->cast.bonus.type_wall_bonus[j] == '9' || data->cast.bonus.type_wall_bonus[j] == '1')//OJO IGUAL PUERTA Y MURO
+	else if(data->cast.bonus.type_wall_bonus[n] == '9' || data->cast.bonus.type_wall_bonus[n] == '1')//OJO IGUAL PUERTA Y MURO
 	img = data->sprites[WALL_N];
-	else if(data->cast.bonus.type_wall_bonus[j] == '8')
+	else if(data->cast.bonus.type_wall_bonus[n] == '8')
 	img = data->sprites[BROKEN];
-	else if(data->cast.bonus.type_wall_bonus[j] == '6')
+	else if(data->cast.bonus.type_wall_bonus[n] == '6')
 		img = data->sprites[GRASS];
-	else if(data->cast.bonus.type_wall_bonus[j] == '5')
+	else if(data->cast.bonus.type_wall_bonus[n] == '5')
 		img = data->sprites[AURA];
 	return (img);
 }
-
-void drawLineTexture_bonus(double x1, double y1, double y2, int column_texture, t_data *data, int j)
+void drawLineTexture_bonus(double x1, double y1, double y2, t_data *data)
+//void drawLineTexture_bonus(double x1, double y1, double y2, int column_texture, t_data *data)
 {
-	double dy;//pantalla y significa WALL-HEIGHT y esta distancia es la que hay que pintar el sprite proporcionalmente
 	double steps;
 	mlx_image_t* img;
 	int row_texture;//textura
@@ -56,22 +56,22 @@ void drawLineTexture_bonus(double x1, double y1, double y2, int column_texture, 
 	int n;
 	float step_y_texture;
 	
-	img = choose_image(j, data);
-	steps = fabs(y2 -y1);//
+	img = choose_image(n, data);
+	steps = fabs(y2 -y1);
 	step_y_texture = (float)img->height/(float)steps;
-	dy = 1;//pantalla es 1 pa la textura
+	
 	n = 0;
 	while ((int)fabs(y2 - y1))
 	{
-		//if(x1 >= 0 && x1 <= WIDTH && y1 >= 0 && y1 <= HEIGHT)
-		if(x1 >= 0 && x1 <= WIDTH && y1 >= 0 && y1 <= data->mlx->height)
+		if(x1 >= 0 && x1 <= WIDTH && y1 >= 0 && y1 <= HEIGHT)
 		{
 			row_texture = floor(step_y_texture * n);
-			color = ((uint32_t*)img->pixels)[row_texture * img->width + column_texture];
+			//color = ((uint32_t*)img->pixels)[row_texture * img->width + column_texture];
+			color = ((uint32_t*)img->pixels)[(row_texture * img->width) + (data->column_texture)];
 			if(color != 0)
 				((uint32_t*)data->img[GAME]->pixels)[((int)y1 * data->img[GAME]->width + (int)x1)] = color;
 		}
-		y1 += dy;
+		y1++;
 		n++;
 	}
 }

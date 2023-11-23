@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:21:29 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/22 12:51:26 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:43:14 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_check_rgb(char *token, t_data *data, int flag)
 	if (i == 3)
 	{
 		data->map.colors[flag] = (ft_atoi(buff[0]) << 24) + \
-		(ft_atoi(buff[1]) << 16) + (ft_atoi(buff[2]) << 8)+ 0x00000077;
+		(ft_atoi(buff[1]) << 16) + (ft_atoi(buff[2]) << 8) + 0x00000077;
 		ft_abort(buff, ft_arrlen(buff));
 		return (1);
 	}
