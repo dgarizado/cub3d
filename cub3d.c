@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:36:08 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/20 19:36:40 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:51:57 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int	main(int argc, char **argv)
 	ft_free_maps(&data);
 	ft_free_textures(&data);
 	ft_special_abort(data.paths, TEX_COUNT);
-	// atexit(leaks);
+	atexit(leaks);
 	return (0);
 }

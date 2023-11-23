@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:21:29 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/15 22:43:46 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:13:40 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_check_rgb(char *token, t_data *data, int flag)
 	if (i == 3)
 	{
 		data->map.colors[flag] = (ft_atoi(buff[0]) << 24) + \
-		(ft_atoi(buff[1]) << 16) + (ft_atoi(buff[2]) << 8)+ 0x00000077;
+		(ft_atoi(buff[1]) << 16) + (ft_atoi(buff[2]) << 8) + 0x00000077;
 		ft_abort(buff, ft_arrlen(buff));
 		return (1);
 	}
@@ -108,7 +108,7 @@ int	ft_check_path(char **bf, t_data *data)
 		flag = TEX_W;
 	else if (((bf[0][0] == 'E' && bf[0][1] == 'A') || (bf[0][0] == 'E' \
 	&& bf[0][1] == '\0')) && bf[1][0] == '.' && bf[1][1] == '/')
-		flag = 	TEX_E;
+		flag = TEX_E;
 	if (flag >= 0)
 	{
 		data->paths[flag] = ft_strdup(bf[1]);

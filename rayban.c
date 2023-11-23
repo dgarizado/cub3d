@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:02:13 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/22 23:22:00 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:35:32 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,17 @@ void	ray_checkwall(t_data *data)
 		{
 			data->ray.sidedistx += data->ray.deltadistx;
 			data->ray.mapx += data->ray.stepx;
-			data->ray.side = NORTH;
+			data->ray.side = TEX_E;
+			if (data->ray.stepx == -1)
+				data->ray.side = TEX_W;
 		}
 		else
 		{
 			data->ray.sidedisty += data->ray.deltadisty;
 			data->ray.mapy += data->ray.stepy;
-			data->ray.side = EAST;
+			data->ray.side = TEX_S;
+			if (data->ray.stepy == -1)
+				data->ray.side = TEX_N;
 		}
 		if (data->ray.mapx >= 0 && data->ray.mapx < data->map.width && \
 		data->ray.mapy >= 0 && data->ray.mapy < data->map.height)

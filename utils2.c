@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:41:11 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/15 13:52:08 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:51:40 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	ft_print_array(char **array)
 void	ft_free_maps(t_data *data)
 {
 	free(data->map.map_s);
-	ft_abort(data->map.map_a, ft_arrlen(data->map.map_a)); //[2 and 3] Freed here
-	free(data->map.map_sclean); //[4] Freed here
-	ft_abort(data->map.map_aclean, ft_arrlen(data->map.map_aclean)); //[5] Freed here	
+	ft_abort(data->map.map_a, ft_arrlen(data->map.map_a));
+	free(data->map.map_sclean);
+	ft_abort(data->map.map_aclean, ft_arrlen(data->map.map_aclean));
 }
 
 /**
@@ -59,7 +59,7 @@ void	ft_free_textures(t_data *data)
 		{
 			free(data->textures[i]->pixels);
 			free(data->textures[i]);
-		}	
+		}
 		i++;
 	}
 }

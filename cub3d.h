@@ -6,20 +6,20 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/23 17:00:01 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:12:59 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <math.h>
-#include "./lib/MLX42/include/MLX42/MLX42.h"
-#include "./libft/libft.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <math.h>
+# include "./lib/MLX42/include/MLX42/MLX42.h"
+# include "./libft/libft.h"
 
 # define INPUT_NBR "WRONG NUMBER OF ARGUMENTS\n"
 # define INPUT_EXT "Wrong extention"
@@ -54,7 +54,7 @@ typedef enum e_sprites{
 	BAULT,
 	DOOR,
 	SPRITES_COUNT
-} t_sprites;
+}	t_sprites;
 
 typedef enum e_textures{
 	TEX_N,
@@ -62,7 +62,7 @@ typedef enum e_textures{
 	TEX_E,
 	TEX_W,
 	TEX_COUNT
-} t_textures;
+}	t_textures;
 
 typedef struct s_victor
 {
@@ -87,12 +87,12 @@ typedef struct s_ray_charles
 	int		hit;
 	int		side;
 	int		x;
-	double 	drawstart;
-	double 	drawend;
+	double	drawstart;
+	double	drawend;
 	int		lineheight;
-} t_ray_charles;
+}	t_ray_charles;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	char		*map_s;
 	char		**map_a;
@@ -109,15 +109,15 @@ typedef struct	s_map
 	mlx_image_t	*mini;
 }	t_map;
 
-typedef struct	s_player
+typedef struct s_player
 {
 	t_victor	pos;
 	t_victor	vdir;
 	t_victor	plane;
-	int 		mouse_x;
-	int 		mouse_y;
+	int			mouse_x;
+	int			mouse_y;
 	int			vertical;
-	double 		step_v;
+	double		step_v;
 	int			step_count;
 }	t_player;
 
@@ -128,13 +128,13 @@ typedef struct s_macro_data
 	t_ray_charles	ray;
 	mlx_image_t		*sprites[SPRITES_COUNT];
 	mlx_texture_t	*textures[TEX_COUNT];
-	char 			*paths[TEX_COUNT];
+	char			*paths[TEX_COUNT];
 	bool			bonus;
 }	t_data;
 
 //RENDER
 void	drawline(t_data *data, int flag);
-void	drawlinetexture(double x1, double drawstart, double drawend, int column_texture, t_data *data, int j);
+void	drawlinetexture(double x1, int column_texture, t_data *data);
 void	ray_render(t_data *data);
 
 //MAPCHECK
@@ -176,9 +176,9 @@ void	ft_space_check_aux(t_data *data, int i, int j);
 void	ft_game(t_data *data);
 
 //GAME_AUX
-void ft_draw_minimap(t_data *data);
-void ft_paintblock(t_data *data, int x, int y, int color);
-void ft_fix_images(t_data *data);
+void	ft_draw_minimap(t_data *data);
+void	ft_paintblock(t_data *data, int x, int y, int color);
+void	ft_fix_images(t_data *data);
 
 //MINISPRITES
 void	ft_load_minisprites(t_data *data);

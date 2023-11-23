@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:23:06 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/21 18:19:48 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:17:55 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,21 @@ void	verticals_w(t_data *data)
 		next_x = data->player.pos.x + data->player.vdir.x * MOVE_SPEED;
 		if (data->map.map_aclean[(int)data->player.pos.y][(int)next_x] != '1')
 		{
-			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
+			mlx_put_pixel(data->map.mini, (data->player.pos.x) \
+			* data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0x00000FF);
 			data->player.pos.x = next_x;
 		}
 		next_y = data->player.pos.y + data->player.vdir.y * MOVE_SPEED;
 		if (data->map.map_aclean[(int)next_y][(int)data->player.pos.x] != '1')
 		{
-			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
+			mlx_put_pixel(data->map.mini, (data->player.pos.x) * \
+			data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0x00000FF);
 			data->player.pos.y = next_y;
 		}
-		mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
+		mlx_put_pixel(data->map.mini, (data->player.pos.x) * \
+		data->map.minimap_scale, \
 		(data->player.pos.y) * data->map.minimap_scale, 0xFF000FF);
 	}
 }
@@ -48,18 +51,21 @@ void	verticals_s(t_data *data)
 		next_x = data->player.pos.x - data->player.vdir.x * MOVE_SPEED;
 		if (data->map.map_aclean[(int)data->player.pos.y][(int)next_x] != '1')
 		{
-			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
+			mlx_put_pixel(data->map.mini, (data->player.pos.x) * \
+			data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0x00000FF);
 			data->player.pos.x = next_x;
 		}
 		next_y = data->player.pos.y - data->player.vdir.y * MOVE_SPEED;
 		if (data->map.map_aclean[(int)next_y][(int)data->player.pos.x] != '1')
 		{
-			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
+			mlx_put_pixel(data->map.mini, (data->player.pos.x) * \
+			data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0x00000FF);
 			data->player.pos.y = next_y;
 		}
-		mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
+		mlx_put_pixel(data->map.mini, (data->player.pos.x) * \
+		data->map.minimap_scale, \
 		(data->player.pos.y) * data->map.minimap_scale, 0xFF000FF);
 	}
 }
@@ -75,11 +81,13 @@ void	laterals_a(t_data *data)
 		next_y = data->player.pos.y - data->player.plane.y * MOVE_SPEED;
 		if (data->map.map_aclean[(int)next_y][(int)next_x] != '1')
 		{
-			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
+			mlx_put_pixel(data->map.mini, (data->player.pos.x) * \
+			data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0x00000FF);
 			data->player.pos.x = next_x;
 			data->player.pos.y = next_y;
-			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
+			mlx_put_pixel(data->map.mini, (data->player.pos.x) * \
+			data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0xFF000FF);
 		}
 	}
@@ -96,11 +104,13 @@ void	laterals_d(t_data *data)
 		next_y = data->player.pos.y + data->player.plane.y * MOVE_SPEED;
 		if (data->map.map_aclean[(int)next_y][(int)next_x] != '1')
 		{
-			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
+			mlx_put_pixel(data->map.mini, (data->player.pos.x) * \
+			data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0x00000FF);
 			data->player.pos.x = next_x;
 			data->player.pos.y = next_y;
-			mlx_put_pixel(data->map.mini, (data->player.pos.x) * data->map.minimap_scale, \
+			mlx_put_pixel(data->map.mini, (data->player.pos.x) * \
+			data->map.minimap_scale, \
 			(data->player.pos.y) * data->map.minimap_scale, 0xFF000FF);
 		}
 	}
@@ -119,7 +129,8 @@ void	mouse(t_data *data)
 		rotate_victor(&data->player.plane, 2);
 	}
 	if (x < data->player.mouse_x && \
-	data->player.mouse_x < data->map.width * data->map.ppc && data->player.mouse_x > 0)
+	data->player.mouse_x < data->map.width * data->map.ppc && \
+	data->player.mouse_x > 0)
 	{
 		rotate_victor(&data->player.vdir, -2);
 		rotate_victor(&data->player.plane, -2);
