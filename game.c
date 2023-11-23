@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 21:18:54 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/18 18:59:47 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:32:16 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_init_graphics(t_data *data)
 	data->map.width * data->map.ppc - data->map.mini->width, \
 	data->map.height * data->map.ppc \
 	- data->map.mini->height);
-	// data->map.mini->instances[0].enabled = false;
+	data->map.mini->instances[0].enabled = false;
 }
 
 void	ft_game(t_data *data)

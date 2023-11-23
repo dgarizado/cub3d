@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/17 13:35:39 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:29:45 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	get_player_coords(int i, int j, t_data *data, int *watchdog)
 		data->player.pos.x = j;
 		data->player.pos.y = i;
 		(*watchdog)++;
-		//THIS IS THE NEW PART USING VICTORS	
 		if (data->map.map_aclean[i][j] == 'N')
 			data->player.vdir.y = -1;
 		if (data->map.map_aclean[i][j] == 'S')
@@ -132,10 +131,11 @@ bool	ft_clean_map(t_data *data, int i)
 	if (i > ft_arrlen(data->map.map_a) - 3 || i < 5)
 	{
 		free(data->map.map_s);
-		ft_abort(data->map.map_a, ft_arrlen(data->map.map_a)); //[2 and 3] Freed here
+		ft_abort(data->map.map_a, ft_arrlen(data->map.map_a));
 		ft_error("Map is not valid, size");
 	}
-	data->map.map_aclean = ft_calloc(ft_arrlen(data->map.map_a) - i + 1, sizeof(char *));
+	data->map.map_aclean = ft_calloc(ft_arrlen(data->map.map_a) - \
+	i + 1, sizeof(char *));
 	j = 0;
 	while (j < ft_arrlen(data->map.map_a) - i)
 	{

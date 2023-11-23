@@ -6,11 +6,33 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:11:40 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/23 22:00:27 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:55:03 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+uint32_t apply_shading(uint32_t color, double shading_factor)
+{
+    uint8_t r, g, b, a;
+
+    // Extract the RGBA components from the color
+    r = (color >> 24) & 0xFF;
+    g = (color >> 16) & 0xFF;
+    b = (color >> 8) & 0xFF;
+    a = color & 0xFF;
+
+    // Apply the shading factor to each component
+    r = (uint8_t)(r * shading_factor);
+    g = (uint8_t)(g * shading_factor);
+    b = (uint8_t)(b * shading_factor);
+    a = (uint8_t)(a * shading_factor);
+
+    // Combine the components back into a single color
+    return (r << 24) | (g << 16) | (b << 8) | a;
+}
+
+
 
 void	drawline(t_data *data, int flag)
 {
@@ -86,6 +108,10 @@ void	drawlinetexture(double x1, int column_texture, t_data *data)
 	int				n;
 	float			step_y_texture;
 
+	double shading_factor;
+	shading_factor = 1.0 - data->ray.perpwalldist / 25;
+	if (shading_factor < 0.2)
+		shading_factor = 0.2;
 	img = data->sprites[data->ray.side];
 	step_y_texture = draw_awx(data, 0, column_texture, img);
 	n = 0;
@@ -98,8 +124,8 @@ void	drawlinetexture(double x1, int column_texture, t_data *data)
 			{
 				row_texture = floor(step_y_texture * n);
 				((uint32_t *)data->map.img3d->pixels)[((int)data->ray.drawstart \
-				* data->map.mlx->width + (int)x1)] = ((uint32_t *)img->pixels) \
-				[row_texture * img->width + column_texture];
+				* data->map.mlx->width + (int)x1)] = apply_shading(((uint32_t *)img->pixels) \
+				[row_texture * img->width + column_texture],shading_factor);
 			}
 			data->ray.drawstart++;
 			n++;
@@ -109,6 +135,8 @@ void	drawlinetexture(double x1, int column_texture, t_data *data)
 
 void	render_aux(t_data *data, int texx)
 {
+	
+	
 	data->ray.lineheight = (int)(((data->map.mlx->height)) \
 	/ data->ray.perpwalldist);
 	if (data->ray.lineheight > data->map.mlx->height)
