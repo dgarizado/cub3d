@@ -6,115 +6,150 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:11:40 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/22 17:29:13 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:22:18 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//THIS WILL BE REPLACED BY VICTORS IN THE FUTURE
-void ft_draw_line(mlx_image_t *img, int x1, int y1, int x2, int y2, int color)
+void	drawline(t_data *data , int flag)
 {
-	int dx;
-	int dy;
-	int sx;
-	int sy;
-	int err;
-	int e2;
+	double	dy;
+	double	steps;
+	double	drawstart;
+	double	drawend;
 
-	dx = abs(x2 - x1);
-	dy = abs(y2 - y1);
-	err = dx - dy;
-	if (x1 < x2)
-		sx = 1;
-	else
-		sx = -1;
-	if (y1 < y2)
-		sy = 1;
-	else
-		sy = -1;
-	printf("SEGFAULT C\n");
-	printf("x1: %d, y1: %d, x2: %d, y2: %d\n", x1, y1, x2, y2);
-	printf("sy: %d, sx: %d, err: %d\n", sy, sx, err);
-	while (x1 != x2 || y1 != y2)
+	if (flag == CEILING)
 	{
-		if (x1 >= 0 && x1 < (int)img->width && y1 >= 0 && y1 < (int)img->height)
-			mlx_put_pixel(img, x1, y1, color);
-		e2 = 2 * err;
-		if (e2 > -dy)
-		{
-			err -= dy;
-			x1 += sx;
-		}
-		if (e2 < dx)
-		{
-			err += dx;
-			y1 += sy;
-		}
+		drawstart = 0;
+		drawend = data->ray.drawstart - data->player.step_v;
+	}
+	else
+	{
+		drawstart = data->ray.drawend - data->player.step_v;
+		drawend = data->map.mlx->height;
+	}
+	steps = fabs(drawend - drawstart);
+	dy = (drawend - drawstart) / steps;
+	while ((int)fabs(drawend - drawstart))
+	{
+		if(data->ray.x >= 0 &&data->ray.x <= WIDTH && drawstart >= 0 && drawstart <= HEIGHT)
+			mlx_put_pixel(data->map.img3d, (int)data->ray.x, (int)drawstart, data->map.colors[flag]);
+		drawstart += dy;
 	}
 }
+//CP
+// void	get_texture(t_data *data)
+// {
+	
+// }
 
-
-
-
-void drawLineTexture(double x1, double y1, double x2, double y2, int column_texture, t_data *data)
+void	drawlinetexture(double x1, double drawstart, double drawend, int column_texture, t_data *data, int j)
 {
-    double dx = x2 - x1;//pantalla
-    double dy =  y2 - y1;//pantalla y significa WALL-HEIGHT y esta distancia es la que hay que pintar el sprite proporcionalmente
-    double steps;
-    mlx_image_t* img;
-    int row_texture = 0;//textura
-    uint32_t color;
-    // if(data->type_wall == 1)
-	if (data->ray.side == 0)
-        img = data->sprites[WALL_N];
-	if (data->ray.side == 1)
-		img = data->sprites[WALL_E];	
-    // else if(data->type_wall == 8)
-    //     img = data->broken;
-    // else if(data->type_wall == 7)
-    //     img = data->zombie;
-	// double texture_scale = data->ray.perpwalldist / 2;
-	// int texture_height = (int)(texture_scale * img->height);
-	// int texture_start = (img->height - texture_height) / 2;
-	// int texture_end = texture_start + texture_height;
-	int lineheight = (int)((data->map.mlx->height)/2 / data->ray.perpwalldist);
-		// if (lineheight > data->map.mlx->height)
-		// 	lineheight = data->map.mlx->height;
-    if ((abs)((int)dx) >= (abs)((int)dy))
-        steps = (fabs)(dx);//pantalla
-    else
-        steps = (fabs)(dy);//pantalla esta saldra siempre pa la textura
-    // float step_y_texture = (float)img->height/(float)steps;
-	// int texture_middle = img->height / 2;
-	double textStep = 1.0 * img->height / lineheight;
-	if (textStep > img->height) {
-    textStep = img->height;
-}
-double offset = (lineheight - data->map.mlx->height / 2) * textStep;
-if (offset < 0) {
-    offset = 0;
-}
-    // double texpos = (y1 - data->map.mlx->height / 2 + lineheight / 2) * textStep;
-	// double textStep = 1.0 * (img->height - texture_middle) / (data->map.mlx->height / 2);
-	dx = dx / steps;//pantalla
-    dy = dy / steps;//pantalla es 1 pa la textura
-    int n = 0;
+	double steps;
+	mlx_image_t* img;
+	int row_texture;//textura
+	uint32_t color;
+	int n;
+	float step_y_texture;
+
+	j = 0;
+	img = data->sprites[WALL_E];
+	steps = fabs(drawend - drawstart);
+	step_y_texture = (float)img->height/(float)steps;
+	n = 0;
 	if (data->ray.perpwalldist < 1)
 	{
-		textStep *= data->ray.perpwalldist;
-	}
-    while ((int)fabs(x2 - x1) || (int)fabs(y2 - y1))
-    {
-		 row_texture = (int)(textStep * n + offset) % img->height;
-        // row_texture = (int)(textStep * n);
-        if(x1 >= 0 && x1 <= WIDTH && y1 >= 0 && y1 <= HEIGHT)
-        {
-            color = ((uint32_t*)img->pixels)[row_texture * img->width + column_texture];
-            if(color != 0)
-                ((uint32_t*)data->map.img3d->pixels)[((int)y1 * data->map.img3d->width + (int)x1)] = color;
-        }
-        y1 += dy;
-        n++;
-    }
+		step_y_texture = 1.0 * img->height / steps * data->ray.perpwalldist;
+		int y = drawstart;
+		while (y < drawend)
+		{
+			row_texture = (int)((y - data->map.mlx->height / 2) * step_y_texture + img->height / 2);
+			// while (row_texture < 0) {
+			// 	row_texture += img->height;
+			// }
+			// while (row_texture >= (int)img->height) {
+			// 	row_texture -= img->height;
+			// }
+			color = ((uint32_t*)img->pixels)[row_texture * img->width + column_texture];
+			if(color != 0)
+				((uint32_t*)data->map.img3d->pixels)[((int)drawstart * data->map.mlx->width + (int)x1)] = color;
+
+			y++;
+			drawstart++;
+			n++;
+		}
+	}else {
+	while ((int)fabs(drawend - drawstart))
+	{
+		if(x1 >= 0 && x1 <= WIDTH && drawstart >= 0 && drawstart <= data->map.mlx->height)
+		{
+			row_texture = floor(step_y_texture * n);
+			color = ((uint32_t*)img->pixels)[row_texture * img->width + column_texture];
+			if(color != 0)
+				((uint32_t*)data->map.img3d->pixels)[((int)drawstart * data->map.mlx->width + (int)x1)] = color;
+		}
+		drawstart++;
+		n++;
+	}}
 }
+
+void	render_aux(t_data *data, int texx)
+{
+	data->ray.lineheight = (int)(((data->map.mlx->height)) / data->ray.perpwalldist);
+	if (data->ray.lineheight > data->map.mlx->height)
+		data->ray.lineheight = data->map.mlx->height;
+	data->ray.drawstart = data->map.mlx->height / 2 - data->ray.lineheight / 2;
+	if (data->ray.drawstart < 0 || data->ray.drawstart >= data->map.mlx->height)
+		data->ray.drawstart = 0;
+	data->ray.drawend = data->ray.lineheight / 2 + data->map.mlx->height / 2;
+	if (data->ray.drawend >= data->map.mlx->height || data->ray.drawend < 0)
+		data->ray.drawend = data->map.mlx->height;
+	drawline(data, CEILING);
+	drawlinetexture(data->ray.x, data->ray.drawstart - data->player.step_v, \
+	data->ray.drawend - data->player.step_v, texx, data, 0);
+	drawline(data, FLOOR);
+}
+
+// void	render_aux(t_data *data, int texx)
+// {
+// 	data->ray.lineheight = (int)(((data->map.mlx->height)) / data->ray.perpwalldist);
+// 	if (data->ray.lineheight > data->map.mlx->height)
+// 		data->ray.lineheight = data->map.mlx->height;
+// 	data->ray.drawstart = data->map.mlx->height / 2 - data->ray.lineheight / 2;
+// 	if (data->ray.drawstart < 0 || data->ray.drawstart >= data->map.mlx->height)
+// 		data->ray.drawstart = 0;
+// 	data->ray.drawend = data->ray.lineheight / 2 + data->map.mlx->height / 2;
+// 	if (data->ray.drawend >= data->map.mlx->height || data->ray.drawend < 0)
+// 		data->ray.drawend = data->map.mlx->height;
+// 	drawline(data, data->ray.x, 0, data->ray.drawstart - data->player.step_v, \
+// 	data->map.colors[CEILING], data->map.img3d);
+// 	drawlinetexture(data->ray.x, data->ray.drawstart - data->player.step_v, \
+// 	data->ray.drawend - data->player.step_v, texx, data, 0);
+// 	drawline(data, data->ray.x, data->ray.drawend -data->player.step_v, data->map.mlx->height, \
+// 	data->map.colors[FLOOR], data->map.img3d);
+// }
+
+void	ray_render(t_data *data)
+{
+	double	wallx;
+	int		texx;
+
+	if (data->ray.side == 0)
+	{
+		data->ray.perpwalldist = (data->ray.sidedistx -  data->ray.deltadistx);
+		wallx = data->player.pos.y + data->ray.perpwalldist * data->ray.raydiry;	
+		wallx -= floor((wallx));
+		texx = (int)(wallx * (double)data->sprites[WALL_E]->width) % (data->sprites[WALL_E]->width);
+	}
+	else
+	{
+		data->ray.perpwalldist = (data->ray.sidedisty -  data->ray.deltadisty);
+		wallx = data->player.pos.x + data->ray.perpwalldist * data->ray.raydirx;
+		wallx -= floor((wallx));
+		texx = (int)(wallx * (double)data->sprites[WALL_E]->width) % (data->sprites[WALL_E]->width);
+	}
+	render_aux(data, texx);
+}
+
+

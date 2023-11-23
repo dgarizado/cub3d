@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/22 17:43:34 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:00:01 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ typedef struct s_ray_charles
 	int		hit;
 	int		side;
 	int		x;
+	double 	drawstart;
+	double 	drawend;
+	int		lineheight;
 } t_ray_charles;
 
 typedef struct	s_map
@@ -130,8 +133,9 @@ typedef struct s_macro_data
 }	t_data;
 
 //RENDER
-void ft_draw_line(mlx_image_t *img, int x1, int y1, int x2, int y2, int color);
-void drawLineTexture(double x1, double y1, double x2, double y2, int column_texture, t_data *data);
+void	drawline(t_data *data, int flag);
+void	drawlinetexture(double x1, double drawstart, double drawend, int column_texture, t_data *data, int j);
+void	ray_render(t_data *data);
 
 //MAPCHECK
 bool	ft_mapcheck(char **argv, t_data *data);
@@ -182,9 +186,6 @@ void	ft_load_minisprites(t_data *data);
 //RAY BAN
 void	ray_bang(t_data *data);
 void	rotate_victor(t_victor *victor, double angle);
-
-//DRAWLINE
-void	ft_draw_line(mlx_image_t *img, int x1, int y1, int x2, int y2, int color);
 
 //MOVEMENTS
 void	verticals_w(t_data *data);
