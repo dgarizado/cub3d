@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 12:44:33 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 18:39:20 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 22:26:49 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ float	rays(t_data *data, float angle)
 			}
 			else if (c == 'B' || c == 'O' || c == 'V' || c == 'G' || c == 'A')
 			{
-				if (n < 5)
+				if (n < 8)
 					set_params_colision(n++, data);
 			}
 		}

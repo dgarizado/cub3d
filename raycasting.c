@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 17:33:42 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 20:11:15 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 21:09:56 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,16 @@ void	draw_colision(int rayCount, float a, int n, t_data *data)
 	if (last_colision_arr(data->cast.bonus.type_wall_bonus) == n)
 	{
 		data->map.flag = 0;
-		drawline_game(rayCount, 0, (HEIGHT / 2) - wallheight, data);
+		//drawline_game(rayCount, 0, (HEIGHT / 2) - wallheight, data);
+		drawline_game(rayCount, 0, (HEIGHT / 2) - wallheight + data->up, data);
 		data->map.flag = 1;
-		drawline_game(rayCount, (HEIGHT / 2) + wallheight, HEIGHT, data);
+		//drawline_game(rayCount, (HEIGHT / 2) + wallheight, HEIGHT, data);
+		drawline_game(rayCount, (HEIGHT / 2) + wallheight - data->up, HEIGHT, data);
 	}
 	data->cast.bonus.n = n;
-	drawlinetexture_bonus(rayCount, (HEIGHT / 2) - wallheight, (HEIGHT / 2) \
+	//drawlinetexture_bonus(rayCount, (HEIGHT / 2) - wallheight, (HEIGHT / 2) \
 	+ wallheight, data);
+	drawlinetexture_bonus(rayCount, (HEIGHT / 2) - wallheight - data->up, (HEIGHT / 2) + wallheight - data->up, data);
 }
 
 void	draw_colisions(int rayCount, float angle, int flag, t_data *data)

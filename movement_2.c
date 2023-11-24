@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:39:44 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 17:43:15 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 22:13:12 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,15 @@ void	ft_check_interaction(t_data *d)
 	float	x;
 	float	y;
 
-	if (mlx_is_key_down(d->mlx, MLX_KEY_Q))
+	if (mlx_is_key_down(d->mlx, MLX_KEY_Q) && MLX_PRESS)
 	{
-		x = cos(ft_degre_to_radian(d->angle)) * 0.5;
-		y = sin(ft_degre_to_radian(d->angle)) * 0.5;
+		x = cos(ft_degre_to_radian(d->angle)) * 1;
+		y = sin(ft_degre_to_radian(d->angle)) * 1;
 		if (d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] == '9')
 			d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] = 'B';
 		else if (d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] == 'D')
 			d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] = 'O';
+		else if (d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] == 'O')
+			d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] = 'D';
 	}
 }

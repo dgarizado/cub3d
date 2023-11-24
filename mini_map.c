@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:56:18 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 20:37:50 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/24 21:22:13 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	draw_squares(t_data *data)
 			data->map.map_aclean[y][x] == '9' || \
 			data->map.map_aclean[y][x] == 'D')
 				paint_square(x, y, 0xFFFFFFFF, data);
-			else if (ft_strchr("0NSEWAGBVZ", data->map.map_aclean[y][x]))
+			else if (ft_strchr("09DSEWNAGBVZ", data->map.map_aclean[y][x]))
 				paint_square(x, y, 0x000000FF, data);
 			x++;
 		}

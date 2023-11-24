@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 19:04:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 20:35:01 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 21:11:00 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ void	ft_draw_steven(float wallheight, int column, t_data *data)
 	while ((data->column_texture) < (data->sprites[ENEMY]->width -10))
 	{
 		data->column_texture = (int)(incremente_texture_column * n);
-		drawlinetexture_bonus(column, ((HEIGHT) / 2), ((HEIGHT) / 2) \
+		//drawlinetexture_bonus(column, ((HEIGHT) / 2), ((HEIGHT) / 2) \
 		+ (wallheight), data);
+		drawlinetexture_bonus(column, ((HEIGHT) / 2) - data->up, ((HEIGHT) / 2) \
+		+ (wallheight) - data->up, data);
 		n++;
 		column++;
 	}

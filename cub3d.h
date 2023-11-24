@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 19:40:49 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:39:08 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ typedef struct s_macro_data
 	int			phase;
 	int			column_texture;
 	int			zombie;
+	int			up;
 }	t_data;
 
 //RENDER
