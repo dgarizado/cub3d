@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:36:08 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 14:15:52 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:12:56 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void	load_graphics(mlx_t *mlx, t_data *data)
 	data->textures[AURA] = mlx_load_png("./imgs/aura.png");
 	data->textures[GRASS] = mlx_load_png("./imgs/grass.png");
 	data->textures[BROKEN] = mlx_load_png("./imgs/break.png");
+	data->textures[DOOR] = mlx_load_png("./imgs/door.png");
+	data->textures[OPEN] = mlx_load_png("./imgs/open.png");
+	data->textures[VROKEN] = mlx_load_png("./imgs/break2.png");
 	data->textures[START_INTRO] = mlx_load_png("./imgs/start.png");
 	ft_load_minisprites(data);
 	ft_free_textures(data);//*************************CUIDDAAAAADDOOOOOOOO

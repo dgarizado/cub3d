@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:36:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 13:21:33 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:42:50 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_game_loop(void *d)
 	ft_memset(data->img[MINIMAP_GAME]->pixels, 0, (int)(WIDTH_MAP_GAME) \
 	*(int)(HEIGHT_MAP_GAME) * sizeof(int));
 	ft_move_players(data);
-	ft_check_door(data);
+	ft_check_interaction(data);
 	ft_draw_minimap(data);
 	raycast_game(data->img[GAME], data);
 }

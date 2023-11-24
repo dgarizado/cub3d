@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:51:54 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 14:17:15 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:12:20 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_wall(double x, double y, t_data *data)
 		radianes = angulo * (M_PI / 180.0);
 		circle_x = x + (radio * cos(radianes));
 		circle_y = y + (radio * sin(radianes));
-		if (data->map.map_aclean[circle_y][circle_x] == '1' || data->map.map_aclean[circle_y][circle_x] == '9')
+		if (data->map.map_aclean[circle_y][circle_x] == '1' || data->map.map_aclean[circle_y][circle_x] == '9' || data->map.map_aclean[circle_y][circle_x] == 'D')
 			return (1);
 		angulo = angulo + 20;
 	}
@@ -100,7 +100,7 @@ void	ft_move_steven(double *temp, double *ptr_x, double *ptr_y, t_data *data)
 	temp[1] = data->steven_y + dy * DIST_FACTOR_STEVEN;
 }
 
-void	ft_check_door(t_data *data)
+void	ft_check_interaction(t_data *data)
 {
 	float	x;
 	float	y;
@@ -111,6 +111,8 @@ void	ft_check_door(t_data *data)
 		y = sin(ft_degre_to_radian(data->angle)) * 0.5;
 		if (data->map.map_aclean[(int)(data->py + y)][(int)(data->px + x)] == '9')
 			data->map.map_aclean[(int)(data->py + y)][(int)(data->px + x)] = 'B';
+		else if (data->map.map_aclean[(int)(data->py + y)][(int)(data->px + x)] == 'D')
+			data->map.map_aclean[(int)(data->py + y)][(int)(data->px + x)] = 'O';
 	}
 }
 

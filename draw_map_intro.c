@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:25:06 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 13:24:44 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:18:05 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	draw_title_map(t_data *data)
 		column = 0;
 		while (data->map.map_aclean[row][column])
 		{
-			if (data->map.map_aclean[row][column] == '1')
+			if (data->map.map_aclean[row][column] == '1' || data->map.map_aclean[row][column] == '9'|| data->map.map_aclean[row][column] == 'D')
 				draw_sq_map_intro(data, row, column);
 			column++;
 		}

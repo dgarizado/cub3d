@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 14:20:31 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:40:36 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ bool	ft_check_chars(t_data *data)
 	watchdog = 0;
 	while (data->map.map_aclean[i] != NULL)
 	{
-		if (ft_ismap(data->map.map_aclean[i], "0 19BG5NWSEDXOZ") == 0)//CORREGUIR 
+		if (ft_ismap(data->map.map_aclean[i], "0 19BVGADZNWSE") == 0)//CORREGUIR 
 		{
 			ft_free_maps(data);
 			ft_error("Map is not valid\n");

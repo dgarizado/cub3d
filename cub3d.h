@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 14:14:23 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:11:39 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,11 @@ typedef enum e_sprites{
 	//PISTOL_BANG,
 	ENEMY,
 	AURA,
-	//DOOR,
+	DOOR,
+	OPEN,
 	GRASS,
 	BROKEN,
+	VROKEN,
 	START_INTRO,
 	SPRITES_COUNT
 } t_sprites;
@@ -259,7 +261,7 @@ void	draw_steven_sprite(t_data *data);
 
 //MOVEMENTS
 void 	ft_move_players(t_data *data);
-void 	ft_check_door(t_data *data);
+void 	ft_check_interaction(t_data *data);
 
 
 

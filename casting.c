@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 12:44:33 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 14:18:45 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:12:00 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,12 @@ float	rays(mlx_image_t *map, t_data *data, float angle)
 		set_new_instances(data);
 		if (into_limits(data))
 		{
-			if (get_value_map(data) == '1' || get_value_map(data) == '9')
+			if (get_value_map(data) == '1' || get_value_map(data) == '9' || get_value_map(data) == 'D')
 			{
 				set_params_colision(n, data);
 				break ;
 			}
-			else if (get_value_map(data) == 'B' || get_value_map(data) == 'G' || get_value_map(data) == '5')
+			else if (get_value_map(data) == 'B' || get_value_map(data) == 'O'|| get_value_map(data) == 'V' || get_value_map(data) == 'G' || get_value_map(data) == 'A')
 			{
 				if (n < 5)
 					set_params_colision(n++, data);
