@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:39:44 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 22:13:12 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:05:27 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_check_interaction(t_data *d)
 	float	x;
 	float	y;
 
-	if (mlx_is_key_down(d->mlx, MLX_KEY_Q) && MLX_PRESS)
+	if (mlx_is_key_down(d->mlx, MLX_KEY_Q))
 	{
 		x = cos(ft_degre_to_radian(d->angle)) * 1;
 		y = sin(ft_degre_to_radian(d->angle)) * 1;
@@ -66,3 +66,29 @@ void	ft_check_interaction(t_data *d)
 			d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] = 'D';
 	}
 }
+
+void	mouse(t_data *data)
+{
+	int	x;
+	int	y;
+
+	mlx_get_mouse_pos(data->mlx, &x, &y);
+	if (x > data->mouse_x && data->mouse_x > 0 \
+	&& data->mouse_x < data->mlx->width)
+	{
+		data->angle += 2;
+	}
+	if (x < data->mouse_x && \
+	data->mouse_x < data->mlx->width && \
+	data->mouse_x > 0)
+	{
+		data->angle -= 2;
+	}
+	data->mouse_x = x;
+	data->mouse_y = y;
+	if (data->sprites[PISTOL_BANG]->instances[0].enabled == true)
+		data->sprites[PISTOL_BANG]->instances[0].enabled = false;
+	if (data->sprites[PISTOL]->instances[0].enabled == false)
+		data->sprites[PISTOL]->instances[0].enabled = true;
+}
+

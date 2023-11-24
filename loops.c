@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loops.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:36:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 19:03:26 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 22:11:46 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_transition(int *n, t_data *data)
 		data->img[MAP_INTRO]->enabled = 0;
 		data->img[TITLE_INTRO]->enabled = 0;
 		data->phase = 1;
+		data->sprites[PISTOL]->instances[0].enabled = true;
 	}
 	else if ((*n) == 150)
 		ft_memset(data->img[TITLE_INTRO]->pixels, 0, WIDTH_IMG_TITLE \
@@ -50,6 +51,12 @@ void	ft_game_loop(void *d)
 	ft_check_interaction(data);
 	ft_draw_minimap(data);
 	raycast_game(data);
+	mouse(data);
+	if (mlx_is_mouse_down(data->mlx, MLX_MOUSE_BUTTON_LEFT))
+	{
+		data->sprites[PISTOL]->instances[0].enabled = false;
+		data->sprites[PISTOL_BANG]->instances[0].enabled = true;
+	}
 }
 
 void	ft_intro_loop(t_data	*data)

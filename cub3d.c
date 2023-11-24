@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:36:08 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 18:55:26 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 22:45:19 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,16 @@ void	put_images_to_windows(t_data *data, mlx_t *mlx)
 	mlx_image_to_window(mlx, data->img[MINIMAP_GAME], WIDTH * 0.01, HEIGHT * 0.01);
 	mlx_image_to_window(mlx, data->img[TITLE_INTRO], (WIDTH / 2) - (WIDTH_IMG_TITLE / 2), (HEIGHT * 0.03));
 	mlx_image_to_window(mlx, data->img[MAP_INTRO], 0, 0);
+	mlx_image_to_window(mlx, data->sprites[PISTOL_BANG], \
+	mlx->width / 2 - \
+	data->sprites[PISTOL_BANG]->width / 2 +10, \
+	mlx->height +10 - data->sprites[PISTOL_BANG]->height);
+	data->sprites[PISTOL_BANG]->instances[0].enabled = false;
+	mlx_image_to_window(mlx, data->sprites[PISTOL], \
+	mlx->width / 2 - \
+	data->sprites[PISTOL]->width / 2, \
+	mlx->height - data->sprites[PISTOL]->height);
+	data->sprites[PISTOL]->instances[0].enabled = false;
 }
 
 	//------------SEG FAULT SI NO ASIGNA WALLS SE SUPONE QUE SE SETEA EN PARSEO*****************************
@@ -45,6 +55,9 @@ void	load_graphics(mlx_t *mlx, t_data *data)
 	data->textures[OPEN] = mlx_load_png("./imgs/open.png");
 	data->textures[VROKEN] = mlx_load_png("./imgs/break2.png");
 	data->textures[START_INTRO] = mlx_load_png("./imgs/start.png");
+	data->textures[PISTOL] = mlx_load_png("./imgs/pistol.png");
+	data->textures[PISTOL_BANG] = mlx_load_png("./imgs/bangbang.png");
+	data->textures[ENEMY2] = mlx_load_png("./imgs/zombieb.png");
 	ft_load_minisprites(data);
 }
 

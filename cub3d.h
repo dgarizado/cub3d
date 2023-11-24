@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 22:38:40 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:03:08 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ typedef enum e_sprites{
 	WALL_E,
 	WALL_W,
 	WALL_TO_BROKE,
-	//PISTOL,
-	//PISTOL_BANG,
+	PISTOL,
+	PISTOL_BANG,
 	ENEMY,
+	ENEMY2,
 	AURA,
 	DOOR,
 	OPEN,
@@ -173,6 +174,8 @@ typedef struct s_macro_data
 	double 		py;
 	double 		steven_x;
 	double 		steven_y;
+	int 		mouse_x;
+	int 		mouse_y;
 	double 		angle_steven;
 	double 		angle;
 	int			phase;
@@ -263,6 +266,7 @@ void 	ft_check_interaction(t_data *data);
 void	ft_check_move(double *temp, double *ptr_x, double *ptr_y, t_data *d);
 
 void	encounter_steven(t_data *data);
+void 	mouse(t_data *data);
 
 
 #endif

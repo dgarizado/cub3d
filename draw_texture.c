@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:10:37 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 20:30:01 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 22:54:24 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,12 @@ mlx_image_t	*choose_image(t_data *data)
 	img = NULL;
 	n = data->cast.bonus.n;
 	if (n == -1)
-		img = data->sprites[ENEMY];
+	{
+		if (mlx_is_mouse_down(data->mlx, MLX_MOUSE_BUTTON_LEFT))
+			img = data->sprites[ENEMY2];
+		else
+			img = data->sprites[ENEMY];
+	}
 	else if (data->cast.bonus.type_wall_bonus[n] == '1')
 		img = choose_orientation(n, data);
 	else if (data->cast.bonus.type_wall_bonus[n] == '9')
