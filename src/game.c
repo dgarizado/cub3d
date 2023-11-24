@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 21:18:54 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 12:54:25 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/24 18:48:42 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ void	ft_hook(void *param)
 	data->map.mlx->height != data->map.height * data->map.ppc)
 		ft_fix_images(data);
 	ray_bang(data);
+	if (mlx_is_key_down(data->map.mlx, MLX_KEY_W))
+	{
+		data->player.step_count += 1;
+		data->player.step_v = 2 * sin(data->player.step_count * 0.2);
+	}
 }
 
 /**

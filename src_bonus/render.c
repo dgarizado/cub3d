@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:11:40 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 17:28:34 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/24 18:47:35 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	drawlinetexture(double x1, int column_texture, t_data *data)
 	img = data->sprites[data->ray.side];
 	step_y_texture = draw_awx(data, 0, column_texture, img);
 	n = 0;
+	data->ray.drawstart = data->ray.drawstart - data->player.step_v;
+	data->ray.drawend = data->ray.drawend - data->player.step_v;
 	if (data->ray.perpwalldist >= 1)
 	{
 		while ((int)fabs(data->ray.drawend - data->ray.drawstart))
@@ -121,8 +123,8 @@ void	render_aux(t_data *data, int texx)
 	if (data->ray.drawend >= data->map.mlx->height || data->ray.drawend < 0)
 		data->ray.drawend = data->map.mlx->height;
 	drawline(data, CEILING);
-	drawlinetexture(data->ray.x, texx, data);
 	drawline(data, FLOOR);
+	drawlinetexture(data->ray.x, texx, data);
 }
 
 void	ray_render(t_data *data)
