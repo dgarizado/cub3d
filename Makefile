@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+         #
+#    By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 18:46:57 by dgarizad          #+#    #+#              #
-#    Updated: 2023/11/24 18:57:55 by dgarizad         ###   ########.fr        #
+#    Updated: 2023/11/24 20:21:15 by vcereced         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ SRCBONUS = cub3d.c  mapanal.c mapanal2.c mapcheck.c mapcheck2_bonus.c mini_sprit
 movement.c parsing_elements.c parsing_elements_2.c parsing_elements_3.c \
 textureparsing.c utils.c utils2.c utils3.c draw_title_intro.c \
 draw_title_intro_2.c loops.c  mini_map.c raycasting_minimap.c casting.c casting_2.c \
-raycasting.c draw_steven.c draw_texture.c draw_map_intro.c parsing_tittle.c movement_2.c
+raycasting.c draw_steven.c draw_texture.c draw_map_intro.c parsing_tittle.c movement_2.c utils4.c
 
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 

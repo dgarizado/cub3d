@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 19:04:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 17:23:49 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:35:01 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,18 @@ void	ft_draw_steven(float wallheight, int column, t_data *data)
 {
 	float	incremente_texture_column;
 	int		n;
-
+	int column_texture;
+	
 	n = 0.0;
 	incremente_texture_column = data->sprites[WALL_N]->width / wallheight;
 	column = column - wallheight / 2;
 	data->cast.bonus.n = -1;
-	while (data->column_texture < data->sprites[ENEMY]->width)
+	data->column_texture = 0;
+	while ((data->column_texture) < (data->sprites[ENEMY]->width -10))
 	{
 		data->column_texture = (int)(incremente_texture_column * n);
-		drawlinetexture_bonus(column, ((HEIGHT) / 2), \
-		((HEIGHT) / 2) + (wallheight), data);
+		drawlinetexture_bonus(column, ((HEIGHT) / 2), ((HEIGHT) / 2) \
+		+ (wallheight), data);
 		n++;
 		column++;
 	}
@@ -75,5 +77,31 @@ void	draw_steven_sprite(t_data *data)
 		angulo_me += increment_angle;
 		normalize_angle(&angulo_me, &angle_steven_from_me);
 		column++;
+	}
+}
+
+void	encounter_steven(t_data *data)
+{
+	double	angle_steven_from_me;
+	double	angulo_me;
+	float	increment_angle;
+	int		column;
+
+	angle_steven_from_me = data->angle_steven - 180;
+	angulo_me = data->angle - 30;
+	increment_angle = 60.0f / WIDTH;
+	column = 0;
+	normalize_angle(&angulo_me, &angle_steven_from_me);
+	while (column < WIDTH)
+	{
+		if (casi_iguales(angulo_me, angle_steven_from_me) == 1)
+		{
+			data->zombie = 1;
+			break ;
+		}
+		angulo_me += increment_angle;
+		normalize_angle(&angulo_me, &angle_steven_from_me);
+		column++;
+		data->zombie = 0;
 	}
 }

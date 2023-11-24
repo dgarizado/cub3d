@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 12:44:33 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 17:21:05 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 18:39:20 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	set_params_start_cast(float angle, t_data *data)
 	data->cast.current_y_cell = floor(data->cast.ray_y_start);
 }
 
-float	rays(mlx_image_t *map, t_data *data, float angle)
+float	rays(t_data *data, float angle)
 {
 	int		n;
 	char	c;

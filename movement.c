@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:51:54 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 17:43:06 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:28:03 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_check_key(double *temp, t_data *data)
 		data->angle += 360;
 }
 
-void	ft_move_steven(double *temp, double *ptr_x, double *ptr_y, t_data *d)
+void	ft_move_steven(double *temp, t_data *d)
 {
 	float	dx;
 	float	dy;
@@ -61,7 +61,7 @@ void	ft_move_steven(double *temp, double *ptr_x, double *ptr_y, t_data *d)
 
 	dx = d->px - d->steven_x;
 	dy = d->py - d->steven_y;
-	angle_steven = radianes_a_grados(atan2(dy, dx));
+	angle_steven = radian_to_grade(atan2(dy, dx));
 	d->angle_steven = angle_steven;
 	dx = cos(ft_degre_to_radian(angle_steven));
 	dy = sin(ft_degre_to_radian(angle_steven));
@@ -71,7 +71,7 @@ void	ft_move_steven(double *temp, double *ptr_x, double *ptr_y, t_data *d)
 
 int	ft_check_game_over(t_data *d)
 {
-	if (sqrt(pow((d->py - d->steven_y), 2) + pow(d->px - d->steven_x, 2)) < 1)
+	if (sqrt(pow((d->py - d->steven_y), 2) + pow(d->px - d->steven_x, 2)) < 1.1)
 		return (1);
 	return (0);
 }
@@ -86,7 +86,7 @@ void	ft_move_players(t_data *data)
 	if (ft_check_game_over(data) == 0)
 	{
 		ft_check_move(temp, &data->px, &data->py, data);
-		ft_move_steven(temp, &data->steven_x, &data->steven_y, data);
+		ft_move_steven(temp, data);
 		ft_check_move(temp, &data->steven_x, &data->steven_y, data);
 	}
 }

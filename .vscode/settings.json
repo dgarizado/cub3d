@@ -11,6 +11,7 @@
 		"initializer_list": "c",
 		"unordered_map": "c",
 		"utility": "c",
-		"chrono": "c"
+		"chrono": "c",
+		"mlx42_int.h": "c"
 	}
 }

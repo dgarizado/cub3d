@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 17:41:51 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:40:49 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,16 +177,14 @@ typedef struct s_macro_data
 	double 		angle;
 	int			phase;
 	int			column_texture;
-	int			screen_width;  // guarda la ventana para resize
-	int			screen_heigth; // guarda la ventana para resize
-	
+	int			zombie;
 }	t_data;
 
 //RENDER
 void 	draw_title(t_data * data);
 void	draw_title_map(t_data *data);
 void	ft_draw_minimap(t_data *data);
-void	draw_raycast_map(mlx_image_t *map, t_data *data);
+void	draw_raycast_map(t_data *data);
 
 
 
@@ -219,9 +217,8 @@ void	ft_free_textures(t_data *data);
 //***UTILS
 int		set_color(float y, t_data *data);
 double	ft_degre_to_radian(double degre);
-double	radianes_a_grados(double radianes);
+double	radian_to_grade(double radianes);
 void	normalize_angle(double *angulo_me, double *angle_steven_from_me);
-int		ft_changed_resolution(t_data *data);
 int		into_limits(t_data *data);
 
 //TEXTURE PARSING
@@ -248,9 +245,9 @@ void 	drawline(t_coord *p, int color, mlx_image_t *ptr, t_data *data);
 void	ft_load_minisprites(t_data *data);
 
 //RAYCASTING
-float	rays(mlx_image_t *map, t_data *data, float angle);
+float	rays(t_data *data, float angle);
 int		get_value_map(t_data *data);
-void	raycast_game(mlx_image_t *game, t_data *data);
+void	raycast_game(t_data *data);
 float	fix_fish_eye(float distance, float angle, float angle_player);
 int		last_colision_arr(int *arr);
 void	set_params_colision(int n, t_data *data);
@@ -263,6 +260,8 @@ void	draw_steven_sprite(t_data *data);
 void 	ft_move_players(t_data *data);
 void 	ft_check_interaction(t_data *data);
 void	ft_check_move(double *temp, double *ptr_x, double *ptr_y, t_data *d);
+
+void	encounter_steven(t_data *data);
 
 
 #endif

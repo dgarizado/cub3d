@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:56:18 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 19:46:12 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:17:54 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,5 @@ void	ft_draw_minimap(t_data *data)
 	draw_squares(data);
 	draw_player(data, 5);
 	draw_steven(data, 5);
-	draw_raycast_map(data->img[MINIMAP_GAME], data);
+	draw_raycast_map(data);
 }

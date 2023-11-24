@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:36:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 14:42:50 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:03:26 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void	ft_game_loop(void *d)
 
 	data = (t_data *)d;
 	if (mlx_is_key_down(data->mlx, 256))
-		mlx_close_window(data->mlx);//liberar todo!!!!
-	ft_memset(data->img[MINIMAP_GAME]->pixels, 0, (int)(WIDTH_MAP_GAME) \
-	*(int)(HEIGHT_MAP_GAME) * sizeof(int));
+		mlx_close_window(data->mlx);
+	ft_memset(data->img[MINIMAP_GAME]->pixels, 0, (int)(WIDTH_MAP_GAME)  *(int)(HEIGHT_MAP_GAME) * sizeof(int));
+	ft_memset(data->img[GAME]->pixels, 0, (int)(WIDTH) * (int)(HEIGHT) * sizeof(int));
 	ft_move_players(data);
 	ft_check_interaction(data);
 	ft_draw_minimap(data);
-	raycast_game(data->img[GAME], data);
+	raycast_game(data);
 }
 
 void	ft_intro_loop(t_data	*data)

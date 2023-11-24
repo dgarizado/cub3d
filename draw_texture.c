@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:10:37 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 17:09:21 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:30:01 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ mlx_image_t	*choose_image(t_data *data)
 	mlx_image_t	*img;
 	int			n;
 
+	img = NULL;
 	n = data->cast.bonus.n;
 	if (n == -1)
 		img = data->sprites[ENEMY];
@@ -90,7 +91,7 @@ void	drawlinetexture_bonus(double x1, double y1, double y2, t_data *data)
 	steps = fabs(y2 - y1);
 	step_y_texture = (float)img->height / (float)steps;
 	arr[2] = 0;
-	if ((int)(y2) > HEIGHT)
+	if ((int)(y2) > HEIGHT && data->cast.bonus.n != -1)
 		arr[2] = ft_recalibrate_offset(&y2, &y1, data);
 	arr[0] = x1;
 	arr[1] = y1;
