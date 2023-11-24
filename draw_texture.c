@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:10:37 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 22:54:24 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:21:24 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,27 @@ int	ft_recalibrate_offset(double *y2, double *y1, t_data *data)
 	return (offsety1);
 }
 
+
+uint32_t	apply_shading(t_data *data, uint8_t r, uint8_t g, uint32_t color)
+{
+	uint8_t	b;
+	uint8_t	a;
+	double	shading_factor;
+
+	shading_factor = 1.0 - data->cast.bonus.distance[data->cast.bonus.n] / 10;
+	if (shading_factor < 0.1)
+		shading_factor = 0.1;
+	r = (color >> 24) & 255;
+	g = (color >> 16) & 255;
+	b = (color >> 8) & 255;
+	a = color & 255;
+	r = (uint8_t)(r * shading_factor);
+	g = (uint8_t)(g * shading_factor);
+	b = (uint8_t)(b * shading_factor);
+	a = (uint8_t)(a * shading_factor);
+	return ((r << 24) | (g << 16) | (b << 8) | a);
+}
+
 void	ft_draw_texture(int *arr, float y_texture, mlx_image_t *img, t_data *d)
 {
 	uint32_t	color;
@@ -82,7 +103,7 @@ void	ft_draw_texture(int *arr, float y_texture, mlx_image_t *img, t_data *d)
 	+ (d->column_texture)];
 	if (color != 0)
 		((uint32_t *)d->img[GAME]->pixels)[((int)(arr[1]) *\
-		d->img[GAME]->width + (int)(arr[0]))] = color;
+		d->img[GAME]->width + (int)(arr[0]))] = apply_shading(d, 0, 0, color);
 }
 
 void	drawlinetexture_bonus(double x1, double y1, double y2, t_data *data)
