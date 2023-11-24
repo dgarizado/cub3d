@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:56:18 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 20:17:54 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:37:50 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,7 @@ void	draw_squares(t_data *data)
 			data->map.map_aclean[y][x] == '9' || \
 			data->map.map_aclean[y][x] == 'D')
 				paint_square(x, y, 0xFFFFFFFF, data);
-			else if (data->map.map_aclean[y][x] == '0' || \
-			data->map.map_aclean[y][x] == 'N' || \
-			data->map.map_aclean[y][x] == 'S' || \
-			data->map.map_aclean[y][x] == 'E' || \
-			data->map.map_aclean[y][x] == 'W' || \
-			data->map.map_aclean[y][x] == 'Z' || data->map.map_aclean[y][x] == 'G' || data->map.map_aclean[y][x] == 'A' || data->map.map_aclean[y][x] == 'B' || data->map.map_aclean[y][x] == 'V')
-			
+			else if (ft_strchr("0NSEWAGBVZ", data->map.map_aclean[y][x]))
 				paint_square(x, y, 0x000000FF, data);
 			x++;
 		}
