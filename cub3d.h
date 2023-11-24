@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 20:39:08 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 22:38:40 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define WIDTH_MAP_GAME     (int)(WIDTH * 0.3)
 # define SCALE_X			(WIDTH_MAP_GAME/data->map.width)
 # define SCALE_Y			(HEIGHT_MAP_GAME/data->map.height)
-# define DIST_FACTOR 0.05 
-# define DIST_FACTOR_STEVEN 0.01
+# define DIST_FACTOR 0.1 
+# define DIST_FACTOR_STEVEN 0.05
 
 # define BUFFER_SIZE 70
 
