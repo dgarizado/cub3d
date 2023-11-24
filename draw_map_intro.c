@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:25:06 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/23 22:00:53 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:24:44 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ static void	ft_draw_sq_map(t_data *data, int x1, int y1)
 			z = 0;
 			while (z < (WIDTH * 0.005))
 			{
-				if (x - z < WIDTH_IMG_TITLE_MAP && x - z > 0 && y - z > 0 && y - z < HEIGTH_IMG_TITLE_MAP)
-					mlx_put_pixel(data->img[MAP_INTRO], x - z, y - z, 0x9b9b9b80);
-				z++;
+				if (x - z++ < WIDTH_IMG_TITLE_MAP && x - z > 0 && y - z > 0 \
+				&& y - z < HEIGTH_IMG_TITLE_MAP)
+					mlx_put_pixel(data->img[MAP_INTRO], x - z, y - z, \
+					0x9b9b9b80);
 			}
-			if (x - z < WIDTH_IMG_TITLE_MAP && x - z > 0 && y - z > 0 && y - z < HEIGTH_IMG_TITLE_MAP)
+			if (x - z < WIDTH_IMG_TITLE_MAP && x - z > 0 && y - z > 0 && y - z \
+			< HEIGTH_IMG_TITLE_MAP)
 				mlx_put_pixel(data->img[MAP_INTRO], x - z, y - z, 0x7e7e7e80);
 			x++;
 		}
@@ -50,7 +52,9 @@ static void	draw_sq_map_intro(t_data *data, int row, int column)
 	dy = (int)((HEIGTH_IMG_TITLE_MAP * 0.4) / data->map.height);
 	width_mini_map = data->map.width * dx * data->title.boom;
 	heigth_mini_map = data->map.height * dy * data->title.boom;
-	ft_draw_sq_map(data, ((WIDTH_IMG_TITLE_MAP / 2) - (width_mini_map / 2)) + (column * dx) * data->title.boom, ((HEIGTH_IMG_TITLE_MAP * 0.70) - (heigth_mini_map / 2)) + (row * dy) * data->title.boom);
+	ft_draw_sq_map(data, ((WIDTH_IMG_TITLE_MAP / 2) - (width_mini_map / 2)) \
+	+ (column * dx) * data->title.boom, ((HEIGTH_IMG_TITLE_MAP * 0.70) - \
+	(heigth_mini_map / 2)) + (row * dy) * data->title.boom);
 }
 
 void	draw_title_map(t_data *data)

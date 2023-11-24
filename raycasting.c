@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 17:33:42 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/23 22:52:53 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:52:24 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	drawline_game(double x1, double y1, double y2, t_data *data)
 	double	dx;
 	double	dy;
 	double	steps;
-	int color;
+	int		color;
 
 	dy = y2 - y1;
 	steps = fabs(dy);
@@ -59,10 +59,8 @@ void	draw_colision(int rayCount, float angle, int n, t_data *data)
 	ray_end_x = data->px + (data->cast.bonus.distance[n] * cos((ft_degre_to_radian(angle))));
 	ray_end_y = data->py + (data->cast.bonus.distance[n] * sin((ft_degre_to_radian(angle))));
 	if (fabs(ray_end_x - round(ray_end_x)) > fabs(ray_end_y - round(ray_end_y)))
-		//colum_texture = (int)(ray_end_x * 1000) % 1000;
 		data->column_texture = (int)(ray_end_x * 1000) % 1000;
 	else
-		//colum_texture = (int)(ray_end_y * 1000) % 1000;
 		data->column_texture = (int)(ray_end_y * 1000) % 1000;
 	data->cast.bonus.distance[n] = fix_fish_eye(data->cast.bonus.distance[n], angle, data->angle);
 	wallheight = floor(HEIGHT / 2) / data->cast.bonus.distance[n];
@@ -74,8 +72,7 @@ void	draw_colision(int rayCount, float angle, int n, t_data *data)
 		drawline_game(rayCount, (HEIGHT / 2) + wallheight, HEIGHT, data);
 	}
 	data->cast.bonus.n = n;
-	//drawLineTexture_bonus(rayCount, (HEIGHT / 2) - wallheight, (HEIGHT / 2) + wallheight, colum_texture, data);
-	drawLineTexture_bonus(rayCount, (HEIGHT / 2) - wallheight, (HEIGHT / 2) + wallheight, data);
+	drawlinetexture_bonus(rayCount, (HEIGHT / 2) - wallheight, (HEIGHT / 2) + wallheight, data);
 }
 
 void	draw_colisions(int rayCount, float angle, int flag, t_data *data)

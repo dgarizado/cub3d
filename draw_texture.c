@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:10:37 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/23 22:51:40 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:18:49 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,21 @@ mlx_image_t* choose_image(int j, t_data *data)
 	{
 		img = choose_orientation(n, data);
 	}
-	else if(data->cast.bonus.type_wall_bonus[n] == '9' || data->cast.bonus.type_wall_bonus[n] == '1')//OJO IGUAL PUERTA Y MURO
-	img = data->sprites[WALL_N];
-	else if(data->cast.bonus.type_wall_bonus[n] == '8')
+	else if(data->cast.bonus.type_wall_bonus[n] == '9')//OJO IGUAL PUERTA Y MURO
+	img = data->sprites[WALL_TO_BROKE];
+	else if(data->cast.bonus.type_wall_bonus[n] == 'B')
 	img = data->sprites[BROKEN];
-	else if(data->cast.bonus.type_wall_bonus[n] == '6')
+	else if(data->cast.bonus.type_wall_bonus[n] == 'G')
 		img = data->sprites[GRASS];
 	else if(data->cast.bonus.type_wall_bonus[n] == '5')
 		img = data->sprites[AURA];
 	return (img);
 }
-void drawLineTexture_bonus(double x1, double y1, double y2, t_data *data)
-//void drawLineTexture_bonus(double x1, double y1, double y2, int column_texture, t_data *data)
+void drawlinetexture_bonus(double x1, double y1, double y2, t_data *data)
 {
 	double steps;
 	mlx_image_t* img;
-	int row_texture;//textura
+	int row_texture;
 	uint32_t color;
 	int n;
 	float step_y_texture;
@@ -66,7 +65,6 @@ void drawLineTexture_bonus(double x1, double y1, double y2, t_data *data)
 		if(x1 >= 0 && x1 <= WIDTH && y1 >= 0 && y1 <= HEIGHT)
 		{
 			row_texture = floor(step_y_texture * n);
-			//color = ((uint32_t*)img->pixels)[row_texture * img->width + column_texture];
 			color = ((uint32_t*)img->pixels)[(row_texture * img->width) + (data->column_texture)];
 			if(color != 0)
 				((uint32_t*)data->img[GAME]->pixels)[((int)y1 * data->img[GAME]->width + (int)x1)] = color;

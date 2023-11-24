@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:10:41 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/23 20:23:31 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:26:26 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,31 @@ int	check_limits(int x, int y, t_data *data)
 		return (0);
 	if (y < 0 || y > HEIGHT_IMG_TITLE)
 		return (0);
-	if (x + (WIDTH * 0.01) > WIDTH_IMG_TITLE || y + (WIDTH * 0.01) > HEIGHT_IMG_TITLE)
+	if (x + (WIDTH * 0.01) > WIDTH_IMG_TITLE || y + (WIDTH * 0.01) > \
+	HEIGHT_IMG_TITLE)
 		return (0);
 	return (1);
 }
 
 void	ft_draw_sq(mlx_image_t *img, t_data *data, int start_x, int start_y)
 {
-	t_coord *p;
-	p = &data->coord;
+	t_coord	*p;
 
+	p = &data->coord;
 	p->last_y = start_y + ((fabs)(HEIGHT_IMG_TITLE / data->title.heigth));
 	p->last_x = start_x + ((fabs)(WIDTH_IMG_TITLE / data->title.length));
 	p->y = start_y;
 	while (p->y < p->last_y)
 	{
-		if (check_limits(start_x, start_y, data) && check_limits(p->last_x, p->last_y, data))
+		if (check_limits(start_x, start_y, data) && check_limits(p->last_x, \
+		p->last_y, data))
 		{
-			p->x1 = start_x; p->y1 = p->y; p->x2 = p->last_x; p->y2 = p->y;
-			drawLine(p, set_color(p->y + data->title.color_up, data), img, data);
+			p->x1 = start_x;
+			p->y1 = p->y;
+			p->x2 = p->last_x;
+			p->y2 = p->y;
+			drawline(p, set_color(p->y + data->title.color_up, data), img, \
+			data);
 		}
 		(p->y)++;
 	}

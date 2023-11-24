@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:56:18 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/23 21:02:10 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:52:35 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	paint_square(int column, int row, int color, t_data *data)
 			data->coord.y1 = row * SCALE_Y + y;
 			data->coord.x2 = (column * SCALE_X) + SCALE_X;
 			data->coord.y2 = row * SCALE_Y + y;
-			drawLine(&data->coord, color, data->img[MINIMAP_GAME], data);
+			drawline(&data->coord, color, data->img[MINIMAP_GAME], data);
 		}
 		y++;
 	}
