@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 00:19:52 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/17 01:38:31 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:24:45 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ int	set_color(float y, t_data *data)
 {
 	float	height;
 	float	way;
-	int 	percent;
+	int		percent;
 
 	height = (HEIGHT_IMG_TITLE);
 	way = y / height;
-	percent = (int)(way*100);
+	percent = (int)(way * 100);
 	return (range_up(percent));
 }

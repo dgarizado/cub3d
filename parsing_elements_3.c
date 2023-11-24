@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:21:29 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/23 21:43:14 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:43:52 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	ft_check_path(char **bf, t_data *data)
 		flag = PATH_W;
 	else if (((bf[0][0] == 'E' && bf[0][1] == 'A') || (bf[0][0] == 'E' \
 	&& bf[0][1] == '\0')) && bf[1][0] == '.' && bf[1][1] == '/')
-		flag = 	PATH_E;
+		flag = PATH_E;
 	if (flag >= 0)
 	{
 		data->paths[flag] = ft_strdup(bf[1]);

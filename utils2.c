@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:41:11 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/22 11:50:17 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:50:54 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,10 @@ void	ft_free_textures(t_data *data)
 		}	
 		i++;
 	}
+}
+
+float fix_fish_eye(float distance, float angle, float angle_player)
+{
+	distance = distance * cos(ft_degre_to_radian(angle - angle_player));
+	return (distance);
 }

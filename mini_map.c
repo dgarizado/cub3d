@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:56:18 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 15:05:56 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:33:11 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	paint_square(int column, int row, int color, t_data *data)
 	int	y;
 
 	y = 0;
-	while (y < HEIGHT_MAP_GAME / data->map.height && row * SCALE_Y + y < HEIGHT_MAP_GAME)
+	while (y < HEIGHT_MAP_GAME / data->map.height && row * SCALE_Y + \
+	y < HEIGHT_MAP_GAME)
 	{
 		if ((column * SCALE_X) + SCALE_X <= WIDTH_MAP_GAME)
 		{
@@ -42,7 +43,9 @@ void	draw_squares(t_data *data)
 		x = 0;
 		while (x < data->map.width)
 		{
-			if (data->map.map_aclean[y][x] == '1' || data->map.map_aclean[y][x] == '9' || data->map.map_aclean[y][x] == 'D')
+			if (data->map.map_aclean[y][x] == '1' || \
+			data->map.map_aclean[y][x] == '9' || \
+			data->map.map_aclean[y][x] == 'D')
 				paint_square(x, y, 0xFFFFFFFF, data);
 			x++;
 		}
@@ -79,15 +82,15 @@ void	draw_steven(t_data *data, int radio)
 	int		angulo;
 
 	angulo = 0;
-		while (angulo <= 360)
-		{
-			radianes = angulo * (M_PI / 180.0);
-			x = (data->steven_x * SCALE_X) + (radio * cos(radianes));
-			y = (data->steven_y * SCALE_Y) + (radio * sin(radianes));
-			if (x > 0 && x < WIDTH_MAP_GAME && y > 0 && y < HEIGHT_MAP_GAME)
-				mlx_put_pixel(data->img[MINIMAP_GAME], x, y, 0xFF0000FF);
-			angulo += 10;
-		}
+	while (angulo <= 360)
+	{
+		radianes = angulo * (M_PI / 180.0);
+		x = (data->steven_x * SCALE_X) + (radio * cos(radianes));
+		y = (data->steven_y * SCALE_Y) + (radio * sin(radianes));
+		if (x > 0 && x < WIDTH_MAP_GAME && y > 0 && y < HEIGHT_MAP_GAME)
+			mlx_put_pixel(data->img[MINIMAP_GAME], x, y, 0xFF0000FF);
+		angulo += 10;
+	}
 }
 
 void	ft_draw_minimap(t_data *data)

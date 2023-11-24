@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 15:11:39 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:41:51 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,10 +262,7 @@ void	draw_steven_sprite(t_data *data);
 //MOVEMENTS
 void 	ft_move_players(t_data *data);
 void 	ft_check_interaction(t_data *data);
-
-
-
-
+void	ft_check_move(double *temp, double *ptr_x, double *ptr_y, t_data *d);
 
 
 #endif

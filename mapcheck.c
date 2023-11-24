@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/22 11:47:14 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:28:29 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ bool	ft_read_map(char **argv, t_data *data, int fd)
 			i++;
 		data->map.bytes = i * BUFFER_SIZE;
 		close(fd);
-		free(data->map.map_s); //[1] Freed here
-		data->map.map_s = ft_calloc(1, data->map.bytes); //[2] malloc Take care of this!!
+		free(data->map.map_s);
+		data->map.map_s = ft_calloc(1, data->map.bytes);
 		fd = open(argv[1], O_RDONLY);
 		read(fd, data->map.map_s, data->map.bytes);
 	}
@@ -94,17 +94,18 @@ bool	ft_mapcheck(char **argv, t_data *data)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		ft_error(INPUT_OPN);
-	data->map.map_s = ft_calloc(1, BUFFER_SIZE);//[1] malloc Take care of this!!
+	data->map.map_s = ft_calloc(1, BUFFER_SIZE);
 	if (!data->map.map_s)
 		ft_error("Malloc error\n");
 	ft_read_map(argv, data, fd);
-	data->map.map_a = ft_split(data->map.map_s, '\n'); //[3] malloc Take care of this!!
+	data->map.map_a = ft_split(data->map.map_s, '\n');
 	if (!data->map.map_a)
 		ft_error("Malloc error\n");
-	if (data->map.map_a[0] == NULL || data->map.map_a[1] == NULL || data->map.map_a[2] == NULL) //HARDCODED
+	if (data->map.map_a[0] == NULL || data->map.map_a[1] == NULL || \
+	data->map.map_a[2] == NULL)
 	{
 		free(data->map.map_s);
-		ft_abort(data->map.map_a, ft_arrlen(data->map.map_a)); //[2 and 3] Freed here
+		ft_abort(data->map.map_a, ft_arrlen(data->map.map_a));
 		ft_error("Map error\n");
 	}
 	ft_parse_info(data);

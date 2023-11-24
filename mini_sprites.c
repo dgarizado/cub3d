@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:24:27 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/22 11:57:06 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:35:51 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,3 @@ void	ft_load_minisprites(t_data *data)
 	}
 
 }
-

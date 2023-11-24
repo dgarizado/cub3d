@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:25:06 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 15:18:05 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:23:06 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,21 @@ static void	draw_sq_map_intro(t_data *data, int row, int column)
 	(heigth_mini_map / 2)) + (row * dy) * data->title.boom);
 }
 
-void	draw_title_map(t_data *data)
+void	draw_title_map(t_data *d)
 {
 	int	row;
 	int	column;
 
 	row = 0;
-	while (data->map.map_aclean[row])
+	while (d->map.map_aclean[row])
 	{
 		column = 0;
-		while (data->map.map_aclean[row][column])
+		while (d->map.map_aclean[row][column])
 		{
-			if (data->map.map_aclean[row][column] == '1' || data->map.map_aclean[row][column] == '9'|| data->map.map_aclean[row][column] == 'D')
-				draw_sq_map_intro(data, row, column);
+			if (d->map.map_aclean[row][column] == '1' || \
+			d->map.map_aclean[row][column] == '9' || \
+			d->map.map_aclean[row][column] == 'D')
+				draw_sq_map_intro(d, row, column);
 			column++;
 		}
 		row++;
