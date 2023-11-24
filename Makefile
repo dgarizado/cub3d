@@ -6,7 +6,7 @@
 #    By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 18:46:57 by dgarizad          #+#    #+#              #
-#    Updated: 2023/11/20 18:08:11 by dgarizad         ###   ########.fr        #
+#    Updated: 2023/11/24 13:44:26 by dgarizad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,19 +49,19 @@ OBJDIRBONUS = ./obj_bonus
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
 
-SRC = cub3d.c game.c mapanal.c mapanal2.c mapcheck.c mapcheck2.c mini_sprites.c \
+SRC = $(addprefix ./src/, cub3d.c game.c mapanal.c mapanal2.c mapcheck.c mapcheck2.c mini_sprites.c \
 movements.c parsing_elements.c parsing_elements_2.c parsing_elements_3.c \
-rayban.c textureparsing.c utils.c utils2.c render.c game_aux.c
+rayban.c textureparsing.c utils.c utils2.c render.c game_aux.c)
 
 SRCBONUS = cub3d.c game_bonus.c mapanal.c mapanal2.c mapcheck.c mapcheck2_bonus.c mini_sprites.c \
 movements.c parsing_elements.c parsing_elements_2.c parsing_elements_3.c \
 rayban.c textureparsing.c utils.c utils2.c render.c game_aux_bonus.c 
 
-OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
+OBJS = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))
 
 OBJSBONUS = $(addprefix $(OBJDIRBONUS)/, $(SRCBONUS:.c=.o))
 
-$(OBJDIR)/%.o: %.c $(HEADER)
+$(OBJDIR)/%.o: src/%.c $(HEADER)
 	@mkdir -p $(OBJDIR)
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
