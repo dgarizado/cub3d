@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 17:44:40 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:50:24 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define FOV 60
 # define PPC 40
 # define WIDTH 1400
-# define HEIGHT 800
+# define HEIGHT 900
 # define MOVE_SPEED 0.067
 # define MINIMAP_SCALE 12
 # define NORTH 0

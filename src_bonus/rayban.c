@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:02:13 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 17:16:37 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:17:04 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	ray_update(t_data *data)
 
 void	ray_bang(t_data *data)
 {
+	printf("width %d\n", data->map.mlx->width);
 	data->ray.x = 0;
 	while (data->ray.x < data->map.mlx->width)
 	{
