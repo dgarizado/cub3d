@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 12:44:33 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 22:26:49 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:01:51 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,16 +107,14 @@ float	rays(t_data *data, float angle)
 		if (into_limits(data))
 		{
 			c = get_value_map(data);
-			if (c == '1' || c == '9' || c == 'D')
+			if (c == '1' || c == 'D')
 			{
 				set_params_colision(n, data);
 				break ;
 			}
-			else if (c == 'B' || c == 'O' || c == 'V' || c == 'G' || c == 'A')
-			{
-				if (n < 8)
-					set_params_colision(n++, data);
-			}
+			else if (n < 8 && (c == 'B' || c == 'O' || c == 'V' || c == 'G' \
+			|| c == 'A' || c == '9' ))
+				set_params_colision(n++, data);
 		}
 	}
 	return (data->cast.ray_length);

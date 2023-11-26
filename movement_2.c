@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:39:44 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 23:05:27 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/25 13:10:55 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,12 @@ void	ft_check_interaction(t_data *d)
 {
 	float	x;
 	float	y;
+	static int n;
 
 	if (mlx_is_key_down(d->mlx, MLX_KEY_Q))
 	{
-		x = cos(ft_degre_to_radian(d->angle)) * 1;
-		y = sin(ft_degre_to_radian(d->angle)) * 1;
+		x = cos(ft_degre_to_radian(d->angle)) * 1.1;
+		y = sin(ft_degre_to_radian(d->angle)) * 1.1;
 		if (d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] == '9')
 			d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] = 'B';
 		else if (d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] == 'D')

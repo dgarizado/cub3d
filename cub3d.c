@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:36:08 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 22:45:19 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:41:25 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	leaks(void)
 void	put_images_to_windows(t_data *data, mlx_t *mlx)
 {
 	mlx_image_to_window(mlx, data->img[GAME], 0, 0);
-	mlx_image_to_window(mlx, data->img[MINIMAP_GAME], WIDTH * 0.01, HEIGHT * 0.01);
-	mlx_image_to_window(mlx, data->img[TITLE_INTRO], (WIDTH / 2) - (WIDTH_IMG_TITLE / 2), (HEIGHT * 0.03));
+	mlx_image_to_window(mlx, data->img[MINIMAP_GAME], WIDTH * 0.01, \
+	HEIGHT * 0.01);
+	mlx_image_to_window(mlx, data->img[TITLE_INTRO], (WIDTH / 2) - \
+	(WIDTH_IMG_TITLE / 2), (HEIGHT * 0.03));
 	mlx_image_to_window(mlx, data->img[MAP_INTRO], 0, 0);
 	mlx_image_to_window(mlx, data->sprites[PISTOL_BANG], \
 	mlx->width / 2 - \
@@ -35,16 +37,14 @@ void	put_images_to_windows(t_data *data, mlx_t *mlx)
 	data->sprites[PISTOL]->instances[0].enabled = false;
 }
 
-	//------------SEG FAULT SI NO ASIGNA WALLS SE SUPONE QUE SE SETEA EN PARSEO*****************************
-//	data->textures[WALL_N] = mlx_load_png(data->paths[PATH_N]);
-//	data->textures[WALL_S] = mlx_load_png(data->paths[PATH_S]);
-//	data->textures[WALL_E] = mlx_load_png(data->paths[PATH_E]);
-//	data->textures[WALL_W] = mlx_load_png(data->paths[PATH_W]);
 void	load_graphics(mlx_t *mlx, t_data *data)
 {
-	data->img[TITLE_INTRO] = mlx_new_image(mlx, WIDTH_IMG_TITLE, HEIGHT_IMG_TITLE);
-	data->img[MAP_INTRO] = mlx_new_image(mlx, WIDTH_IMG_TITLE_MAP, HEIGTH_IMG_TITLE_MAP);
-	data->img[MINIMAP_GAME] = mlx_new_image(mlx, (int)(WIDTH_MAP_GAME), (int)(HEIGHT_MAP_GAME));
+	data->img[TITLE_INTRO] = mlx_new_image(mlx, WIDTH_IMG_TITLE, \
+	HEIGHT_IMG_TITLE);
+	data->img[MAP_INTRO] = mlx_new_image(mlx, WIDTH_IMG_TITLE_MAP, \
+	HEIGTH_IMG_TITLE_MAP);
+	data->img[MINIMAP_GAME] = mlx_new_image(mlx, (int)(WIDTH_MAP_GAME), \
+	(int)(HEIGHT_MAP_GAME));
 	data->img[GAME] = mlx_new_image(mlx, WIDTH, HEIGHT);
 	data->textures[WALL_TO_BROKE] = mlx_load_png("./imgs/wall_to_broke.png");
 	data->textures[ENEMY] = mlx_load_png("./imgs/zombie.png");

@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 17:32:03 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/25 16:57:12 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	get_enemy_coords(int i, int j, t_data *data)
 {
-	if (ft_strchr("Z", data->map.map_aclean[i][j]) != NULL)
+	static int x;
+	
+	if (ft_strchr("Z", data->map.map_aclean[i][j]) != NULL && x < 16)
 	{
-		data->steven_x = (double)(j + 0.5f);
-		data->steven_y = (double)(i + 0.5f);
-		if (data->map.map_aclean[i][j] == 'N')
-			data->angle = 270;
-		if (data->map.map_aclean[i][j] == 'S')
-			data->angle = 90;
-		if (data->map.map_aclean[i][j] == 'W')
-			data->angle = 180;
-		if (data->map.map_aclean[i][j] == 'E')
-			data->angle = 0;
+		printf("valor n %d\n", x);
+		//data->steven_x = (double)(j + 0.5f);
+		//data->steven_y = (double)(i + 0.5f);
+		data->stv_x[x] =  (double)(j + 0.5f);
+		data->stv_y[x] = (double)(i + 0.5f);
+		data->steven_x = data->stv_x[0];
+		data->steven_y = data->stv_y[0];
+		x++;
 	}
 }
 

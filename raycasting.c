@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 17:33:42 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 23:17:34 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:28:32 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,21 @@
 
 int	detras_de_steven_bonus(t_data *d, int n)
 {
-	if (d->cast.bonus.flag_bonus[n] == 'x' && d->cast.bonus.cell_step_bonus[n] == -1 && (d->cast.bonus.current_cell_bonus[n]) < (int)d->steven_x)
+	if (d->cast.bonus.flag_bonus[n] == 'x' && \
+	d->cast.bonus.cell_step_bonus[n] == -1 && \
+	(d->cast.bonus.current_cell_bonus[n]) < (int)d->steven_x)
 		return (1);
-	else if (d->cast.bonus.flag_bonus[n] == 'x' && d->cast.bonus.cell_step_bonus[n] == 1 && (d->cast.bonus.current_cell_bonus[n]) > (int)d->steven_x)
+	else if (d->cast.bonus.flag_bonus[n] == 'x' && \
+	d->cast.bonus.cell_step_bonus[n] == 1 && \
+	(d->cast.bonus.current_cell_bonus[n]) > (int)d->steven_x)
 		return (1);
-	else if (d->cast.bonus.flag_bonus[n] == 'y' && d->cast.bonus.cell_step_bonus[n] == -1 && (d->cast.bonus.current_cell_bonus[n]) < (int)d->steven_y)
+	else if (d->cast.bonus.flag_bonus[n] == 'y' && \
+	d->cast.bonus.cell_step_bonus[n] == -1 && \
+	(d->cast.bonus.current_cell_bonus[n]) < (int)d->steven_y)
 		return (1);
-	else if (d->cast.bonus.flag_bonus[n] == 'y' && d->cast.bonus.cell_step_bonus[n] == 1 && (d->cast.bonus.current_cell_bonus[n]) > (int)d->steven_y)
+	else if (d->cast.bonus.flag_bonus[n] == 'y' && \
+	d->cast.bonus.cell_step_bonus[n] == 1 && \
+	(d->cast.bonus.current_cell_bonus[n]) > (int)d->steven_y)
 		return (1);
 	return (0);
 }
@@ -73,9 +81,8 @@ void	draw_colision(int rayCount, float a, int n, t_data *data)
 		drawline_game(rayCount, (HEIGHT / 2) + wallheight - data->up, HEIGHT, data);
 	}
 	data->cast.bonus.n = n;
-	//drawlinetexture_bonus(rayCount, (HEIGHT / 2) - wallheight, (HEIGHT / 2) \
-	+ wallheight, data);
-	drawlinetexture_bonus(rayCount, (HEIGHT / 2) - wallheight - data->up, (HEIGHT / 2) + wallheight - data->up, data);
+	drawlinetexture_bonus(rayCount, (HEIGHT / 2) - wallheight - data->up, \
+	(HEIGHT / 2) + wallheight - data->up, data);
 }
 
 void	draw_colisions(int rayCount, float angle, int flag, t_data *data)

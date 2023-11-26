@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 23:03:08 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:35:40 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,8 @@ typedef struct s_macro_data
 	double 		py;
 	double 		steven_x;
 	double 		steven_y;
+	double		stv_x[16];
+	double		stv_y[16];
 	int 		mouse_x;
 	int 		mouse_y;
 	double 		angle_steven;
@@ -190,12 +192,14 @@ void	draw_title_map(t_data *data);
 void	ft_draw_minimap(t_data *data);
 void	draw_raycast_map(t_data *data);
 
-
-
 //MAPCHECK
 bool	ft_mapcheck(char **argv, t_data *data);
 int		ft_check_colors(t_data *data, int line_reached);
 int		ft_check_paths(t_data *data, int line_reached);
+
+//MAPCHECK2
+bool	ft_clean_map(t_data *data, int i);
+bool	ft_check_chars(t_data *data);
 
 //PARSING_ELEMENTS
 int		ft_parse_elements(t_data *data);
@@ -209,63 +213,65 @@ char 	**ft_skip_sp_arr(char **arr);
 //UTILS
 void	ft_error(char *err);
 void	msg_error(char *err);
-void	ft_print_array(char **array);
-int		ft_ismap(char *line, char *str);
+int		ft_arrlen(char **arr);
 char	**ft_abort(char **new_array, unsigned int i);
+int		ft_ismap(char *line, char *str);
+int		set_color(float y, t_data *data);
+int		into_limits(t_data *data);
+int		almost_equal(double izquierda, double derecha);
+void	ft_step(t_data *d);
+void	ft_check_win(t_data *data);
 
 //UTILS2
+void	ft_print_array(char **array);
 void	ft_free_maps(t_data *data);
-int		ft_arrlen(char **arr);
 void	ft_free_textures(t_data *data);
+void	ft_load_minisprites(t_data *data);
 
-//***UTILS
-int		set_color(float y, t_data *data);
-double	ft_degre_to_radian(double degre);
-double	radian_to_grade(double radianes);
+//UTILS3
 void	normalize_angle(double *angulo_me, double *angle_steven_from_me);
-int		into_limits(t_data *data);
+int		last_colision_arr(int *arr);
+
+//UTILS4
+double	radian_to_grade(double radianes);
+double	ft_degre_to_radian(double degre);
+float	fix_fish_eye(float distance, float angle, float angle_player);
 
 //TEXTURE PARSING
 bool	ft_texture_parse(t_data *data, int flag);
 
-//MAPCHECK2
-bool	ft_clean_map(t_data *data, int i);
-bool	ft_check_chars(t_data *data);
-
-//MAPANAL
+//MAPANALISIS
 bool	ft_map_anal(t_data *data);
 
-//MAPANAL2
+//MAPANALISIS2
 void	ft_space_check_aux(t_data *data, int i, int j);
 
 //LOOPS
 void	ft_loop(void *d);
 
 //DRAWLINE
-void	drawlinetexture_bonus(double x1, double y1, double y2, t_data *data);
-void 	drawline(t_coord *p, int color, mlx_image_t *ptr, t_data *data);
-
-//MINISPRITES
-void	ft_load_minisprites(t_data *data);
+void		drawlinetexture_bonus(double x1, double y1, double y2, t_data *data);
+void 		drawline(t_coord *p, int color, mlx_image_t *ptr, t_data *data);
+uint32_t	apply_shading(t_data *data, uint8_t r, uint8_t g, uint32_t color);
 
 //RAYCASTING
 float	rays(t_data *data, float angle);
 int		get_value_map(t_data *data);
 void	raycast_game(t_data *data);
-float	fix_fish_eye(float distance, float angle, float angle_player);
-int		last_colision_arr(int *arr);
 void	set_params_colision(int n, t_data *data);
 
 //ZOMBIE
-void	ft_draw_steven(float wallheight, int column, t_data *data);
-void	draw_steven_sprite(t_data *data);
+void		ft_draw_steven(float wallheight, int column, t_data *data);
+void		draw_steven_sprite(t_data *data);
+void		encounter_steven(t_data *data);
+int			aim_sprite(t_data *data);
+void 		ft_kill(t_data	*data);
+mlx_image_t	*choose_img_zombie(t_data *data);
 
 //MOVEMENTS
 void 	ft_move_players(t_data *data);
 void 	ft_check_interaction(t_data *data);
 void	ft_check_move(double *temp, double *ptr_x, double *ptr_y, t_data *d);
-
-void	encounter_steven(t_data *data);
 void 	mouse(t_data *data);
 
 

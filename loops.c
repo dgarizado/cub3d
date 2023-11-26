@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loops.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:36:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 22:11:46 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:14:24 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,18 @@ void	ft_transition(int *n, t_data *data)
 void	ft_game_loop(void *d)
 {
 	t_data	*data;
-
+	
 	data = (t_data *)d;
 	if (mlx_is_key_down(data->mlx, 256))
 		mlx_close_window(data->mlx);
 	ft_memset(data->img[MINIMAP_GAME]->pixels, 0, (int)(WIDTH_MAP_GAME)  *(int)(HEIGHT_MAP_GAME) * sizeof(int));
-	ft_memset(data->img[GAME]->pixels, 0, (int)(WIDTH) * (int)(HEIGHT) * sizeof(int));
 	ft_move_players(data);
 	ft_check_interaction(data);
 	ft_draw_minimap(data);
 	raycast_game(data);
 	mouse(data);
-	if (mlx_is_mouse_down(data->mlx, MLX_MOUSE_BUTTON_LEFT))
-	{
-		data->sprites[PISTOL]->instances[0].enabled = false;
-		data->sprites[PISTOL_BANG]->instances[0].enabled = true;
-	}
+	ft_kill(data);
+
 }
 
 void	ft_intro_loop(t_data	*data)
@@ -69,7 +65,7 @@ void	ft_intro_loop(t_data	*data)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ENTER))
 		data->title.flag = 1;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(data->mlx);//falta funcion pa liberar todo
+		mlx_close_window(data->mlx);
 	if (data->title.flag == 0)
 	{
 		draw_title_map(data);

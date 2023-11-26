@@ -6,7 +6,7 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:41:11 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 18:21:16 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:27:17 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,50 @@ void	ft_free_textures(t_data *data)
 			free(data->textures[i]->pixels);
 			free(data->textures[i]);
 		}
+		i++;
+	}
+}
+/**
+ * @brief Here we load the png 
+ * images of the walls and convert them to an mlx_texture_t
+ * If all is ok this data->textures will be used
+ * to create the images of the walls in the ft_load_minisprites function.
+ * Also here we could check if the image has the correct size!
+ * @param data 
+ * @param flag 
+ * @return true 
+ * @return false 
+ */
+bool	ft_texture_parse(t_data *data, int flag)
+{
+	mlx_texture_t	*texture;
+
+	texture = mlx_load_png(data->paths[flag]);
+	if (texture == NULL)
+	{
+		return (false);
+	}
+	data->textures[flag] = texture;
+	return (true);
+}
+
+/**
+ * @brief This function is used to load the mini sprites
+ * that will be used in the game. Wall textures
+ * are treated appart just because they are not 
+ * loaded in the same way.
+ * Sprites are loaded individually
+ * @param data 
+ */
+void	ft_load_minisprites(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < SPRITES_COUNT)
+	{
+		data->sprites[i] = mlx_texture_to_image(data->mlx, \
+		data->textures[i]);
 		i++;
 	}
 }

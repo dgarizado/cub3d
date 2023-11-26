@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:10:37 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 23:21:24 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:11:48 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,7 @@ mlx_image_t	*choose_image(t_data *data)
 	img = NULL;
 	n = data->cast.bonus.n;
 	if (n == -1)
-	{
-		if (mlx_is_mouse_down(data->mlx, MLX_MOUSE_BUTTON_LEFT))
-			img = data->sprites[ENEMY2];
-		else
-			img = data->sprites[ENEMY];
-	}
+		img  = choose_img_zombie(data);
 	else if (data->cast.bonus.type_wall_bonus[n] == '1')
 		img = choose_orientation(n, data);
 	else if (data->cast.bonus.type_wall_bonus[n] == '9')
@@ -72,26 +67,6 @@ int	ft_recalibrate_offset(double *y2, double *y1, t_data *data)
 	return (offsety1);
 }
 
-
-uint32_t	apply_shading(t_data *data, uint8_t r, uint8_t g, uint32_t color)
-{
-	uint8_t	b;
-	uint8_t	a;
-	double	shading_factor;
-
-	shading_factor = 1.0 - data->cast.bonus.distance[data->cast.bonus.n] / 10;
-	if (shading_factor < 0.1)
-		shading_factor = 0.1;
-	r = (color >> 24) & 255;
-	g = (color >> 16) & 255;
-	b = (color >> 8) & 255;
-	a = color & 255;
-	r = (uint8_t)(r * shading_factor);
-	g = (uint8_t)(g * shading_factor);
-	b = (uint8_t)(b * shading_factor);
-	a = (uint8_t)(a * shading_factor);
-	return ((r << 24) | (g << 16) | (b << 8) | a);
-}
 
 void	ft_draw_texture(int *arr, float y_texture, mlx_image_t *img, t_data *d)
 {
