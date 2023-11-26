@@ -6,7 +6,7 @@
 #    By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 18:46:57 by dgarizad          #+#    #+#              #
-#    Updated: 2023/11/24 17:46:07 by dgarizad         ###   ########.fr        #
+#    Updated: 2023/11/26 17:58:05 by dgarizad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ NAME := cub3D
 NAMEBONUS := cub3D_bonus
 LIBMLX := ./lib/MLX42
 LIBFT = ./libft/libft.a
-HEADERS := "-I./inc -I$(LIBMLX)/include"
+HEADERS := "-I$(LIBMLX)/include"
 HEADER = ./src/cub3d.h
 HEADERBONUS = ./src_bonus/cub3d.h
 CC = gcc -g
