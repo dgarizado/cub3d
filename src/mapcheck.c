@@ -6,12 +6,12 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/26 18:51:21 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:06:06 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "cub3d_bonus.h"
+#include "cub3d.h"
 
 /**
  * @brief Parse the map by checking if all info elements are present and valid.
@@ -29,7 +29,7 @@ bool	ft_parse_info(t_data *data)
 	{
 		free(data->map.map_s);
 		ft_abort(data->map.map_a, ft_arrlen(data->map.map_a));
-		ft_special_abort(data->paths, PATH_COUNT);
+		ft_special_abort(data->paths, TEX_COUNT);
 		exit(1);
 	}
 	ft_clean_map(data, line);

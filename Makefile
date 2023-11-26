@@ -6,7 +6,7 @@
 #    By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 18:46:57 by dgarizad          #+#    #+#              #
-#    Updated: 2023/11/26 18:40:05 by dgarizad         ###   ########.fr        #
+#    Updated: 2023/11/26 19:47:57 by dgarizad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,9 +40,9 @@ LIBMLX := ./lib/MLX42
 LIBFT = ./libft/libft.a
 HEADERS := "-I$(LIBMLX)/include"
 HEADER = ./src/cub3d.h
-HEADERBONUS = ./src_bonus/cub3d.h
+HEADERBONUS = ./src_bonus/cub3d_bonus.h
 CC = gcc -g
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 LIBS	:= -ldl -lglfw -L "/Users/$(USER)/.brew/opt/glfw/lib/" -lm $(LIBMLX)/libmlx42.a
 OBJDIR = ./obj
 OBJDIRBONUS = ./obj_bonus
@@ -54,12 +54,12 @@ SRC = $(addprefix ./src/, cub3d.c game.c mapanal.c mapanal2.c mapcheck.c mapchec
 movements.c parsing_elements.c parsing_elements_2.c parsing_elements_3.c \
 rayban.c textureparsing.c utils.c utils2.c render.c game_aux.c)
 
-SRCBONUS = cub3d_bonus.c  mapanal_bonus.c mapanal2_bonus.c mapcheck_bonus.c mapcheck2_bonus.c \
+SRCBONUS = $(addprefix ./src_bonus/,cub3d_bonus.c  mapanal_bonus.c mapanal2_bonus.c mapcheck_bonus.c mapcheck2_bonus.c \
 movement_bonus.c movement_3_bonus.c parsing_elements_bonus.c parsing_elements_2_bonus.c \
 parsing_elements_3_bonus.c utils_bonus.c utils2_bonus.c utils3_bonus.c draw_title_intro_bonus.c \
 draw_title_intro_2_bonus.c loops_bonus.c mini_map_bonus.c raycasting_minimap_bonus.c \
 casting_bonus.c casting_2_bonus.c raycasting_bonus.c draw_steven_bonus.c draw_texture_bonus.c \
-draw_map_intro_bonus.c parsing_tittle_bonus.c movement_2_bonus.c utils4_bonus.c kill_bonus.c draw_texture_2_bonus.c 
+draw_map_intro_bonus.c parsing_tittle_bonus.c movement_2_bonus.c utils4_bonus.c kill_bonus.c draw_texture_2_bonus.c)
 
 OBJS = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))
 

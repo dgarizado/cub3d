@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_elements_bonus.c                           :+:      :+:    :+:   */
+/*   parsing_elements.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:53:05 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/26 18:01:51 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:04:10 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "cub3d_bonus.h"
+#include "cub3d.h"
 
 /**
  * @brief check if * was freed. NO free(arr).

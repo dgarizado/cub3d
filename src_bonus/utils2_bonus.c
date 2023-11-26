@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   utils2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:41:11 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 15:03:12 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:45:15 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "cub3d_bonus.h"
 
 //DELETE THIS AT THE END OF THE PROJECT
 void	ft_print_array(char **array)
@@ -26,26 +27,6 @@ void	ft_print_array(char **array)
 	}
 }
 //DELETE THIS AT THE END OF THE PROJECT
-
-uint32_t	apply_shading(t_data *data, uint8_t r, uint8_t g, uint32_t color)
-{
-	uint8_t	b;
-	uint8_t	a;
-	double	shading_factor;
-
-	shading_factor = 1.0 - data->ray.perpwalldist / 25;
-	if (shading_factor < 0.1)
-		shading_factor = 0.1;
-	r = (color >> 24) & 255;
-	g = (color >> 16) & 255;
-	b = (color >> 8) & 255;
-	a = color & 255;
-	r = (uint8_t)(r * shading_factor);
-	g = (uint8_t)(g * shading_factor);
-	b = (uint8_t)(b * shading_factor);
-	a = (uint8_t)(a * shading_factor);
-	return ((r << 24) | (g << 16) | (b << 8) | a);
-}
 
 /**
  * @brief This function is used to free all the pointers allocated
@@ -73,13 +54,57 @@ void	ft_free_textures(t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < TEX_COUNT)
+	while (i < SPRITES_COUNT)
 	{
 		if (data->textures[i])
 		{
 			free(data->textures[i]->pixels);
 			free(data->textures[i]);
 		}
+		i++;
+	}
+}
+/**
+ * @brief Here we load the png 
+ * images of the walls and convert them to an mlx_texture_t
+ * If all is ok this data->textures will be used
+ * to create the images of the walls in the ft_load_minisprites function.
+ * Also here we could check if the image has the correct size!
+ * @param data 
+ * @param flag 
+ * @return true 
+ * @return false 
+ */
+bool	ft_texture_parse(t_data *data, int flag)
+{
+	mlx_texture_t	*texture;
+
+	texture = mlx_load_png(data->paths[flag]);
+	if (texture == NULL)
+	{
+		return (false);
+	}
+	data->textures[flag] = texture;
+	return (true);
+}
+
+/**
+ * @brief This function is used to load the mini sprites
+ * that will be used in the game. Wall textures
+ * are treated appart just because they are not 
+ * loaded in the same way.
+ * Sprites are loaded individually
+ * @param data 
+ */
+void	ft_load_minisprites(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < SPRITES_COUNT)
+	{
+		data->sprites[i] = mlx_texture_to_image(data->mlx, \
+		data->textures[i]);
 		i++;
 	}
 }

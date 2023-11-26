@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapcheck.c                                         :+:      :+:    :+:   */
+/*   mapcheck_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/23 22:31:34 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:44:11 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "cub3d_bonus.h"
 
 /**
  * @brief Parse the map by checking if all info elements are present and valid.
@@ -28,7 +29,7 @@ bool	ft_parse_info(t_data *data)
 	{
 		free(data->map.map_s);
 		ft_abort(data->map.map_a, ft_arrlen(data->map.map_a));
-		ft_special_abort(data->paths, TEX_COUNT);
+		ft_special_abort(data->paths, PATH_COUNT);
 		exit(1);
 	}
 	ft_clean_map(data, line);
@@ -101,8 +102,8 @@ bool	ft_mapcheck(char **argv, t_data *data)
 	data->map.map_a = ft_split(data->map.map_s, '\n');
 	if (!data->map.map_a)
 		ft_error("Malloc error\n");
-	if (data->map.map_a[0] == NULL || data->map.map_a[1] == NULL \
-	|| data->map.map_a[2] == NULL)
+	if (data->map.map_a[0] == NULL || data->map.map_a[1] == NULL || \
+	data->map.map_a[2] == NULL)
 	{
 		free(data->map.map_s);
 		ft_abort(data->map.map_a, ft_arrlen(data->map.map_a));
