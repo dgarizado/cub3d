@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map_intro.c                                   :+:      :+:    :+:   */
+/*   draw_map_intro_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:25:06 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 17:23:06 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:01:23 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "cub3d_bonus.h"
 
 static void	ft_draw_sq_map(t_data *data, int x1, int y1)
 {

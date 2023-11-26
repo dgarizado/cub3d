@@ -6,11 +6,12 @@
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/25 16:57:12 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:08:38 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "cub3d_bonus.h"
 
 void	get_enemy_coords(int i, int j, t_data *data)
 {
@@ -18,9 +19,6 @@ void	get_enemy_coords(int i, int j, t_data *data)
 	
 	if (ft_strchr("Z", data->map.map_aclean[i][j]) != NULL && x < 16)
 	{
-		printf("valor n %d\n", x);
-		//data->steven_x = (double)(j + 0.5f);
-		//data->steven_y = (double)(i + 0.5f);
 		data->stv_x[x] =  (double)(j + 0.5f);
 		data->stv_y[x] = (double)(i + 0.5f);
 		data->steven_x = data->stv_x[0];

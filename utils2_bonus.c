@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   utils2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:41:11 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/25 18:27:17 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:02:11 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "cub3d_bonus.h"
 
 //DELETE THIS AT THE END OF THE PROJECT
 void	ft_print_array(char **array)

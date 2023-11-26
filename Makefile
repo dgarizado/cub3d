@@ -6,7 +6,7 @@
 #    By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 18:46:57 by dgarizad          #+#    #+#              #
-#    Updated: 2023/11/25 18:27:36 by vcereced         ###   ########.fr        #
+#    Updated: 2023/11/26 18:05:15 by vcereced         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ NAMEBONUS := cub3d_bonus
 LIBMLX := ./lib/MLX42
 LIBFT = ./libft/libft.a
 HEADERS := "-I./inc -I$(LIBMLX)/include"
-HEADER = cub3d.h
+HEADER = cub3d_bonus.h
 CC = gcc -g
 CFLAGS = #-Wall -Wextra -Werror
 LIBS	:= -ldl -lglfw -L "/Users/$(USER)/.brew/opt/glfw/lib/" -lm $(LIBMLX)/libmlx42.a
@@ -54,11 +54,12 @@ movement.c parsing_elements.c parsing_elements_2.c parsing_elements_3.c \
 textureparsing.c utils.c utils2.c  game_aux.c draw_map_intro.c draw_texture.c draw_steven.c\
 draw_title_intro.c draw_title_intro_2.c intro.c utils_2.c utils3.c mini_map.c raycasting_minimap.c casting.c casting_2.c raycasting.c
 
-SRCBONUS = cub3d.c  mapanal.c mapanal2.c mapcheck.c mapcheck2_bonus.c \
-movement.c parsing_elements.c parsing_elements_2.c parsing_elements_3.c \
- utils.c utils2.c utils3.c draw_title_intro.c \
-draw_title_intro_2.c loops.c  mini_map.c raycasting_minimap.c casting.c casting_2.c \
-raycasting.c draw_steven.c draw_texture.c draw_map_intro.c parsing_tittle.c movement_2.c utils4.c kill.c draw_texture_2.c movement_3.c
+SRCBONUS = cub3d_bonus.c  mapanal_bonus.c mapanal2_bonus.c mapcheck_bonus.c mapcheck2_bonus.c \
+movement_bonus.c movement_3_bonus.c parsing_elements_bonus.c parsing_elements_2_bonus.c \
+parsing_elements_3_bonus.c utils_bonus.c utils2_bonus.c utils3_bonus.c draw_title_intro_bonus.c \
+draw_title_intro_2_bonus.c loops_bonus.c mini_map_bonus.c raycasting_minimap_bonus.c \
+casting_bonus.c casting_2_bonus.c raycasting_bonus.c draw_steven_bonus.c draw_texture_bonus.c \
+draw_map_intro_bonus.c parsing_tittle_bonus.c movement_2_bonus.c utils4_bonus.c kill_bonus.c draw_texture_2_bonus.c 
 
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 

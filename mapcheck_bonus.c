@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapcheck.c                                         :+:      :+:    :+:   */
+/*   mapcheck_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:00:58 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 17:28:29 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:01:46 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "cub3d_bonus.h"
 
 /**
  * @brief Parse the map by checking if all info elements are present and valid.

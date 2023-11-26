@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_map.c                                         :+:      :+:    :+:   */
+/*   mini_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:56:18 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 21:22:13 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:01:38 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "cub3d_bonus.h"
 
 void	paint_square(int column, int row, int color, t_data *data)
 {

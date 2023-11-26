@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_texture.c                                     :+:      :+:    :+:   */
+/*   draw_texture_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:10:37 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/25 18:11:48 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:01:07 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "cub3d_bonus.h"
 
 mlx_image_t	*choose_orientation(int j, t_data *data)
 {

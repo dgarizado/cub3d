@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_elements_3.c                               :+:      :+:    :+:   */
+/*   parsing_elements_3_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:21:29 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 17:43:52 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:01:58 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "cub3d_bonus.h"
 
 int	ft_check_rgb(char *token, t_data *data, int flag)
 {

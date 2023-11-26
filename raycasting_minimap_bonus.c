@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting_minimap.c                               :+:      :+:    :+:   */
+/*   raycasting_minimap_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:57:25 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/24 18:40:20 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:02:05 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "cub3d_bonus.h"
 
 void	paint_colision_map(t_data *data)
 {

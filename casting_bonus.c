@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   casting.c                                          :+:      :+:    :+:   */
+/*   casting_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 12:44:33 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/25 18:01:51 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:01:21 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "cub3d_bonus.h"
 
 void	save_last_colision(float cell, int cell_step, char flag, t_data *d)
 {
