@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_elements_2.c                               :+:      :+:    :+:   */
+/*   parsing_elements_2_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:40:15 by vcereced          #+#    #+#             */
-/*   Updated: 2023/10/22 20:15:23 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:01:48 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "cub3d_bonus.h"
 
 /**
  * @brief iter the array of elements. check any not NULL

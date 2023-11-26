@@ -1,15 +1,13 @@
-EA ./imgs/start.png
-NO ./imgs/wall3.png
+WE ./imgs/wall1.png
 
 
-WE ./imgs/wall2.png
-SO ./imgs/wall1.png
+EA ./imgs/wall1.png
+NO ./imgs/wall2.png
 
 F 100,200,1
+SO ./imgs/wall1.png
 
 C  0,180,255
-
-
          1111111111111111111111111
          1000000000110000000000001
          1011000001110000000000001

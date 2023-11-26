@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapanal.c                                          :+:      :+:    :+:   */
+/*   mapanal_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 23:57:37 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/13 21:51:08 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:01:32 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "cub3d_bonus.h"
 
 /**
  * @brief Checks if any 0 is touching a space.
