@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map_intro_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:25:06 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/26 18:01:23 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:09:06 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d_bonus.h"
 
@@ -26,7 +25,7 @@ static void	ft_draw_sq_map(t_data *data, int x1, int y1)
 		while (x <= (x1 + (WIDTH_IMG_TITLE_MAP) * 0.4 / data->map.width))
 		{
 			z = 0;
-			while (z < (WIDTH * 0.005))
+			while (z < (data->mlx->width * 0.005))
 			{
 				if (x - z++ < WIDTH_IMG_TITLE_MAP && x - z > 0 && y - z > 0 \
 				&& y - z < HEIGTH_IMG_TITLE_MAP)

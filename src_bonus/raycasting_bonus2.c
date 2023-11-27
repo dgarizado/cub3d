@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement_3_bonus.c                                 :+:      :+:    :+:   */
+/*   raycasting_bonus2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/25 18:24:47 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/27 17:02:15 by dgarizad         ###   ########.fr       */
+/*   Created: 2023/11/27 16:42:12 by dgarizad          #+#    #+#             */
+/*   Updated: 2023/11/27 19:10:15 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-void	ft_step(t_data *d)
+void	raycast_game_aux(t_data *data)
 {
-	static double	pasos;
+	float	increment_angle;
+	float	angle;
+	int		raycount;
 
-	if (mlx_is_key_down(d->mlx, MLX_KEY_W) || mlx_is_key_down(d->mlx, MLX_KEY_A)
-		|| mlx_is_key_down(d->mlx, MLX_KEY_S) || mlx_is_key_down(d->mlx,
-			MLX_KEY_D))
-		d->up = abs((int)(12 * sin(pasos++ *0.15)));
-}
-
-void	ft_check_win(t_data *data)
-{
-	static int	pas = 0;
-
-	if (data->map.map_aclean[(int)(data->py)][(int)(data->px)] == 'A')
+	increment_angle = 60.0f / data->mlx->width;
+	if (data->zombie == 1)
 	{
-		data->up = abs((int)(100 * sin(pas * 0.2)));
-		pas++;
+		draw_steven_sprite(data);
+		raycount = 0;
+		angle = data->angle - 30;
+		while (raycount < data->mlx->width)
+		{
+			ft_memset((&data->cast.bonus), 0, sizeof(t_bonus));
+			rays(data, angle);
+			draw_colisions(raycount++, angle, 0, data);
+			angle += increment_angle;
+		}
 	}
 }

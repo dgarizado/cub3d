@@ -3,24 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   draw_title_intro_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:10:41 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/26 18:01:10 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:30:12 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d_bonus.h"
 
 int	check_limits(int x, int y, t_data *data)
 {
-	if (x < 0 || x > WIDTH_IMG_TITLE)
+	if (x < 0 || x > data->mlx->width * 0.9)
 		return (0);
-	if (y < 0 || y > HEIGHT_IMG_TITLE)
+	if (y < 0 || y > data->mlx->height * 0.4)
 		return (0);
-	if (x + (WIDTH * 0.01) > WIDTH_IMG_TITLE || y + (WIDTH * 0.01) > \
-	HEIGHT_IMG_TITLE)
+	if (x + (data->mlx->width * 0.01) > data->mlx->width * 0.9 || y + (data->mlx->width * 0.01) > \
+	data->mlx->height * 0.4)
 		return (0);
 	return (1);
 }
@@ -30,8 +29,8 @@ void	ft_draw_sq(mlx_image_t *img, t_data *data, int start_x, int start_y)
 	t_coord	*p;
 
 	p = &data->coord;
-	p->last_y = start_y + ((fabs)(HEIGHT_IMG_TITLE / data->title.heigth));
-	p->last_x = start_x + ((fabs)(WIDTH_IMG_TITLE / data->title.length));
+	p->last_y = start_y + ((fabs)(data->mlx->height * 0.4 / data->title.heigth));
+	p->last_x = start_x + ((fabs)(data->mlx->width * 0.9 / data->title.length));
 	p->y = start_y;
 	while (p->y < p->last_y)
 	{
@@ -54,8 +53,8 @@ void	draw_square_img(t_data *data, int column, int row)
 	int	x1;
 	int	y1;
 
-	x1 = column * (int)((WIDTH_IMG_TITLE / data->title.length));
-	y1 = row * (int)((HEIGHT_IMG_TITLE / data->title.heigth));
+	x1 = column * (int)((data->mlx->width * 0.9 / data->title.length));
+	y1 = row * (int)((data->mlx->height * 0.4 / data->title.heigth));
 	ft_draw_sq(data->img[TITLE_INTRO], data, x1, y1);
 }
 

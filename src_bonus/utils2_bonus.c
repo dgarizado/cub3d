@@ -6,10 +6,9 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:41:11 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/26 18:45:15 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:00:58 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d_bonus.h"
 
@@ -64,6 +63,7 @@ void	ft_free_textures(t_data *data)
 		i++;
 	}
 }
+
 /**
  * @brief Here we load the png 
  * images of the walls and convert them to an mlx_texture_t

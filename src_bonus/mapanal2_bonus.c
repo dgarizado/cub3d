@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   mapanal2_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:13:42 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/26 18:01:15 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:30:47 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d_bonus.h"
 

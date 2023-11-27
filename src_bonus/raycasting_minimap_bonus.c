@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_minimap_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:57:25 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/26 18:02:05 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:15:19 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d_bonus.h"
 
@@ -30,11 +29,12 @@ void	paint_colision_map(t_data *data)
 		radianes = angulo * (M_PI / 180.0);
 		x = x + (radio * cos(radianes));
 		y = y + (radio * sin(radianes));
-		if (data->cast.ray_x_start * SCALE_X + x > 0 && data->cast.ray_x_start \
-		* SCALE_X + x < WIDTH_MAP_GAME && data->cast.ray_y_start * SCALE_Y + \
-		y > 0 && data->cast.ray_y_start * SCALE_Y + y < HEIGHT_MAP_GAME)
-			mlx_put_pixel(data->img[MINIMAP_GAME], data->cast.ray_x_start * \
-			SCALE_X + x, data->cast.ray_y_start * SCALE_Y + y, 0xFFFF00FF);
+		if (data->cast.ray_x_start * SCALE_X + x > 0 && data->cast.ray_x_start
+			* SCALE_X + x < WIDTH_MAP_GAME && data->cast.ray_y_start * SCALE_Y
+			+ y > 0 && data->cast.ray_y_start * SCALE_Y + y < HEIGHT_MAP_GAME)
+			mlx_put_pixel(data->img[MINIMAP_GAME], data->cast.ray_x_start
+				* SCALE_X + x, data->cast.ray_y_start * SCALE_Y + y,
+				0xFFFF00FF);
 		angulo += 10;
 	}
 }

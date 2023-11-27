@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   draw_texture_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:10:37 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/26 18:01:07 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:09:44 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d_bonus.h"
 
@@ -38,7 +37,7 @@ mlx_image_t	*choose_image(t_data *data)
 	img = NULL;
 	n = data->cast.bonus.n;
 	if (n == -1)
-		img  = choose_img_zombie(data);
+		img = choose_img_zombie(data);
 	else if (data->cast.bonus.type_wall_bonus[n] == '1')
 		img = choose_orientation(n, data);
 	else if (data->cast.bonus.type_wall_bonus[n] == '9')
@@ -64,10 +63,9 @@ int	ft_recalibrate_offset(double *y2, double *y1, t_data *data)
 
 	offsety1 = (int)(fabs(*y1));
 	*y1 = 0;
-	*y2 = WIDTH;
+	*y2 = data->mlx->width;
 	return (offsety1);
 }
-
 
 void	ft_draw_texture(int *arr, float y_texture, mlx_image_t *img, t_data *d)
 {
@@ -93,13 +91,13 @@ void	drawlinetexture_bonus(double x1, double y1, double y2, t_data *data)
 	steps = fabs(y2 - y1);
 	step_y_texture = (float)img->height / (float)steps;
 	arr[2] = 0;
-	if ((int)(y2) > HEIGHT && data->cast.bonus.n != -1)
+	if ((int)(y2) > data->mlx->height && data->cast.bonus.n != -1)
 		arr[2] = ft_recalibrate_offset(&y2, &y1, data);
 	arr[0] = x1;
 	arr[1] = y1;
 	while ((int)fabs(y2 - arr[1]))
 	{
-		if (arr[0] >= 0 && arr[0] <= WIDTH && arr[1] >= 0 && arr[1] <= HEIGHT)
+		if (arr[0] >= 0 && arr[0] <= data->mlx->width && arr[1] >= 0 && arr[1] <= data->mlx->height)
 			ft_draw_texture(arr, step_y_texture, img, data);
 		(arr[1])++;
 		(arr[2])++;

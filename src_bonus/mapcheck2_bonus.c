@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   mapcheck2_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:11:19 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/26 18:08:38 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:30:29 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d_bonus.h"
 
 void	get_enemy_coords(int i, int j, t_data *data)
 {
-	static int x;
-	
+	static int	x;
+
 	if (ft_strchr("Z", data->map.map_aclean[i][j]) != NULL && x < 16)
 	{
-		data->stv_x[x] =  (double)(j + 0.5f);
+		data->stv_x[x] = (double)(j + 0.5f);
 		data->stv_y[x] = (double)(i + 0.5f);
 		data->steven_x = data->stv_x[0];
 		data->steven_y = data->stv_y[0];

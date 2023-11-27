@@ -6,10 +6,9 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:39:44 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/26 20:31:59 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:29:19 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d_bonus.h"
 
@@ -28,9 +27,9 @@ int	ft_wall(double x, double y, t_data *d)
 		radianes = angulo * (M_PI / 180.0);
 		circle_x = x + (radio * cos(radianes));
 		circle_y = y + (radio * sin(radianes));
-		if (d->map.map_aclean[circle_y][circle_x] == '1' || \
-		d->map.map_aclean[circle_y][circle_x] == '9' || \
-		d->map.map_aclean[circle_y][circle_x] == 'D')
+		if (d->map.map_aclean[circle_y][circle_x] == '1'
+			|| d->map.map_aclean[circle_y][circle_x] == '9'
+			|| d->map.map_aclean[circle_y][circle_x] == 'D')
 			return (1);
 		angulo = angulo + 20;
 	}
@@ -55,14 +54,14 @@ void	ft_check_interaction(t_data *d)
 	float	x;
 	float	y;
 
-		x = cos(ft_degre_to_radian(d->angle)) * 1.1;
-		y = sin(ft_degre_to_radian(d->angle)) * 1.1;
-		if (d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] == '9')
-			d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] = 'B';
-		else if (d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] == 'D')
-			d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] = 'O';
-		else if (d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] == 'O')
-			d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] = 'D';
+	x = cos(ft_degre_to_radian(d->angle)) * 1.1;
+	y = sin(ft_degre_to_radian(d->angle)) * 1.1;
+	if (d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] == '9')
+		d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] = 'B';
+	else if (d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] == 'D')
+		d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] = 'O';
+	else if (d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] == 'O')
+		d->map.map_aclean[(int)(d->py + y)][(int)(d->px + x)] = 'D';
 }
 
 void	mouse(t_data *data)
@@ -71,14 +70,13 @@ void	mouse(t_data *data)
 	int	y;
 
 	mlx_get_mouse_pos(data->mlx, &x, &y);
-	if (x > data->mouse_x && data->mouse_x > 0 \
-	&& data->mouse_x < data->mlx->width)
+	if (x > data->mouse_x && data->mouse_x > 0
+		&& data->mouse_x < data->mlx->width)
 	{
 		data->angle += 2;
 	}
-	if (x < data->mouse_x && \
-	data->mouse_x < data->mlx->width && \
-	data->mouse_x > 0)
+	if (x < data->mouse_x && data->mouse_x < data->mlx->width
+		&& data->mouse_x > 0)
 	{
 		data->angle -= 2;
 	}
@@ -89,4 +87,3 @@ void	mouse(t_data *data)
 	if (data->sprites[PISTOL]->instances[0].enabled == false)
 		data->sprites[PISTOL]->instances[0].enabled = true;
 }
-

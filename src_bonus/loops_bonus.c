@@ -6,10 +6,9 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:36:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/26 20:38:06 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:31:09 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d_bonus.h"
 
@@ -24,8 +23,8 @@ void	ft_transition(int *n, t_data *data)
 		data->sprites[PISTOL]->instances[0].enabled = true;
 	}
 	else if ((*n) == 150)
-		ft_memset(data->img[TITLE_INTRO]->pixels, 0, WIDTH_IMG_TITLE \
-	* HEIGHT_IMG_TITLE * sizeof(int32_t));
+		ft_memset(data->img[TITLE_INTRO]->pixels, 0, data->mlx->width * 0.9 \
+	* data->mlx->height * 0.4 * sizeof(int32_t));
 	else if ((*n) > 30 && (*n) < 120)
 		ft_memset(data->img[MAP_INTRO]->pixels, 255 - ((*n) * 2), \
 	WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
@@ -42,11 +41,12 @@ void	ft_transition(int *n, t_data *data)
 void	ft_game_loop(void *d)
 {
 	t_data	*data;
-	
+
 	data = (t_data *)d;
 	if (mlx_is_key_down(data->mlx, 256))
 		mlx_close_window(data->mlx);
-	ft_memset(data->img[MINIMAP_GAME]->pixels, 0, (int)(WIDTH_MAP_GAME)  *(int)(HEIGHT_MAP_GAME) * sizeof(int));
+	ft_memset(data->img[MINIMAP_GAME]->pixels, 0, (int)(WIDTH_MAP_GAME) \
+	*(int)(HEIGHT_MAP_GAME) * sizeof(int));
 	ft_move_players(data);
 	ft_draw_minimap(data);
 	raycast_game(data);
@@ -59,7 +59,7 @@ void	ft_intro_loop(t_data	*data)
 	static int	n;
 
 	data->title.color_up += 15 ;
-	if (data->title.color_up >= ((HEIGHT_IMG_TITLE) * 3))
+	if (data->title.color_up >= ((data->mlx->height * 0.4) * 3))
 		data->title.color_up = 0;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ENTER))
 		data->title.flag = 1;

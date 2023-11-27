@@ -6,46 +6,38 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:36:08 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/26 20:36:06 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:28:44 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cub3d_bonus.h"
-
-void	leaks(void)
-{
-	system("leaks cub3D_bonus");
-}
 
 void	put_images_to_windows(t_data *data, mlx_t *mlx)
 {
 	mlx_image_to_window(mlx, data->img[GAME], 0, 0);
-	mlx_image_to_window(mlx, data->img[MINIMAP_GAME], WIDTH * 0.01, \
-	HEIGHT * 0.01);
-	mlx_image_to_window(mlx, data->img[TITLE_INTRO], (WIDTH / 2) - \
-	(WIDTH_IMG_TITLE / 2), (HEIGHT * 0.03));
+	mlx_image_to_window(mlx, data->img[MINIMAP_GAME], WIDTH * 0.01, HEIGHT
+		* 0.01);
+	mlx_image_to_window(mlx, data->img[TITLE_INTRO], (WIDTH / 2)
+		- (data->mlx->width * 0.9 / 2), (HEIGHT * 0.03));
 	mlx_image_to_window(mlx, data->img[MAP_INTRO], 0, 0);
-	mlx_image_to_window(mlx, data->sprites[PISTOL_BANG], \
-	mlx->width / 2 - \
-	data->sprites[PISTOL_BANG]->width / 2 +10, \
-	mlx->height +10 - data->sprites[PISTOL_BANG]->height);
+	mlx_image_to_window(mlx, data->sprites[PISTOL_BANG], mlx->width / 2
+		- data->sprites[PISTOL_BANG]->width / 2 + 10, mlx->height + 10
+		- data->sprites[PISTOL_BANG]->height);
 	data->sprites[PISTOL_BANG]->instances[0].enabled = false;
-	mlx_image_to_window(mlx, data->sprites[PISTOL], \
-	mlx->width / 2 - \
-	data->sprites[PISTOL]->width / 2, \
-	mlx->height - data->sprites[PISTOL]->height);
+	mlx_image_to_window(mlx, data->sprites[PISTOL], mlx->width / 2
+		- data->sprites[PISTOL]->width / 2, mlx->height
+		- data->sprites[PISTOL]->height);
 	data->sprites[PISTOL]->instances[0].enabled = false;
 }
 
 void	load_graphics(mlx_t *mlx, t_data *data)
 {
-	data->img[TITLE_INTRO] = mlx_new_image(mlx, WIDTH_IMG_TITLE, \
-	HEIGHT_IMG_TITLE);
-	data->img[MAP_INTRO] = mlx_new_image(mlx, WIDTH_IMG_TITLE_MAP, \
-	HEIGTH_IMG_TITLE_MAP);
-	data->img[MINIMAP_GAME] = mlx_new_image(mlx, (int)(WIDTH_MAP_GAME), \
-	(int)(HEIGHT_MAP_GAME));
+	data->img[TITLE_INTRO] = mlx_new_image(mlx, data->mlx->width * 0.9,
+			data->mlx->height * 0.4);
+	data->img[MAP_INTRO] = mlx_new_image(mlx, WIDTH_IMG_TITLE_MAP,
+			HEIGTH_IMG_TITLE_MAP);
+	data->img[MINIMAP_GAME] = mlx_new_image(mlx, (int)(WIDTH_MAP_GAME),
+			(int)(HEIGHT_MAP_GAME));
 	data->img[GAME] = mlx_new_image(mlx, WIDTH, HEIGHT);
 	data->textures[WALL_TO_BROKE] = mlx_load_png("./imgs/wall_to_broke.png");
 	data->textures[ENEMY] = mlx_load_png("./imgs/zombie.png");
@@ -62,13 +54,13 @@ void	load_graphics(mlx_t *mlx, t_data *data)
 	ft_load_minisprites(data);
 }
 
-void	init_params(mlx_t *mlx, t_data	*data)
+void	init_params(mlx_t *mlx, t_data *data)
 {
 	data->mlx = mlx;
 	data->title.boom = 1;
 }
 
-void	ft_load(mlx_t*mlx, t_data *data)
+void	ft_load(mlx_t *mlx, t_data *data)
 {
 	ft_parse_title(data);
 	init_params(mlx, data);
@@ -76,23 +68,12 @@ void	ft_load(mlx_t*mlx, t_data *data)
 	put_images_to_windows(data, mlx);
 }
 
-void ft_key_hook(mlx_key_data_t keydata, void *param)
-{
-	t_data	*d;
-	float	x;
-	float	y;
-
-	d = (t_data *)param;
-	if (keydata.key == MLX_KEY_Q && keydata.action == MLX_PRESS)
-		ft_check_interaction(d);
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	data;
 	mlx_t	*mlx;
 
-	mlx = mlx_init(1000, 1000, "Test", true);
+	mlx = mlx_init(1000, 1000, "Test", false);
 	if (argc != 2)
 		ft_error(INPUT_NBR);
 	ft_memset(&data, 0, sizeof(t_data));
@@ -105,6 +86,5 @@ int	main(int argc, char **argv)
 	ft_free_maps(&data);
 	ft_free_textures(&data);
 	ft_special_abort(data.paths, PATH_COUNT);
-	//atexit(leaks);
 	return (0);
 }

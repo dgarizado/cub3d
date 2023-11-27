@@ -6,7 +6,7 @@
 #    By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 18:46:57 by dgarizad          #+#    #+#              #
-#    Updated: 2023/11/26 19:47:57 by dgarizad         ###   ########.fr        #
+#    Updated: 2023/11/27 16:46:43 by dgarizad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,8 @@ movement_bonus.c movement_3_bonus.c parsing_elements_bonus.c parsing_elements_2_
 parsing_elements_3_bonus.c utils_bonus.c utils2_bonus.c utils3_bonus.c draw_title_intro_bonus.c \
 draw_title_intro_2_bonus.c loops_bonus.c mini_map_bonus.c raycasting_minimap_bonus.c \
 casting_bonus.c casting_2_bonus.c raycasting_bonus.c draw_steven_bonus.c draw_texture_bonus.c \
-draw_map_intro_bonus.c parsing_tittle_bonus.c movement_2_bonus.c utils4_bonus.c kill_bonus.c draw_texture_2_bonus.c)
+draw_map_intro_bonus.c parsing_tittle_bonus.c movement_2_bonus.c utils4_bonus.c kill_bonus.c draw_texture_2_bonus.c \
+raycasting_bonus2.c)
 
 OBJS = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))
 

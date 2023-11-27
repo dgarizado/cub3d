@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   draw_title_intro_2_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 00:19:52 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/26 18:01:29 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:29:27 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d_bonus.h"
 
@@ -39,7 +38,7 @@ int	set_color(float y, t_data *data)
 	float	way;
 	int		percent;
 
-	height = (HEIGHT_IMG_TITLE);
+	height = (data->mlx->height * 0.4);
 	way = y / height;
 	percent = (int)(way * 100);
 	return (range_up(percent));

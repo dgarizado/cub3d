@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   utils3_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 13:19:52 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/26 18:02:13 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:10:30 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d_bonus.h"
 
@@ -29,7 +28,8 @@ void	drawline(t_coord *p, int color, mlx_image_t *ptr, t_data *data)
 	dy = dy / steps;
 	while (p->x2 - p->x1 || p->y2 - p->y1)
 	{
-		if (p->x1 >= 0 && p->x1 <= WIDTH && p->y1 >= 0 && p->y1 <= HEIGHT)
+		if (p->x1 >= 0 && p->x1 <= data->mlx->width && \
+		p->y1 >= 0 && p->y1 <= data->mlx->height)
 			mlx_put_pixel(ptr, (int)p->x1, (int)p->y1, color);
 		p->x1 += dx;
 		p->y1 += dy;
@@ -57,5 +57,3 @@ int	last_colision_arr(int *arr)
 		n++;
 	return (n);
 }
-
-

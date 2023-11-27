@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_tittle_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:03:47 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/26 18:01:53 by vcereced         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:25:55 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d_bonus.h"
 
