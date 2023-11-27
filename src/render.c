@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:11:40 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 16:43:37 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/27 21:06:45 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	drawline(t_data *data, int flag)
 	dy = (drawend - drawstart) / steps;
 	while ((int)fabs(drawend - drawstart))
 	{
-		if (data->ray.x >= 0 && data->ray.x <= WIDTH && \
-		drawstart >= 0 && drawstart <= HEIGHT)
+		if (data->ray.x >= 0 && data->ray.x <= data->map.mlx->width && \
+		drawstart >= 0 && drawstart <= data->map.mlx->height)
 			mlx_put_pixel(data->map.img3d, (int)data->ray.x, \
 			(int)drawstart, data->map.colors[flag]);
 		drawstart += dy;
@@ -93,7 +93,7 @@ void	drawlinetexture(double x1, int column_texture, t_data *data)
 	{
 		while ((int)fabs(data->ray.drawend - data->ray.drawstart))
 		{
-			if (x1 >= 0 && x1 <= WIDTH && data->ray.drawstart >= 0 \
+			if (x1 >= 0 && x1 <= data->map.mlx->width && data->ray.drawstart >= 0 \
 			&& data->ray.drawstart <= data->map.mlx->height)
 			{
 				row_texture = floor(step_y_texture * n);

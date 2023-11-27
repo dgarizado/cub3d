@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:36:01 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/27 19:31:09 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:13:14 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	ft_transition(int *n, t_data *data)
 	* data->mlx->height * 0.4 * sizeof(int32_t));
 	else if ((*n) > 30 && (*n) < 120)
 		ft_memset(data->img[MAP_INTRO]->pixels, 255 - ((*n) * 2), \
-	WIDTH_IMG_TITLE_MAP * HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
+	data->mlx->width * data->mlx->height * sizeof(int32_t));
 	else if ((*n) < 30)
 	{
 		data->title.boom += 0.2;
-		ft_memset(data->img[MAP_INTRO]->pixels, 0, WIDTH_IMG_TITLE_MAP \
-		* HEIGTH_IMG_TITLE_MAP * sizeof(int32_t));
+		ft_memset(data->img[MAP_INTRO]->pixels, 0, data->mlx->width \
+		* data->mlx->height * sizeof(int32_t));
 		draw_title(data);
 		draw_title_map(data);
 	}
@@ -45,8 +45,8 @@ void	ft_game_loop(void *d)
 	data = (t_data *)d;
 	if (mlx_is_key_down(data->mlx, 256))
 		mlx_close_window(data->mlx);
-	ft_memset(data->img[MINIMAP_GAME]->pixels, 0, (int)(WIDTH_MAP_GAME) \
-	*(int)(HEIGHT_MAP_GAME) * sizeof(int));
+	ft_memset(data->img[MINIMAP_GAME]->pixels, 0, (int)(data->mlx->width * 0.3) \
+	*(int)(data->mlx->height * 0.3) * sizeof(int));
 	ft_move_players(data);
 	ft_draw_minimap(data);
 	raycast_game(data);

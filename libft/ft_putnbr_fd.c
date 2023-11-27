@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 16:37:31 by dgarizad          #+#    #+#             */
-/*   Updated: 2022/12/08 17:14:57 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/27 21:19:00 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_putnbr(long nb, int fd)
 	{
 		nb *= -1;
 		write(fd, "-", 1);
-	}	
+	}
 	if (nb / 10 != 0)
 	{
 		ft_putnbr(nb / 10, fd);

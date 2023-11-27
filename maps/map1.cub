@@ -1,7 +1,11 @@
-NO ./imgs/wall1.png
-SO ./imgs/wall1.png
-WE ./imgs/wall1.png
-EA ./imgs/wall1.png
+WE ./imgs/wall_W.png
+
+
+EA ./imgs/wall_E.png
+NO ./imgs/wall_N.png
+
+
+SO ./imgs/wall_S.png
 F 220,100,0
 C 225,30,0
 1111111111111

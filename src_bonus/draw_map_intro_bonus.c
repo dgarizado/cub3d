@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:25:06 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/27 19:09:06 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:46:02 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@ static void	ft_draw_sq_map(t_data *data, int x1, int y1)
 	int	z;
 
 	y = y1;
-	while (y <= (y1 + (HEIGTH_IMG_TITLE_MAP) * 0.4 / data->map.height))
+	while (y <= (y1 + (data->mlx->height) * 0.4 / data->map.height))
 	{
 		x = x1;
-		while (x <= (x1 + (WIDTH_IMG_TITLE_MAP) * 0.4 / data->map.width))
+		while (x <= (x1 + (data->mlx->width) * 0.4 / data->map.width))
 		{
 			z = 0;
 			while (z < (data->mlx->width * 0.005))
 			{
-				if (x - z++ < WIDTH_IMG_TITLE_MAP && x - z > 0 && y - z > 0 \
-				&& y - z < HEIGTH_IMG_TITLE_MAP)
+				if (x - z++ < data->mlx->width && x - z > 0 && y - z > 0 \
+				&& y - z < data->mlx->height)
 					mlx_put_pixel(data->img[MAP_INTRO], x - z, y - z, \
 					0x9b9b9b80);
 			}
-			if (x - z < WIDTH_IMG_TITLE_MAP && x - z > 0 && y - z > 0 && y - z \
-			< HEIGTH_IMG_TITLE_MAP)
+			if (x - z < data->mlx->width && x - z > 0 && y - z > 0 && y - z \
+			< data->mlx->height)
 				mlx_put_pixel(data->img[MAP_INTRO], x - z, y - z, 0x7e7e7e80);
 			x++;
 		}
@@ -48,12 +48,12 @@ static void	draw_sq_map_intro(t_data *data, int row, int column)
 	int	width_mini_map;
 	int	heigth_mini_map;
 
-	dx = (int)((WIDTH_IMG_TITLE_MAP * 0.4) / data->map.width);
-	dy = (int)((HEIGTH_IMG_TITLE_MAP * 0.4) / data->map.height);
+	dx = (int)((data->mlx->width * 0.4) / data->map.width);
+	dy = (int)((data->mlx->height * 0.4) / data->map.height);
 	width_mini_map = data->map.width * dx * data->title.boom;
 	heigth_mini_map = data->map.height * dy * data->title.boom;
-	ft_draw_sq_map(data, ((WIDTH_IMG_TITLE_MAP / 2) - (width_mini_map / 2)) \
-	+ (column * dx) * data->title.boom, ((HEIGTH_IMG_TITLE_MAP * 0.70) - \
+	ft_draw_sq_map(data, ((data->mlx->width / 2) - (width_mini_map / 2)) \
+	+ (column * dx) * data->title.boom, ((data->mlx->height * 0.70) - \
 	(heigth_mini_map / 2)) + (row * dy) * data->title.boom);
 }
 

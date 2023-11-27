@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/27 19:20:20 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:14:13 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,6 @@
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
-# define HEIGHT						data->mlx->height
-# define WIDTH							data->mlx->width
-# define WIDTH_IMG_TITLE 			data->mlx->width * 0.9
-# define HEIGHT_IMG_TITLE 			data->mlx->height * 0.4
-# define WIDTH_IMG_TITLE_MAP			data->mlx->width
-# define HEIGTH_IMG_TITLE_MAP		data->mlx->height
-# define HEIGHT_MAP_GAME    (int)(HEIGHT * 0.3)
-# define WIDTH_MAP_GAME     (int)(WIDTH * 0.3)
-# define SCALE_X			(WIDTH_MAP_GAME/data->map.width)
-# define SCALE_Y			(HEIGHT_MAP_GAME/data->map.height)
 # define DIST_FACTOR 0.1 
 # define DIST_FACTOR_STEVEN 0.05
 
@@ -176,6 +166,8 @@ typedef struct s_macro_data
 	double			stv_y[16];
 	int				mouse_x;
 	int				mouse_y;
+	int				scale_x;
+	int				scale_y;
 	double			angle_steven;
 	double			angle;
 	int				phase;

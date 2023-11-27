@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:56:18 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/27 15:29:30 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:32:56 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,20 @@
 void	paint_square(int column, int row, int color, t_data *data)
 {
 	int	y;
+	int	scale_x;
 
 	y = 0;
-	while (y < HEIGHT_MAP_GAME / data->map.height && row * SCALE_Y + \
-	y < HEIGHT_MAP_GAME)
+	scale_x = data->mlx->width * 0.3 / data->map.width;
+	while (y < (int)data->mlx->height * 0.3 / data->map.height && \
+	row * data->scale_y + \
+	y < (int)data->mlx->height * 0.3)
 	{
-		if ((column * SCALE_X) + SCALE_X <= WIDTH_MAP_GAME)
+		if ((column * scale_x) + scale_x <= data->mlx->width * 0.3)
 		{
-			data->coord.x1 = column * SCALE_X;
-			data->coord.y1 = row * SCALE_Y + y;
-			data->coord.x2 = (column * SCALE_X) + SCALE_X;
-			data->coord.y2 = row * SCALE_Y + y;
+			data->coord.x1 = column * scale_x;
+			data->coord.y1 = row * data->scale_y + y;
+			data->coord.x2 = (column * scale_x) + scale_x;
+			data->coord.y2 = row * data->scale_y + y;
 			drawline(&data->coord, color, data->img[MINIMAP_GAME], data);
 		}
 		y++;
@@ -68,9 +71,11 @@ void	draw_player(t_data *data, int radio)
 	while (angulo <= 360)
 	{
 		radianes = angulo * (M_PI / 180.0);
-		x = (data->px * SCALE_X) + (radio * cos(radianes));
-		y = (data->py * SCALE_Y) + (radio * sin(radianes));
-		if (x > 0 && x < WIDTH_MAP_GAME && y > 0 && y < HEIGHT_MAP_GAME)
+		x = (data->px * (int)data->mlx->width * 0.3 / data->map.width) \
+		+ (radio * cos(radianes));
+		y = (data->py * data->scale_y) + (radio * sin(radianes));
+		if (x > 0 && x < data->mlx->width * 0.3 && \
+		y > 0 && y < (int)data->mlx->height * 0.3)
 			mlx_put_pixel(data->img[MINIMAP_GAME], x, y, 0xFFFFFFFF);
 		angulo += 5;
 	}
@@ -87,9 +92,11 @@ void	draw_steven(t_data *data, int radio)
 	while (angulo <= 360)
 	{
 		radianes = angulo * (M_PI / 180.0);
-		x = (data->steven_x * SCALE_X) + (radio * cos(radianes));
-		y = (data->steven_y * SCALE_Y) + (radio * sin(radianes));
-		if (x > 0 && x < WIDTH_MAP_GAME && y > 0 && y < HEIGHT_MAP_GAME)
+		x = (data->steven_x * (int)data->mlx->width * 0.3 / data->map.width) \
+		+ (radio * cos(radianes));
+		y = (data->steven_y * data->scale_y) + (radio * sin(radianes));
+		if (x > 0 && x < data->mlx->width * 0.3 && \
+		y > 0 && y < (int)data->mlx->height * 0.3)
 			mlx_put_pixel(data->img[MINIMAP_GAME], x, y, 0xFF0000FF);
 		angulo += 10;
 	}

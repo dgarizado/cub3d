@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:10:41 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/27 19:30:12 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:33:50 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	check_limits(int x, int y, t_data *data)
 		return (0);
 	if (y < 0 || y > data->mlx->height * 0.4)
 		return (0);
-	if (x + (data->mlx->width * 0.01) > data->mlx->width * 0.9 || y + (data->mlx->width * 0.01) > \
+	if (x + (data->mlx->width * 0.01) > data->mlx->width * 0.9 || \
+	y + (data->mlx->width * 0.01) > \
 	data->mlx->height * 0.4)
 		return (0);
 	return (1);
@@ -29,7 +30,8 @@ void	ft_draw_sq(mlx_image_t *img, t_data *data, int start_x, int start_y)
 	t_coord	*p;
 
 	p = &data->coord;
-	p->last_y = start_y + ((fabs)(data->mlx->height * 0.4 / data->title.heigth));
+	p->last_y = start_y + ((fabs)(data->mlx->height * \
+	0.4 / data->title.heigth));
 	p->last_x = start_x + ((fabs)(data->mlx->width * 0.9 / data->title.length));
 	p->y = start_y;
 	while (p->y < p->last_y)

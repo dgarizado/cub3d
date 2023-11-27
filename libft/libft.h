@@ -6,11 +6,11 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:21:22 by dgarizad          #+#    #+#             */
-/*   Updated: 2022/12/09 15:38:43 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/27 21:18:20 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef  LIBFT_H
+#ifndef LIBFT_H
 # define LIBFT_H
 
 # include <stdlib.h>

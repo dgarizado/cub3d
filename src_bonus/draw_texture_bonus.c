@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:10:37 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/27 19:09:44 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:34:03 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	drawlinetexture_bonus(double x1, double y1, double y2, t_data *data)
 	arr[1] = y1;
 	while ((int)fabs(y2 - arr[1]))
 	{
-		if (arr[0] >= 0 && arr[0] <= data->mlx->width && arr[1] >= 0 && arr[1] <= data->mlx->height)
+		if (arr[0] >= 0 && arr[0] <= data->mlx->width && \
+		arr[1] >= 0 && arr[1] <= data->mlx->height)
 			ft_draw_texture(arr, step_y_texture, img, data);
 		(arr[1])++;
 		(arr[2])++;
