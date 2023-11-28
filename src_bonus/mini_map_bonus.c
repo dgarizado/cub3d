@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:56:18 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/27 20:32:56 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:12:28 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,15 @@ void	draw_squares(t_data *data)
 		x = 0;
 		while (x < data->map.width)
 		{
-			if (data->map.map_aclean[y][x] == '1' || \
-			data->map.map_aclean[y][x] == '9' || \
-			data->map.map_aclean[y][x] == 'D')
+			if (data->map.map_aclean[y][x] == '1')
 				paint_square(x, y, 0xFFFFFFFF, data);
-			else if (ft_strchr("09DSEWNAGBVZ", data->map.map_aclean[y][x]))
+			else if (ft_strchr("0OSEWNGBVZ", data->map.map_aclean[y][x]))
 				paint_square(x, y, 0x000000FF, data);
+			else if (data->map.map_aclean[y][x] == 'D' || \
+			data->map.map_aclean[y][x] == '9')
+				paint_square(x, y, 0x00FF00FF, data);
+			else if (data->map.map_aclean[y][x] == 'A')
+				paint_square(x, y, 0xFFFF00FF, data);	
 			x++;
 		}
 		y++;
