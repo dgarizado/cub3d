@@ -7,7 +7,7 @@ NO ./imgs/wall_N.png
 F 100,200,1
 SO ./imgs/wall_S.png
 
-C  225,30,0
+C  0,200,255
 
 
 111

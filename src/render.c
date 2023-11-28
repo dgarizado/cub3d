@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:11:40 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/27 21:06:45 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:39:25 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	drawlinetexture(double x1, int column_texture, t_data *data)
 	{
 		while ((int)fabs(data->ray.drawend - data->ray.drawstart))
 		{
-			if (x1 >= 0 && x1 <= data->map.mlx->width && data->ray.drawstart >= 0 \
-			&& data->ray.drawstart <= data->map.mlx->height)
+			if (x1 >= 0 && x1 <= data->map.mlx->width && data->ray.drawstart \
+			>= 0 && data->ray.drawstart <= data->map.mlx->height)
 			{
 				row_texture = floor(step_y_texture * n);
 				((uint32_t *)data->map.img3d->pixels)[((int)data->ray.drawstart \

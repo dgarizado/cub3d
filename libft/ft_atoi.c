@@ -6,7 +6,7 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 20:04:12 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/04/06 15:03:47 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:41:03 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_atoi(const char *str)
 		str++;
 	}
 	if (str[i] == '-' || str[i] == '+')
-	{	
+	{
 		if (str[i] == '-')
 			sign *= -1;
 		str++;
@@ -48,6 +48,6 @@ int	ft_atoi(const char *str)
 		digit = str[i++] - '0';
 		number = (number * 10) + digit;
 	}
-		number = number * sign;
+	number = number * sign;
 	return (number);
 }

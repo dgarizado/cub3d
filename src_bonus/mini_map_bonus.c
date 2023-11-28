@@ -6,28 +6,49 @@
 /*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:56:18 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/28 16:12:28 by dgarizad         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:42:50 by dgarizad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
+void	draw_player(t_data *data, int radio)
+{
+	double	radianes;
+	double	x;
+	double	y;
+	int		n;
+	int		angulo;
+
+	angulo = 0;
+	n = 0;
+	while (angulo <= 360)
+	{
+		radianes = angulo * (M_PI / 180.0);
+		x = (data->px * data->scale_x) + (radio * cos(radianes));
+		y = (data->py * data->scale_y) + (radio * sin(radianes));
+		if (x > 0 && x < (int)(data->mlx->width * 0.3) && y > 0 && \
+		y < (int)(data->mlx->height * 0.3))
+			mlx_put_pixel(data->img[MINIMAP_GAME], x, y, 0xFFFFFFFF);
+		angulo += 5;
+	}
+}
+
 void	paint_square(int column, int row, int color, t_data *data)
 {
 	int	y;
-	int	scale_x;
 
 	y = 0;
-	scale_x = data->mlx->width * 0.3 / data->map.width;
-	while (y < (int)data->mlx->height * 0.3 / data->map.height && \
+	while (y < (int)(data->mlx->height * 0.3) / data->map.height && \
 	row * data->scale_y + \
-	y < (int)data->mlx->height * 0.3)
+	y < (int)(data->mlx->height * 0.3))
 	{
-		if ((column * scale_x) + scale_x <= data->mlx->width * 0.3)
+		if ((column * data->scale_x) + data->scale_x <= \
+		(int)(data->mlx->width * 0.3))
 		{
-			data->coord.x1 = column * scale_x;
+			data->coord.x1 = column * data->scale_x;
 			data->coord.y1 = row * data->scale_y + y;
-			data->coord.x2 = (column * scale_x) + scale_x;
+			data->coord.x2 = (column * data->scale_x) + data->scale_x;
 			data->coord.y2 = row * data->scale_y + y;
 			drawline(&data->coord, color, data->img[MINIMAP_GAME], data);
 		}
@@ -54,33 +75,10 @@ void	draw_squares(t_data *data)
 			data->map.map_aclean[y][x] == '9')
 				paint_square(x, y, 0x00FF00FF, data);
 			else if (data->map.map_aclean[y][x] == 'A')
-				paint_square(x, y, 0xFFFF00FF, data);	
+				paint_square(x, y, 0xFFFF00FF, data);
 			x++;
 		}
 		y++;
-	}
-}
-
-void	draw_player(t_data *data, int radio)
-{
-	double	radianes;
-	double	x;
-	double	y;
-	int		n;
-	int		angulo;
-
-	angulo = 0;
-	n = 0;
-	while (angulo <= 360)
-	{
-		radianes = angulo * (M_PI / 180.0);
-		x = (data->px * (int)data->mlx->width * 0.3 / data->map.width) \
-		+ (radio * cos(radianes));
-		y = (data->py * data->scale_y) + (radio * sin(radianes));
-		if (x > 0 && x < data->mlx->width * 0.3 && \
-		y > 0 && y < (int)data->mlx->height * 0.3)
-			mlx_put_pixel(data->img[MINIMAP_GAME], x, y, 0xFFFFFFFF);
-		angulo += 5;
 	}
 }
 
@@ -95,11 +93,10 @@ void	draw_steven(t_data *data, int radio)
 	while (angulo <= 360)
 	{
 		radianes = angulo * (M_PI / 180.0);
-		x = (data->steven_x * (int)data->mlx->width * 0.3 / data->map.width) \
-		+ (radio * cos(radianes));
+		x = (data->steven_x * data->scale_x) + (radio * cos(radianes));
 		y = (data->steven_y * data->scale_y) + (radio * sin(radianes));
-		if (x > 0 && x < data->mlx->width * 0.3 && \
-		y > 0 && y < (int)data->mlx->height * 0.3)
+		if (x > 0 && x < (int)(data->mlx->width * 0.3) && y > 0 && \
+		y < (int)(data->mlx->height * 0.3))
 			mlx_put_pixel(data->img[MINIMAP_GAME], x, y, 0xFF0000FF);
 		angulo += 10;
 	}
