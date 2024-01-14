@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 21:18:54 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/27 18:53:44 by dgarizad         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:11:15 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	ft_init_graphics(t_data *data)
 	data->map.width * data->map.ppc - data->map.mini->width, \
 	data->map.height * data->map.ppc \
 	- data->map.mini->height);
-	// data->map.mini->instances[0].enabled = false;
 }
 
 void	ft_game(t_data *data)

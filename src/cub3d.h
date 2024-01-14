@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:38:02 by dgarizad          #+#    #+#             */
-/*   Updated: 2023/11/24 17:44:40 by dgarizad         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:12:06 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@
 # define FLOOR 0
 # define CEILING 1
 
-typedef enum e_sprites{
+typedef enum e_sprites
+{
 	WALL_N,
 	WALL_S,
 	WALL_E,
@@ -56,7 +57,8 @@ typedef enum e_sprites{
 	SPRITES_COUNT
 }	t_sprites;
 
-typedef enum e_textures{
+typedef enum e_textures
+{
 	TEX_N,
 	TEX_S,
 	TEX_E,

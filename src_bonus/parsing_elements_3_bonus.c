@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_elements_3_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:21:29 by vcereced          #+#    #+#             */
-/*   Updated: 2023/11/27 15:26:07 by dgarizad         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:12:52 by vcereced         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,10 @@ int	ft_check_path(char **bf, t_data *data)
 
 /**
  * @brief checking paths of elements. NO CHECKS IF ELEMENTS ARE REPEATED.
- * 			-iter till line_reached
- * 				--token the line with split
- * 					---checks 1º token (NO, SO, WE, EA) and 2º token (./...) are ok.
- * 					---checks path of the 2ºtoken.
+ * 	-iter till line_reached
+ * 	--token the line with split
+ * 	---checks 1º token (NO, SO, WE, EA) and 2º token (./...) are ok.
+ * 	---checks path of the 2ºtoken.
  * @return int 1 OK (4 paths are ok). 0 KO(more/less paths/no open).
  */
 int	ft_check_paths(t_data *data, int line_reached)

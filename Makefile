@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dgarizad <dgarizad@student.42.fr>          +#+  +:+       +#+         #
+#    By: vcereced <vcereced@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 18:46:57 by dgarizad          #+#    #+#              #
-#    Updated: 2023/11/27 16:46:43 by dgarizad         ###   ########.fr        #
+#    Updated: 2024/01/14 17:40:17 by vcereced         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ LIBFT = ./libft/libft.a
 HEADERS := "-I$(LIBMLX)/include"
 HEADER = ./src/cub3d.h
 HEADERBONUS = ./src_bonus/cub3d_bonus.h
-CC = gcc -g
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LIBS	:= -ldl -lglfw -L "/Users/$(USER)/.brew/opt/glfw/lib/" -lm $(LIBMLX)/libmlx42.a
 OBJDIR = ./obj
